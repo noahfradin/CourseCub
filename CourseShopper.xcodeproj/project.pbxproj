@@ -15,13 +15,17 @@
 		8C2CD69317F2CC0500CAA5EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CD69217F2CC0500CAA5EF /* AppDelegate.m */; };
 		8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CD69417F2CC0500CAA5EF /* Main_iPhone.storyboard */; };
 		8C2CD69917F2CC0500CAA5EF /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CD69717F2CC0500CAA5EF /* Main_iPad.storyboard */; };
-		8C2CD69C17F2CC0500CAA5EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CD69B17F2CC0500CAA5EF /* ViewController.m */; };
 		8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CD69D17F2CC0500CAA5EF /* Images.xcassets */; };
 		8C2CD6A517F2CC0500CAA5EF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2CD6A417F2CC0500CAA5EF /* XCTest.framework */; };
 		8C2CD6A617F2CC0500CAA5EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2CD68217F2CC0500CAA5EF /* Foundation.framework */; };
 		8C2CD6A717F2CC0500CAA5EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2CD68617F2CC0500CAA5EF /* UIKit.framework */; };
 		8C2CD6AF17F2CC0500CAA5EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CD6AD17F2CC0500CAA5EF /* InfoPlist.strings */; };
 		8C2CD6B117F2CC0500CAA5EF /* CourseShopperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CD6B017F2CC0500CAA5EF /* CourseShopperTests.m */; };
+		8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91740183D384A0059A923 /* CalendarViewController.m */; };
+		8CA91745183D39370059A923 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91744183D39370059A923 /* LoginViewController.m */; };
+		8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91748183D3E650059A923 /* DepartmentTableViewController.m */; };
+		8CA9174D183D42C20059A923 /* CourseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9174C183D42C20059A923 /* CourseTableViewController.m */; };
+		8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91750183D42FA0059A923 /* CourseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +51,22 @@
 		8C2CD69217F2CC0500CAA5EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8C2CD69517F2CC0500CAA5EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		8C2CD69817F2CC0500CAA5EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		8C2CD69A17F2CC0500CAA5EF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8C2CD69B17F2CC0500CAA5EF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8C2CD69D17F2CC0500CAA5EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8C2CD6A317F2CC0500CAA5EF /* CourseShopperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CourseShopperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CD6A417F2CC0500CAA5EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8C2CD6AC17F2CC0500CAA5EF /* CourseShopperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CourseShopperTests-Info.plist"; sourceTree = "<group>"; };
 		8C2CD6AE17F2CC0500CAA5EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C2CD6B017F2CC0500CAA5EF /* CourseShopperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseShopperTests.m; sourceTree = "<group>"; };
+		8CA9173F183D384A0059A923 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController.h; path = ../CalendarViewController.h; sourceTree = "<group>"; };
+		8CA91740183D384A0059A923 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController.m; path = ../CalendarViewController.m; sourceTree = "<group>"; };
+		8CA91743183D39370059A923 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
+		8CA91744183D39370059A923 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../LoginViewController.m; sourceTree = "<group>"; };
+		8CA91747183D3E650059A923 /* DepartmentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepartmentTableViewController.h; sourceTree = "<group>"; };
+		8CA91748183D3E650059A923 /* DepartmentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepartmentTableViewController.m; sourceTree = "<group>"; };
+		8CA9174B183D42C20059A923 /* CourseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTableViewController.h; sourceTree = "<group>"; };
+		8CA9174C183D42C20059A923 /* CourseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewController.m; sourceTree = "<group>"; };
+		8CA9174F183D42FA0059A923 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
+		8CA91750183D42FA0059A923 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +130,11 @@
 				8C2CD69217F2CC0500CAA5EF /* AppDelegate.m */,
 				8C2CD69417F2CC0500CAA5EF /* Main_iPhone.storyboard */,
 				8C2CD69717F2CC0500CAA5EF /* Main_iPad.storyboard */,
-				8C2CD69A17F2CC0500CAA5EF /* ViewController.h */,
-				8C2CD69B17F2CC0500CAA5EF /* ViewController.m */,
+				8CA91746183D39470059A923 /* Login */,
+				8CA91742183D38560059A923 /* Calendar */,
+				8CA9174A183D3E6F0059A923 /* Department Table */,
+				8CA9174E183D42C70059A923 /* Course Table */,
+				8CA91753183D43110059A923 /* Course */,
 				8C2CD69D17F2CC0500CAA5EF /* Images.xcassets */,
 				8C2CD68917F2CC0500CAA5EF /* Supporting Files */,
 			);
@@ -153,6 +168,51 @@
 				8C2CD6AD17F2CC0500CAA5EF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8CA91742183D38560059A923 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				8CA9173F183D384A0059A923 /* CalendarViewController.h */,
+				8CA91740183D384A0059A923 /* CalendarViewController.m */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		8CA91746183D39470059A923 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8CA91743183D39370059A923 /* LoginViewController.h */,
+				8CA91744183D39370059A923 /* LoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		8CA9174A183D3E6F0059A923 /* Department Table */ = {
+			isa = PBXGroup;
+			children = (
+				8CA91747183D3E650059A923 /* DepartmentTableViewController.h */,
+				8CA91748183D3E650059A923 /* DepartmentTableViewController.m */,
+			);
+			name = "Department Table";
+			sourceTree = "<group>";
+		};
+		8CA9174E183D42C70059A923 /* Course Table */ = {
+			isa = PBXGroup;
+			children = (
+				8CA9174B183D42C20059A923 /* CourseTableViewController.h */,
+				8CA9174C183D42C20059A923 /* CourseTableViewController.m */,
+			);
+			name = "Course Table";
+			sourceTree = "<group>";
+		};
+		8CA91753183D43110059A923 /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				8CA9174F183D42FA0059A923 /* CourseViewController.h */,
+				8CA91750183D42FA0059A923 /* CourseViewController.m */,
+			);
+			name = Course;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +313,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C2CD69C17F2CC0500CAA5EF /* ViewController.m in Sources */,
+				8CA9174D183D42C20059A923 /* CourseTableViewController.m in Sources */,
+				8CA91745183D39370059A923 /* LoginViewController.m in Sources */,
+				8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */,
+				8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */,
+				8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */,
 				8C2CD69317F2CC0500CAA5EF /* AppDelegate.m in Sources */,
 				8C2CD68F17F2CC0500CAA5EF /* main.m in Sources */,
 			);
@@ -474,6 +538,7 @@
 				8C2CD6B617F2CC0500CAA5EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C2CD6B717F2CC0500CAA5EF /* Build configuration list for PBXNativeTarget "CourseShopperTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +547,7 @@
 				8C2CD6B917F2CC0500CAA5EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

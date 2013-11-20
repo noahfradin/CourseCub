@@ -7,12 +7,23 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //#Setting window and frame presets like a boss
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    //Setting the initial viewcontroller like a boss
+#warning once login is set up we need to set conditional for when user is already logged in => calendar view
+    LoginViewController *login = [[LoginViewController alloc] init];
+    self.window.rootViewController = login;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
