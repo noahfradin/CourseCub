@@ -36,6 +36,7 @@
 }
 
 -(void)loginButtonWasPressed{
+    
     CalendarViewController *cal = [[CalendarViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cal];
     [self presentViewController:navController animated:YES completion:nil];

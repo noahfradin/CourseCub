@@ -135,6 +135,7 @@
 				8CA9174A183D3E6F0059A923 /* Department Table */,
 				8CA9174E183D42C70059A923 /* Course Table */,
 				8CA91753183D43110059A923 /* Course */,
+				8CA91758183D62470059A923 /* Additional */,
 				8C2CD69D17F2CC0500CAA5EF /* Images.xcassets */,
 				8C2CD68917F2CC0500CAA5EF /* Supporting Files */,
 			);
@@ -213,6 +214,14 @@
 				8CA91750183D42FA0059A923 /* CourseViewController.m */,
 			);
 			name = Course;
+			sourceTree = "<group>";
+		};
+		8CA91758183D62470059A923 /* Additional */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Additional;
+			path = TWTSideMenuViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
