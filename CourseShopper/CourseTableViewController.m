@@ -70,9 +70,28 @@
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     // Configure the cell...
     
-    NSString *courseTitle = self.courseArray[indexPath.row];
     
-    cell.textLabel.text = courseTitle;
+    //I feel like courseArray should actually have the number and time contained within it like courseArray.number
+    NSString *courseTitle = self.courseArray[indexPath.row];
+    NSString *courseNumber = self.courseNumberArray[indexPath.row];
+    NSString *courseTime = self.courseArray[indexPath.row];
+    UILabel *courseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 210, 40)];
+    UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 20, 210, 40)];
+    UIFont *courseFont = [UIFont fontWithName:@"Helvetica Light" size:14];
+    courseLabel.font = courseFont;
+    courseLabel.text = courseTitle;
+    courseTimeLabel.font = courseFont;
+    courseTimeLabel.text = courseTime;
+    UILabel *courseNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 95, 40)];
+    UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:36];
+    courseNumberLabel.font = numberFont;
+    courseNumberLabel.text = courseNumber;
+    courseNumberLabel.textColor = _departmentColor;
+    
+    [cell addSubview: courseLabel];
+    [cell addSubview: courseTimeLabel];
+    [cell addSubview: courseNumberLabel];
+
     
     
     return cell;
@@ -102,6 +121,7 @@
     
     //This is just an example for y'all
     self.courseArray = [NSMutableArray arrayWithObjects:@"Course1", @"Course2", @"Course3", nil];
+    self.courseNumberArray = [NSMutableArray arrayWithObjects:@"0120", @"0222", @"5888", nil];
     
     //In future this is where we'll populate array from nodejs api and the query will pull in utitlizing the department as a parameter to populate the array
 }

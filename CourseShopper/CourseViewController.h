@@ -11,5 +11,6 @@
 @interface CourseViewController : UIViewController
 
 @property NSString *courseTitle;
+@property UIColor *departmentColor;
 
 @end

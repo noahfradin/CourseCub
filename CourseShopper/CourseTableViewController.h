@@ -11,6 +11,8 @@
 @interface CourseTableViewController : UITableViewController
 
 @property NSMutableArray *courseArray;
+@property NSMutableArray *courseNumberArray;
+@property UIColor *departmentColor;
 
 -(void)loadData;
 

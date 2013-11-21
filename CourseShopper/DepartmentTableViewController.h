@@ -11,6 +11,9 @@
 @interface DepartmentTableViewController : UITableViewController
 
 @property NSMutableArray *departmentArray;
+@property NSMutableArray *departmentAbbrevArray;
+@property NSMutableArray *colorArray;
+@property NSMutableDictionary *dict;
 
 -(void)loadData;
 

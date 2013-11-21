@@ -29,6 +29,7 @@
     //In future we'll supply own images but I wanted to get rid of back text for now (hate it with text)
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = @"Departments";
+    self.dict = [[NSMutableDictionary alloc] init];
     
     [self loadData];//This populates the department array
     
@@ -77,8 +78,28 @@
     // Configure the cell...
     
     NSString *departmentTitle = self.departmentArray[indexPath.row];
-    //This is just to show y'all an example
-    cell.textLabel.text = departmentTitle;
+    NSString *departmentAbbrev = self.departmentAbbrevArray[indexPath.row];
+    UILabel *departmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 10, 210, 40)];
+    UIFont *departmentFont = [UIFont fontWithName:@"Helvetica Light" size:20];
+    departmentLabel.font = departmentFont;
+    departmentLabel.text = departmentTitle;
+    UILabel *departmentAbbrevLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 95, 40)];
+    UIFont *abbrevFont = [UIFont fontWithName:@"Helvetica Light" size:36];
+    departmentAbbrevLabel.font = abbrevFont;
+    departmentAbbrevLabel.text = departmentAbbrev;
+    departmentAbbrevLabel.textColor = self.colorArray[indexPath.row];
+
+    
+    
+    [cell addSubview: departmentLabel];
+    [cell addSubview: departmentAbbrevLabel];
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *depKey = [index stringByAppendingString: @"dep"];
+    NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
+
+    [self.dict setObject:departmentLabel.text forKey:depKey];
+    [self.dict setObject:departmentAbbrevLabel.textColor forKey:depAbbrevKey];
     
     return cell;
 }
@@ -88,11 +109,19 @@
     //First get the cell from the table based on the click event/indexpath
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     //Then get the department title from the text on the cell's label
-    NSString *department = cell.textLabel.text;
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *depKey = [index stringByAppendingString: @"dep"];
+    NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
+    
+    NSString *department = [self.dict objectForKey:depKey];
+    UIColor *departmentColor = [self.dict objectForKey:depAbbrevKey];
+    
     //Then instantiate the courses table and set the title to the correct department
     //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
     CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
     courseTable.navigationItem.title = department;
+    courseTable.departmentColor = departmentColor;
 
     [self.navigationController pushViewController:courseTable animated:YES];
     
@@ -104,6 +133,33 @@
 -(void)loadData{
     //This is just to show y'all an example
     self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
+    self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
+    //75 colors
+    self.colorArray = [NSMutableArray arrayWithObjects:
+                       [UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.25 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.75 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.5 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.25 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.25 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.5 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.75 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.5 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.25 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.25 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.75 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.5 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],nil];
     
     //In future this is where we'll populate array from nodejs api
 }
