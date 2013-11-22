@@ -14,6 +14,8 @@
 @property NSMutableArray *departmentAbbrevArray;
 @property NSMutableArray *colorArray;
 @property NSMutableDictionary *dict;
+@property NSMutableArray *alphabet;
+@property NSMutableArray *alphabetCount;
 
 -(void)loadData;
 

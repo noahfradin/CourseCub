@@ -29,7 +29,7 @@
     //In future we'll supply own images but I wanted to get rid of back text for now (hate it with text)
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = @"Departments";
-    self.dict = [[NSMutableDictionary alloc] init];
+
     
     [self loadData];//This populates the department array
     
@@ -42,6 +42,8 @@
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
+    self.dict = [[NSMutableDictionary alloc] init];
+    self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",nil];
 
 }
 
@@ -57,14 +59,16 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 26;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.departmentArray.count;//this returns the number of departments in department array
+    
+    //The basic idea here would be to return the number of items based on the letter of the alphabet the section number referred to
+     return [self.alphabetCount[section] integerValue];//this returns the number of departments in department array
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,12 +132,33 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return self.alphabet;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    return [self.alphabet indexOfObject:title];
+}
+
 //Put the non-delegate methods below
 
 -(void)loadData{
     //This is just to show y'all an example
     self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
     self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
+    
+    //Though this code doesnt work because I cannot figure out the syntax yet, were it correct it would simply check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
+    for (int i = 0; i <= (sizeof self.departmentAbbrevArray); i++) {
+        NSString *firstLetter = [self.departmentAbbrevArray[i] substringFromIndex: 1];
+        NSInteger number = [firstLetter characterAtIndex: 0] - 65;
+        if (self.alphabetCount[number] == nil) {
+            self.alphabetCount[number] = 0;
+        }
+        else {
+            self.alphabetCount[number] += 1;
+        }
+    }
+    
     //75 colors
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor colorWithRed:1 green:0 blue:0 alpha:1],
