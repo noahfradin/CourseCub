@@ -8,6 +8,17 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "CalendarMenuViewController.h"
+#import "CalendarViewController.h"
+#import "TWTSideMenuViewController.h"
+
+@interface AppDelegate()
+
+@property (nonatomic, strong) TWTSideMenuViewController *sideMenuViewController;
+@property (nonatomic, strong) CalendarMenuViewController *menuViewController;
+@property (nonatomic, strong) CalendarViewController *mainViewController;
+
+@end
 
 @implementation AppDelegate
 
@@ -15,15 +26,32 @@
 {
     // Override point for customization after application launch.
     
-    //#Setting window and frame presets like a boss
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+//    //#Setting window and frame presets like a boss
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.backgroundColor = [UIColor whiteColor];
     
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
-    LoginViewController *login = [[LoginViewController alloc] init];
-    self.window.rootViewController = login;
+//    LoginViewController *login = [[LoginViewController alloc] init];
+//    self.window.rootViewController = login;
+//    [self.window makeKeyAndVisible];
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.menuViewController = [[CalendarMenuViewController alloc] initWithNibName:nil bundle:nil];
+    self.mainViewController = [[CalendarViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.sideMenuViewController = [[TWTSideMenuViewController alloc] initWithMenuViewController:self.menuViewController mainViewController:[[UINavigationController alloc] initWithRootViewController:self.mainViewController]];
+    self.sideMenuViewController.shadowColor = [UIColor blackColor];
+    self.sideMenuViewController.edgeOffset = (UIOffset) { .horizontal = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 18.0f : 0.0f };
+    self.sideMenuViewController.zoomScale = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 0.5634f : 0.85f;
+    self.window.rootViewController = self.sideMenuViewController;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 							

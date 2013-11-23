@@ -8,8 +8,12 @@
 
 #import "CalendarViewController.h"
 #import "DepartmentTableViewController.h"
+#import "TWTSideMenuViewController.h"
 
 @interface CalendarViewController ()
+
+#define HOUR_BLOCK 34
+#define MINUTE_BLOCK .57
 
 @end
 
@@ -39,6 +43,7 @@
     self.navigationItem.leftBarButtonItem = menuButton;
     
     
+    
 }
 
 //And this is a place for post view load stuff anything happening on the main view is cool to put here usually
@@ -46,11 +51,20 @@
 {
     [super viewDidLoad];
     
+    //Set the background color to white to hide hidden views
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     //I just put this here to show us where we are for now
     UILabel *test = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 300, 200)];
     test.text = @"Yo so this is the calview :}";
     [self.view addSubview:test];
     //End of example text
+    
+    //Add swipe gesture recognizer to menu
+    UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(menuButtonWasPressed)];
+    
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +80,16 @@
 
 -(void) menuButtonWasPressed{
     NSLog(@"Menubutton was tapped real nice");
+    [self.sideMenuViewController openMenuAnimated:YES completion:nil];
     //Will present side menubar view here
+}
+
+-(void)loadData{
+    self.courseArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
+}
+
+-(NSInteger)numberToTime{
+    return 0;
 }
 
 @end

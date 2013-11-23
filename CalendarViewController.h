@@ -10,7 +10,12 @@
 
 @interface CalendarViewController : UIViewController
 
+@property NSMutableArray *courseArray;
+@property NSMutableDictionary *durationDict;
+@property NSMutableDictionary *timeDict;
+
 -(void) addButtonWasPressed;
 -(void) menuButtonWasPressed;
+-(void) loadData;
 
 @end
