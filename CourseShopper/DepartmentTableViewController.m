@@ -44,6 +44,10 @@
     self.tableView.showsVerticalScrollIndicator=NO;
     self.dict = [[NSMutableDictionary alloc] init];
     self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",nil];
+    self.alphabetCount = [NSMutableArray arrayWithCapacity:26];
+    for (int i = 0; i < 26; i++) {
+        [self.alphabetCount insertObject:[NSNull null] atIndex:i];
+    }
 
 }
 
@@ -68,7 +72,13 @@
     // Return the number of rows in the section.
     
     //The basic idea here would be to return the number of items based on the letter of the alphabet the section number referred to
-     return [self.alphabetCount[section] integerValue];//this returns the number of departments in department array
+    id numberOfRows = [self.alphabetCount objectAtIndex:section];
+    if (numberOfRows == [NSNull null]) {
+        return 0;
+    }
+    else {
+        return [numberOfRows integerValue];//this returns the number of departments in department array
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,8 +91,26 @@
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     // Configure the cell...
     
-    NSString *departmentTitle = self.departmentArray[indexPath.row];
-    NSString *departmentAbbrev = self.departmentAbbrevArray[indexPath.row];
+    int section = indexPath.section;
+    int counter = 0;
+    int scounter = 0;
+    if (section != 0) {
+        while (section > scounter) {
+            if (self.alphabetCount[scounter] != [NSNull null]) {
+                int numberInSection = [self.alphabetCount[scounter] intValue];
+                counter += numberInSection;
+                scounter++;
+                if (section == scounter) {
+                    break;
+                }
+            }
+            else {
+                scounter++;
+            }
+        }
+    }
+    NSString *departmentTitle = self.departmentArray[indexPath.row + counter];
+    NSString *departmentAbbrev = self.departmentAbbrevArray[indexPath.row + counter];
     UILabel *departmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 10, 210, 40)];
     UIFont *departmentFont = [UIFont fontWithName:@"Helvetica Light" size:20];
     departmentLabel.font = departmentFont;
@@ -91,7 +119,9 @@
     UIFont *abbrevFont = [UIFont fontWithName:@"Helvetica Light" size:36];
     departmentAbbrevLabel.font = abbrevFont;
     departmentAbbrevLabel.text = departmentAbbrev;
-    departmentAbbrevLabel.textColor = self.colorArray[indexPath.row];
+    departmentAbbrevLabel.textColor = self.colorArray[indexPath.row + counter];
+    
+
 
     
     
@@ -146,45 +176,102 @@
     //This is just to show y'all an example
     self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
     self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
-    
     //Though this code doesnt work because I cannot figure out the syntax yet, were it correct it would simply check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
-    for (int i = 0; i <= (sizeof self.departmentAbbrevArray); i++) {
-        NSString *firstLetter = [self.departmentAbbrevArray[i] substringFromIndex: 1];
-        NSInteger number = [firstLetter characterAtIndex: 0] - 65;
-        if (self.alphabetCount[number] == nil) {
-            self.alphabetCount[number] = 0;
+    for (int i = 0; i < (sizeof self.departmentAbbrevArray) - 1; i++) {
+        NSString *firstLetter = [self.departmentAbbrevArray[i] substringToIndex: 1];
+        int letter = [firstLetter characterAtIndex:0] - 65;
+       // NSString *number = [NSString stringWithFormat:@"%d", letter];
+        //[self.dict setValue:self.departmentAbbrevArray[i] forKey:number];
+        if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
+            NSNumber *one = [NSNumber numberWithInteger:1];
+            [self.alphabetCount insertObject:one atIndex:letter];
         }
         else {
-            self.alphabetCount[number] += 1;
+            NSNumber *number = [self.alphabetCount objectAtIndex:letter];
+            NSInteger numberint = [number integerValue];
+            numberint++;
+            number = [NSNumber numberWithInteger:numberint];
+            self.alphabetCount[letter] = number;
         }
     }
     
     //75 colors
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.08 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.16 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:0.25 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.33 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.41 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.58 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.66 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.83 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.91 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.92 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:84 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:0.75 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.67 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.59 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:0.5 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.42 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.34 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:0.25 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.17 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.09 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.08 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.16 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.25 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.33 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.41 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.5 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.58 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:66 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.83 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.91 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.92 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.84 blue:1 alpha:1],
                        [UIColor colorWithRed:0 green:0.75 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.67 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.59 blue:1 alpha:1],
                        [UIColor colorWithRed:0 green:0.5 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.42 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.34 blue:1 alpha:1],
                        [UIColor colorWithRed:0 green:0.25 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.17 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.09 blue:1 alpha:1],
                        [UIColor colorWithRed:0 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.08 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.16 green:0 blue:1 alpha:1],
                        [UIColor colorWithRed:0.25 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.33 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.41 green:0 blue:1 alpha:1],
                        [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.58 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.66 green:0 blue:1 alpha:1],
                        [UIColor colorWithRed:0.75 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.83 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.91 green:0 blue:1 alpha:1],
                        [UIColor colorWithRed:1 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.92 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.84 alpha:1],
                        [UIColor colorWithRed:1 green:0 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.67 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.59 alpha:1],
                        [UIColor colorWithRed:1 green:0 blue:0.5 alpha:1],
-                       [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],nil];
+                       [UIColor colorWithRed:1 green:0 blue:.42 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.34 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.20 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.15 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.10 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.05 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.02 alpha:1],nil];
     
     //In future this is where we'll populate array from nodejs api
 }
