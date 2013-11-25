@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DepartmentTableViewController : UITableViewController
+@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate> {
+    UISearchBar *theSearchBar;
+}
 
 @property NSMutableArray *departmentArray;
 @property NSMutableArray *departmentAbbrevArray;
@@ -16,6 +18,7 @@
 @property NSMutableDictionary *dict;
 @property NSMutableArray *alphabet;
 @property NSMutableArray *alphabetCount;
+@property (nonatomic, retain) UISearchBar *theSearchBar;
 
 -(void)loadData;
 

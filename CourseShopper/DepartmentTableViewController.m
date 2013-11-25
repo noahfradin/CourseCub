@@ -15,6 +15,8 @@
 
 @implementation DepartmentTableViewController
 
+@synthesize theSearchBar;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -29,16 +31,26 @@
     //In future we'll supply own images but I wanted to get rid of back text for now (hate it with text)
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = @"Departments";
-
+    
     
     [self loadData];//This populates the department array
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.tableView.tableHeaderView = self.theSearchBar;
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.theSearchBar.frame = CGRectMake(0,MAX(0,scrollView.contentOffset.y),320,44);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+    
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
@@ -48,7 +60,10 @@
     for (int i = 0; i < 26; i++) {
         [self.alphabetCount insertObject:[NSNull null] atIndex:i];
     }
-
+    self.theSearchBar = [[UISearchBar alloc] init];
+    self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,8 +100,8 @@
 {
     
     //We can uncomment and use this if we want to set up a class and nib for how we want to display the cell
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //    static NSString *CellIdentifier = @"Cell";
+    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     // Configure the cell...
@@ -121,19 +136,20 @@
     departmentAbbrevLabel.text = departmentAbbrev;
     departmentAbbrevLabel.textColor = self.colorArray[indexPath.row + counter];
     
-
-
-    
     
     [cell addSubview: departmentLabel];
     [cell addSubview: departmentAbbrevLabel];
     
+    
     NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
     NSString *depKey = [index stringByAppendingString: @"dep"];
     NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
-
+    
     [self.dict setObject:departmentLabel.text forKey:depKey];
     [self.dict setObject:departmentAbbrevLabel.textColor forKey:depAbbrevKey];
+    
+    //this is for finding and deleting specific colors when searching
+    [self.dict setObject:departmentAbbrevLabel.textColor forKey:departmentAbbrev];
     
     return cell;
 }
@@ -142,7 +158,7 @@
     
     //First get the cell from the table based on the click event/indexpath
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    //Then get the department title from the text on the cell's label
+    
     
     NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
     NSString *depKey = [index stringByAppendingString: @"dep"];
@@ -155,8 +171,9 @@
     //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
     CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
     courseTable.navigationItem.title = department;
+    courseTable.department = department;
     courseTable.departmentColor = departmentColor;
-
+    
     [self.navigationController pushViewController:courseTable animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
@@ -170,18 +187,69 @@
     return [self.alphabet indexOfObject:title];
 }
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    searchBar = theSearchBar;
+    [searchBar setShowsCancelButton:YES animated:YES];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar = theSearchBar;
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.tableView.allowsSelection = YES;
+    self.tableView.scrollEnabled = YES;
+    [self loadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    NSArray *resultsAbbrev = [self searchThroughArray:(self.departmentAbbrevArray) withString: searchBar.text];
+    NSArray *resultsDept = [self searchThroughArray:(self.departmentArray) withString: searchBar.text];
+	
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.tableView.allowsSelection = YES;
+    self.tableView.scrollEnabled = YES;
+	
+    [self.departmentAbbrevArray removeAllObjects];
+    [self.departmentArray removeAllObjects];
+    [self.colorArray removeAllObjects];
+    [self.alphabetCount removeAllObjects];
+    
+    //NEED TO EITHER FIGURE OUT HOW TO SEARCH BOTH DEPARTMENT AND ABBREVS AT SAME TIME AND SHOW COMBINED RESULTS OR JUST SEARCH BY DEPARTMENT TITLE
+    [self.departmentAbbrevArray addObjectsFromArray:resultsAbbrev];
+    [self.departmentArray addObjectsFromArray:resultsDept];
+    [self resetSections];
+    
+    
+    //NEED TO ALSO ADD BACK ASSOCIATED DEPARTMENT COLORS
+    for (int i = 0; i < (sizeof self.departmentAbbrevArray); i++) {
+        UIColor *color = [self.dict objectForKey: [self.departmentAbbrevArray objectAtIndex:i]];
+        [self.colorArray addObject:color];
+    }
+    
+    [self.tableView reloadData];
+}
+
 //Put the non-delegate methods below
 
--(void)loadData{
-    //This is just to show y'all an example
-    self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
-    self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
-    //Though this code doesnt work because I cannot figure out the syntax yet, were it correct it would simply check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
+-(NSArray *)searchThroughArray:(NSMutableArray *)array withString:(NSString *)stringToSearch {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@",stringToSearch]; // if you need case sensitive search avoid '[c]' in the predicate
+    
+    NSArray *results = [array filteredArrayUsingPredicate:predicate];
+    return results;
+}
+
+//Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
+-(void) resetSections{
     for (int i = 0; i < (sizeof self.departmentAbbrevArray) - 1; i++) {
         NSString *firstLetter = [self.departmentAbbrevArray[i] substringToIndex: 1];
         int letter = [firstLetter characterAtIndex:0] - 65;
-       // NSString *number = [NSString stringWithFormat:@"%d", letter];
-        //[self.dict setValue:self.departmentAbbrevArray[i] forKey:number];
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
             NSNumber *one = [NSNumber numberWithInteger:1];
             [self.alphabetCount insertObject:one atIndex:letter];
@@ -194,6 +262,13 @@
             self.alphabetCount[letter] = number;
         }
     }
+}
+
+-(void)loadData{
+    //This is just to show y'all an example
+    self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
+    self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
+    [self resetSections];
     
     //75 colors
     self.colorArray = [NSMutableArray arrayWithObjects:
