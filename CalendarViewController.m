@@ -86,7 +86,12 @@
     //Initial configuration and data needs like array of day title strings
     self.dayBar = [[UIView alloc]initWithFrame:CGRectMake(0, TOPBAR_HEIGHT, SCREEN_WIDTH, DAYBAR_HEIGHT)];
     [self.dayBar setBackgroundColor:[UIColor whiteColor]];
-    NSArray *dayInitials = [NSArray arrayWithObjects:@"M", @"T", @"W",@"TR",@"F", nil];
+    NSArray *dayInitials = [NSArray arrayWithObjects:@"M", @"T", @"W",@"TH",@"F", nil];
+    
+    //1px line at bottom of the bar
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, TOPBAR_HEIGHT+DAYBAR_HEIGHT, SCREEN_WIDTH, 1)];
+    [line setBackgroundColor:[UIColor grayColor]];
+    [self.view addSubview:line];
     
     //Set up day buttons
     for (int j=0; j<5; j++) {
@@ -101,6 +106,7 @@
         NSString *dayInitial = [dayInitials objectAtIndex:j];
         UILabel *dayInitialLabel = [[UILabel alloc] initWithFrame:CGRectMake(DAY_WIDTH/2-8, 0, DAY_WIDTH, DAYBAR_HEIGHT)];//8 is an offset to visually center text
         [dayInitialLabel setText:dayInitial];
+        [dayInitialLabel setFont:[UIFont fontWithName:@"Helvetica-Light" size:17]];
         
         //Add day label to day button and daybutton to daybar
         [dayButton addSubview:dayInitialLabel];
@@ -129,6 +135,9 @@
         courseButton.tag = i;
         [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
         [courseButton setBackgroundColor:[UIColor grayColor]];
+        
+        //Create top color bumper
+        
         [self.view addSubview:courseButton];
     }
 
@@ -182,11 +191,44 @@
     [self.dayBar bringSubviewToFront:sender];
     
     //Animate movement of day initial to left of dayBar
-    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{[sender setFrame:CGRectMake(0, 0, DAY_WIDTH, DAYBAR_HEIGHT)];} completion:^(BOOL finished){
+    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{[sender setFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];} completion:^(BOOL finished){
         //Complete day title here based on day array yet to be constructed
+        UILabel *fullDayLabel = [[UILabel alloc] init];
+        [fullDayLabel setFont:[UIFont fontWithName:@"Helvetica-Light" size:17]];
+        float offset = 0;
+        switch (sender.tag) {
+            case 0:
+                offset = 6;
+                [fullDayLabel setText:@"ONDAY"];
+                break;
+            case 1:
+                offset = 1;
+                [fullDayLabel setText:@"UESDAY"];
+                break;
+            case 2:
+                offset = 7;
+                [fullDayLabel setText:@"EDNESDAY"];
+                break;
+            case 3:
+                offset = 13;
+                [fullDayLabel setText:@"URSDAY"];
+                break;
+            case 4:
+                offset = 2;
+                [fullDayLabel setText:@"RIDAY"];
+                break;
+                
+            default:
+                break;
+        }
+        
+        [fullDayLabel setFrame:CGRectMake(DAY_WIDTH/2+offset, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
+        [sender addSubview:fullDayLabel];
+        
     }];
     
 #warning Still need to add back button and get rid of add and menu buttons in nav bar
+    
     
 }
 
