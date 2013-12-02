@@ -173,14 +173,20 @@
 //////////////////////////////////////////////////////////////////////
 -(void)dayButtonWasPressed:(UIButton*)sender{
     NSLog(@"dayButtonWasPressed");
-#warning have to disable all other buttons
-    UIView *whiteOut = [[UIView alloc] initWithFrame:CGRectMake(0, TOPBAR_HEIGHT, SCREEN_WIDTH, DAYBAR_HEIGHT)];
+
+    //Hide all other buttons
+    UIView *whiteOut = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
     [whiteOut setBackgroundColor:[UIColor whiteColor]];
     [self.dayBar addSubview:whiteOut];
+    [self.dayBar bringSubviewToFront:whiteOut];
+    [self.dayBar bringSubviewToFront:sender];
+    
+    //Animate movement of day initial to left of dayBar
     [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{[sender setFrame:CGRectMake(0, 0, DAY_WIDTH, DAYBAR_HEIGHT)];} completion:^(BOOL finished){
-        
-        
+        //Complete day title here based on day array yet to be constructed
     }];
+    
+#warning Still need to add back button and get rid of add and menu buttons in nav bar
     
 }
 
