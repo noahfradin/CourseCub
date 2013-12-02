@@ -8,8 +8,14 @@
 
 #import "CalendarViewController.h"
 #import "DepartmentTableViewController.h"
+#import "CourseViewController.h"
 
 @interface CalendarViewController ()
+
+#define DAY_WIDTH 64 // = 320width/5days
+#define HOUR_HEIGHT 47 // = 568height/12hours
+#define TOPBAR_HEIGHT 64 //Statusbar height plus nav bar height w/out daybar
+//Need to define sidebar and daybar width/height
 
 @end
 
@@ -46,11 +52,24 @@
 {
     [super viewDidLoad];
     
-    //I just put this here to show us where we are for now
-    UILabel *test = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 300, 200)];
-    test.text = @"Yo so this is the calview :}";
-    [self.view addSubview:test];
-    //End of example text
+    self.course_title_array =[NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies",@"Advanced Fradin Studies",@"Intro to Fradin Studies", nil];
+    
+    for (int i = 0; i<self.course_title_array.count; i++) {
+        
+        //Test data
+        float startTime = 9.0+i*2;
+        float duration = 1.0;
+        float position = startTime - 9;
+        float day = 0+i;
+        //End of test/example data
+        
+        UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+        courseButton.tag = i;
+        [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [courseButton setBackgroundColor:[UIColor grayColor]];
+        [self.view addSubview:courseButton];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,6 +86,21 @@
 -(void) menuButtonWasPressed{
     NSLog(@"Menubutton was tapped real nice");
     //Will present side menubar view here
+}
+
+//////////////////////////////////////////////////////////////////////
+#pragma courseButtonWasPressed
+//Takes a unique index of course (courseIndex)
+//Passes all necessary course into to courseViewController and Pushes courseViewController
+//////////////////////////////////////////////////////////////////////
+-(void) courseButtonWasPressed:(UIButton*)sender{
+    NSString *courseTitle = self.course_title_array[sender.tag];
+    //Then instantiate the course detail view and set the title to the correct course
+    //Anything else we need to pass can go here as well
+    CourseViewController *courseView = [[CourseViewController alloc] init];
+    courseView.navigationItem.title = courseTitle;
+    [self.navigationController pushViewController:courseView animated:YES];
+    
 }
 
 @end

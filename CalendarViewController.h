@@ -10,7 +10,10 @@
 
 @interface CalendarViewController : UIViewController
 
+@property NSMutableArray *course_title_array;
+
 -(void) addButtonWasPressed;
 -(void) menuButtonWasPressed;
+-(void) courseButtonWasPressed:(UIButton*)sender;
 
 @end
