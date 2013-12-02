@@ -42,6 +42,8 @@
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
 
 }
 

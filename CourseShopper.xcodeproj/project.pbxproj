@@ -21,6 +21,12 @@
 		8C2CD6A717F2CC0500CAA5EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2CD68617F2CC0500CAA5EF /* UIKit.framework */; };
 		8C2CD6AF17F2CC0500CAA5EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CD6AD17F2CC0500CAA5EF /* InfoPlist.strings */; };
 		8C2CD6B117F2CC0500CAA5EF /* CourseShopperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CD6B017F2CC0500CAA5EF /* CourseShopperTests.m */; };
+		8C5EE046183E8A3900D5A7F8 /* TWTSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5EE045183E8A3900D5A7F8 /* TWTSideMenuViewController.m */; };
+		8C5EE04D183E8D6B00D5A7F8 /* CalendarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5EE04C183E8D6B00D5A7F8 /* CalendarMenuViewController.m */; };
+		8C5EE051183E8F0E00D5A7F8 /* gauss.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C5EE050183E8F0E00D5A7F8 /* gauss.png */; };
+		8C5EE057183E917500D5A7F8 /* greygauss.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C5EE056183E917500D5A7F8 /* greygauss.png */; };
+		8C5EE059183EA14000D5A7F8 /* lightgauss.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C5EE058183EA14000D5A7F8 /* lightgauss.png */; };
+		8C5EE05C183FCF4F00D5A7F8 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5EE05B183FCF4F00D5A7F8 /* Constants.m */; };
 		8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91740183D384A0059A923 /* CalendarViewController.m */; };
 		8CA91745183D39370059A923 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91744183D39370059A923 /* LoginViewController.m */; };
 		8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91748183D3E650059A923 /* DepartmentTableViewController.m */; };
@@ -57,6 +63,15 @@
 		8C2CD6AC17F2CC0500CAA5EF /* CourseShopperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CourseShopperTests-Info.plist"; sourceTree = "<group>"; };
 		8C2CD6AE17F2CC0500CAA5EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C2CD6B017F2CC0500CAA5EF /* CourseShopperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseShopperTests.m; sourceTree = "<group>"; };
+		8C5EE044183E8A3900D5A7F8 /* TWTSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWTSideMenuViewController.h; sourceTree = "<group>"; };
+		8C5EE045183E8A3900D5A7F8 /* TWTSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWTSideMenuViewController.m; sourceTree = "<group>"; };
+		8C5EE04B183E8D6B00D5A7F8 /* CalendarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMenuViewController.h; sourceTree = "<group>"; };
+		8C5EE04C183E8D6B00D5A7F8 /* CalendarMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMenuViewController.m; sourceTree = "<group>"; };
+		8C5EE050183E8F0E00D5A7F8 /* gauss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gauss.png; sourceTree = "<group>"; };
+		8C5EE056183E917500D5A7F8 /* greygauss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greygauss.png; sourceTree = "<group>"; };
+		8C5EE058183EA14000D5A7F8 /* lightgauss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgauss.png; sourceTree = "<group>"; };
+		8C5EE05A183FCF4F00D5A7F8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		8C5EE05B183FCF4F00D5A7F8 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		8CA9173F183D384A0059A923 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController.h; path = ../CalendarViewController.h; sourceTree = "<group>"; };
 		8CA91740183D384A0059A923 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController.m; path = ../CalendarViewController.m; sourceTree = "<group>"; };
 		8CA91743183D39370059A923 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
@@ -126,6 +141,7 @@
 		8C2CD68817F2CC0500CAA5EF /* CourseShopper */ = {
 			isa = PBXGroup;
 			children = (
+				8C5EE043183E8A2400D5A7F8 /* Additional */,
 				8C2CD69117F2CC0500CAA5EF /* AppDelegate.h */,
 				8C2CD69217F2CC0500CAA5EF /* AppDelegate.m */,
 				8C2CD69417F2CC0500CAA5EF /* Main_iPhone.storyboard */,
@@ -144,6 +160,9 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8C5EE058183EA14000D5A7F8 /* lightgauss.png */,
+				8C5EE056183E917500D5A7F8 /* greygauss.png */,
+				8C5EE050183E8F0E00D5A7F8 /* gauss.png */,
 				8C2CD68A17F2CC0500CAA5EF /* CourseShopper-Info.plist */,
 				8C2CD68B17F2CC0500CAA5EF /* InfoPlist.strings */,
 				8C2CD68E17F2CC0500CAA5EF /* main.m */,
@@ -170,11 +189,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8C5EE043183E8A2400D5A7F8 /* Additional */ = {
+			isa = PBXGroup;
+			children = (
+				8C5EE044183E8A3900D5A7F8 /* TWTSideMenuViewController.h */,
+				8C5EE045183E8A3900D5A7F8 /* TWTSideMenuViewController.m */,
+				8C5EE05A183FCF4F00D5A7F8 /* Constants.h */,
+				8C5EE05B183FCF4F00D5A7F8 /* Constants.m */,
+			);
+			name = Additional;
+			sourceTree = "<group>";
+		};
 		8CA91742183D38560059A923 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
 				8CA9173F183D384A0059A923 /* CalendarViewController.h */,
 				8CA91740183D384A0059A923 /* CalendarViewController.m */,
+				8C5EE04B183E8D6B00D5A7F8 /* CalendarMenuViewController.h */,
+				8C5EE04C183E8D6B00D5A7F8 /* CalendarMenuViewController.m */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -295,6 +327,9 @@
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
+				8C5EE057183E917500D5A7F8 /* greygauss.png in Resources */,
+				8C5EE051183E8F0E00D5A7F8 /* gauss.png in Resources */,
+				8C5EE059183EA14000D5A7F8 /* lightgauss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,13 +348,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5EE046183E8A3900D5A7F8 /* TWTSideMenuViewController.m in Sources */,
 				8CA9174D183D42C20059A923 /* CourseTableViewController.m in Sources */,
 				8CA91745183D39370059A923 /* LoginViewController.m in Sources */,
 				8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */,
 				8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */,
+				8C5EE05C183FCF4F00D5A7F8 /* Constants.m in Sources */,
 				8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */,
 				8C2CD69317F2CC0500CAA5EF /* AppDelegate.m in Sources */,
 				8C2CD68F17F2CC0500CAA5EF /* main.m in Sources */,
+				8C5EE04D183E8D6B00D5A7F8 /* CalendarMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
