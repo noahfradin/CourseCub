@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CourseShopper/DepartmentTableViewController.m"
-            timestampString = "407035425.429839"
+            timestampString = "407808974.080104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
