@@ -37,7 +37,7 @@
     self.navigationItem.title = @"Departments";
     
     
-    [self loadData];//This populates the department array
+
     
     //More database stuff
     // get an instance of app delegate
@@ -46,7 +46,7 @@
     self.managedObjectContext = appDelegate.managedObjectContext;
     self.fetchedDeptsArray = [appDelegate getAllDepartments];
     //[appDelegate getClassList];
-    [self resetSections];
+
     [self.tableView reloadData];
 
     
@@ -94,7 +94,7 @@
     }
     self.theSearchBar = [[UISearchBar alloc] init];
     self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
-    [self resetSections];
+    [self loadData];//This populates the department array
     [self.tableView reloadData];
 }
 
@@ -259,7 +259,7 @@
     [searchBar resignFirstResponder];
     self.tableView.allowsSelection = YES;
     self.tableView.scrollEnabled = YES;
-    [self loadData];
+    //[self loadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -304,7 +304,7 @@
 
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
-    for (int i = 0; i < (sizeof self.fetchedDeptsArray) - 1; i++) {
+    for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
         NSString *firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
         int letter = [firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
