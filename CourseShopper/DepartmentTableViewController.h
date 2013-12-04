@@ -14,7 +14,13 @@
 @property NSMutableArray *departmentAbbrevArray;
 @property NSMutableArray *colorArray;
 @property NSMutableDictionary *dict;
+@property NSNumber *counter;
+//testing inserting into table
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong)NSArray* fetchedDeptsArray;
+@property (nonatomic,strong)NSArray* classListTest;
 
 -(void)loadData;
+
 
 @end

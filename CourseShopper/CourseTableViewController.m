@@ -8,6 +8,9 @@
 
 #import "CourseTableViewController.h"
 #import "CourseViewController.h"
+#import "AppDelegate.h"
+#import "Department.h"
+#import "Course.h"
 
 @interface CourseTableViewController ()
 
@@ -40,6 +43,28 @@
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
     
+    
+    //More database stuff
+    // get an instance of app delegate
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    NSArray *temp = [appDelegate getAllClassesOfDept:self.abbrev];
+    //self.fetchedCourseArray = [appDelegate getAllClassesOfDept:self.abbrev];
+
+
+    
+    NSSortDescriptor *dateDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"number"
+                                                                     ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:dateDescriptor];
+    self.fetchedCourseArray = [temp sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"I have fetched this: %@", self.fetchedCourseArray);
+    
+    //[appDelegate getClassList];
+    [self.tableView reloadData];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +86,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.courseArray.count;
+    return self.fetchedCourseArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,9 +97,13 @@
     
     
     //I feel like courseArray should actually have the number and time contained within it like courseArray.number
-    NSString *courseTitle = self.courseArray[indexPath.row];
-    NSString *courseNumber = self.courseNumberArray[indexPath.row];
-    NSString *courseTime = self.courseArray[indexPath.row];
+   // NSString *courseTitle = self.courseArray[indexPath.row];
+    
+    
+    Course * course = [self.fetchedCourseArray objectAtIndex:indexPath.row];
+    NSString *courseTitle = course.title;
+    NSString *courseNumber = course.number;
+    NSString *courseTime = @"jhkjh";
     UILabel *courseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 210, 40)];
     UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 20, 210, 40)];
     UIFont *courseFont = [UIFont fontWithName:@"Helvetica Light" size:14];
@@ -124,6 +153,7 @@
     self.courseNumberArray = [NSMutableArray arrayWithObjects:@"0120", @"0222", @"5888", nil];
     
     //In future this is where we'll populate array from nodejs api and the query will pull in utitlizing the department as a parameter to populate the array
+    //can either access ns array built intially and only the parts I want or load all into core data and make a request
 }
 
 

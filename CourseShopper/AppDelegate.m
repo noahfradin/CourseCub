@@ -9,15 +9,23 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 
+
 @implementation AppDelegate
+
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    
     // Override point for customization after application launch.
     
     //#Setting window and frame presets like a boss
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.window.tintColor = [UIColor redColor];
+    [self addClassesToCD];
     
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
@@ -52,6 +60,234 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *)managedObjectContext
+{
+    
+    if (managedObjectContext != nil)
+    {
+        return managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil)
+    {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return managedObjectContext;
+}
+
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created from the application's model.
+ */
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (managedObjectModel != nil)
+    {
+        return managedObjectModel;
+    }
+    managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    return managedObjectModel;
+}
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ */
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    
+    if (persistentStoreCoordinator != nil)
+    {
+        return persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CourseShopper.sqlite"];
+    
+    NSError *error = nil;
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return persistentStoreCoordinator;
+}
+
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+-(NSArray*)getAllDepartments
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Department"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return fetchedRecords;
+}
+
+//this should return all classes of a given department (passed in as a string)
+-(NSArray*)getAllClassesOfDept:(NSString *)dept
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSString *departmentName = dept;
+    NSLog(@"helllooo %@",departmentName);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"department.abbrev like %@", departmentName];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return fetchedRecords;
+    
+}
+
+-(Department*)getDeptByAbbrev:(NSString *)abbreviation
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Department"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"abbrev like %@", abbreviation];
+    [fetchRequest setPredicate:predicate];
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *temp = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    if ([temp count]>=1){
+        Department *fetchedDept = [temp objectAtIndex:0];
+        // Returning Fetched Records
+        return fetchedDept;
+    }
+    else
+    {
+        return nil;
+    }
+    
+}
+
+//reads from a text file of departmenst, parses the file and returns an nsarray of the deparment names
+- (NSArray *)getDepartmentsData
+{
+    NSString *title = @"deps";
+    NSString *type = @"txt";
+    NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:title ofType:type] encoding:NSMacOSRomanStringEncoding error:nil];
+    
+    NSArray *dataClient = [fileText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]; //to load txt
+    NSArray *chunks = [[dataClient objectAtIndex:1] componentsSeparatedByString: @"\\n', '"];
+    
+    //NSLog(@"%@", chunks);
+    return chunks;
+}
+
+
+-(void)addClassesToCD
+{
+    
+    //    NSString *departmentTitle = record.name;
+    //    NSString *departmentAbbrev = record.abbrev;
+    //    @dynamic descr;
+    //    @dynamic number;
+    //    @dynamic prof;
+    //    @dynamic time;
+    //    @dynamic title;
+    //    @dynamic department;
+    
+    NSError* err = nil;
+    NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
+    
+    NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList]
+                                                            options:kNilOptions
+                                                              error:&err];
+    NSMutableArray * abbrevs= [[NSMutableArray alloc]init];
+
+    
+    for(NSString *key in classes)
+    {
+        //NSLog(@"key=%@ value=%@", key, [classes objectForKey:key]);
+        NSString *firstWord = [[key componentsSeparatedByString:@" "] objectAtIndex:0];
+        [abbrevs addObject:firstWord];
+        
+        //add the class as a course, then set up relationship to department
+        
+        Course * newCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course"
+                                                           inManagedObjectContext:self.managedObjectContext];
+        
+        newCourse.number = [[key componentsSeparatedByString:@" "] objectAtIndex:1];
+        newCourse.title = [classes objectForKey:key];
+        
+        newCourse.department = [self getDeptByAbbrev:firstWord];
+        
+    }
+    [abbrevs setArray:[[NSSet setWithArray:abbrevs] allObjects]];
+    [abbrevs sortUsingSelector:@selector(compare:)];
+    [self addDepartmentsToCD:abbrevs];
+    
+}
+
+#pragma addDepartments
+-(void)addDepartmentsToCD:(NSMutableArray *)abbrevs
+{
+    
+    NSArray *deps = [self getDepartmentsData];
+//    NSLog(@"abbrev len is %ul",[abbrevs count]);
+//    NSLog(@"depts len is %ul",[deps count]);
+//    
+//    NSLog(@"abbrevs %@", abbrevs);
+    
+    for(NSString *abr in abbrevs)
+    {
+        NSUInteger i = [abbrevs indexOfObject:abr]%[deps count];
+        NSString * dep = [deps objectAtIndex:i];
+        Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
+                                                              inManagedObjectContext:self.managedObjectContext];
+        newEntry.name = dep;
+        newEntry.abbrev = abr;
+        
+        NSError *error;
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                }
+    }
+    
+
 }
 
 @end

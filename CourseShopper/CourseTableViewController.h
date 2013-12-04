@@ -13,6 +13,10 @@
 @property NSMutableArray *courseArray;
 @property NSMutableArray *courseNumberArray;
 @property UIColor *departmentColor;
+@property NSString *abbrev;
+//database stuff
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong)NSArray* fetchedCourseArray;
 
 -(void)loadData;
 

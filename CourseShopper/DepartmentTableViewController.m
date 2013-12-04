@@ -8,6 +8,9 @@
 
 #import "DepartmentTableViewController.h"
 #import "CourseTableViewController.h"
+//for database use
+#import "AppDelegate.h"
+#import "Department.h"
 
 @interface DepartmentTableViewController ()
 
@@ -25,6 +28,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     //Nav bar stuff
     //In future we'll supply own images but I wanted to get rid of back text for now (hate it with text)
     self.navigationController.navigationBar.topItem.title = @"";
@@ -33,15 +37,35 @@
     
     [self loadData];//This populates the department array
     
+    //More database stuff
+    // get an instance of app delegate
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    self.fetchedDeptsArray = [appDelegate getAllDepartments];
+    //[appDelegate getClassList];
+    [self.tableView reloadData];
+    
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+    NSLog(@"we are back loading");
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
+    
+    //More database stuff
+    // get an instance of app delegate
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    self.fetchedDeptsArray = [appDelegate getAllDepartments];
+    //[appDelegate getClassList];
+    [self.tableView reloadData];
 
 }
 
@@ -64,7 +88,8 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.departmentArray.count;//this returns the number of departments in department array
+    return [self.fetchedDeptsArray count];
+    //return self.departmentArray.count;//this returns the number of departments in department array
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,11 +99,20 @@
 //    static NSString *CellIdentifier = @"Cell";
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    // Configure the cell...
     
-    NSString *departmentTitle = self.departmentArray[indexPath.row];
-    NSString *departmentAbbrev = self.departmentAbbrevArray[indexPath.row];
+    
+//    staticNSString *CellIdentifier = @"PhoneBookCellIdentifier";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    Department * record = [self.fetchedDeptsArray objectAtIndex:indexPath.row];
+    //Department * record = [self.classListTest objectAtIndex:indexPath.row];
+
+    
+    // Configure the cell...
+    NSString *departmentTitle = record.name;
+    NSString *departmentAbbrev = record.abbrev;
     UILabel *departmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 10, 210, 40)];
     UIFont *departmentFont = [UIFont fontWithName:@"Helvetica Light" size:20];
     departmentLabel.font = departmentFont;
@@ -87,7 +121,7 @@
     UIFont *abbrevFont = [UIFont fontWithName:@"Helvetica Light" size:36];
     departmentAbbrevLabel.font = abbrevFont;
     departmentAbbrevLabel.text = departmentAbbrev;
-    departmentAbbrevLabel.textColor = self.colorArray[indexPath.row];
+    departmentAbbrevLabel.textColor = [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1];//self.colorArray[indexPath.row];
 
     
     
@@ -97,9 +131,11 @@
     NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
     NSString *depKey = [index stringByAppendingString: @"dep"];
     NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
+    NSString *depAbbrevCode = [index stringByAppendingString: @"depAbbrevCode"];
 
     [self.dict setObject:departmentLabel.text forKey:depKey];
     [self.dict setObject:departmentAbbrevLabel.textColor forKey:depAbbrevKey];
+    [self.dict setObject:departmentAbbrev forKey:depAbbrevCode];
     
     return cell;
 }
@@ -113,15 +149,19 @@
     NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
     NSString *depKey = [index stringByAppendingString: @"dep"];
     NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
+    NSString *depAbbrevCode = [index stringByAppendingString: @"depAbbrevCode"];
     
     NSString *department = [self.dict objectForKey:depKey];
     UIColor *departmentColor = [self.dict objectForKey:depAbbrevKey];
+    NSString *abbr = [self.dict objectForKey:depAbbrevCode];
     
     //Then instantiate the courses table and set the title to the correct department
     //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
     CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
     courseTable.navigationItem.title = department;
     courseTable.departmentColor = departmentColor;
+    NSLog(@"setting the abrrev of the page to %@",abbr);
+    courseTable.abbrev = abbr;
 
     [self.navigationController pushViewController:courseTable animated:YES];
     
@@ -163,6 +203,34 @@
     
     //In future this is where we'll populate array from nodejs api
 }
+
+-(void)testingDatabase{
+    
+    
+//    NSLog(@"jjjjjjjjjjjjjjjjjjjjj");
+//    int value = [_counter intValue];
+//    _counter = [NSNumber numberWithInt:value + 1];
+//    // Add Entry to PhoneBook Data base and reset all fields
+//    NSString *strFromInt = [_counter stringValue];
+//    
+//    NSString * name = [NSString stringWithFormat:@"%s%@", "Kappi: ", strFromInt];
+//    //  1
+//    Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
+//                                                      inManagedObjectContext:self.managedObjectContext];
+//    //
+//    newEntry.name = name;
+//    newEntry.abbrev =@"KAPP";
+//
+//    //  3
+//    NSError *error;
+//    if (![self.managedObjectContext save:&error]) {
+//        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+//    }
+//    //  4
+ 
+}
+
+
 
 
 @end
