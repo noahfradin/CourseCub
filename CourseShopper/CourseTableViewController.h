@@ -13,6 +13,7 @@
 @property NSMutableArray *courseArray;
 @property NSMutableArray *courseNumberArray;
 @property UIColor *departmentColor;
+@property NSString *department;
 
 -(void)loadData;
 
