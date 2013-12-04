@@ -304,7 +304,7 @@
 
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
-    for (int i = 0; i < (sizeof self.fetchedDeptsArray) - 1; i++) {
+    for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
         NSString *firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
         int letter = [firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
