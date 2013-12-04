@@ -46,7 +46,9 @@
     self.managedObjectContext = appDelegate.managedObjectContext;
     self.fetchedDeptsArray = [appDelegate getAllDepartments];
     //[appDelegate getClassList];
+    [self resetSections];
     [self.tableView reloadData];
+
     
     
 }
@@ -77,7 +79,8 @@
     
     self.fetchedDeptsArray = [appDelegate getAllDepartments];
     //[appDelegate getClassList];
-    [self.tableView reloadData];
+    
+    
 
     
     self.tableView.rowHeight = 60;
@@ -91,6 +94,8 @@
     }
     self.theSearchBar = [[UISearchBar alloc] init];
     self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+    [self resetSections];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,14 +120,13 @@
     //return self.departmentArray.count;//this returns the number of departments in department array
     
     //The basic idea here would be to return the number of items based on the letter of the alphabet the section number referred to
-//    id numberOfRows = [self.alphabetCount objectAtIndex:section];
-//    if (numberOfRows == [NSNull null]) {
-//        return 0;
-//    }
-//    else {
-//        return [numberOfRows integerValue];//this returns the number of departments in department array
-//    }
-    return [self.fetchedDeptsArray count];
+    id numberOfRows = [self.alphabetCount objectAtIndex:section];
+    if (numberOfRows == [NSNull null]) {
+        return 0;
+    }
+    else {
+        return [numberOfRows integerValue];//this returns the number of departments in department array
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,40 +140,39 @@
     
 //    staticNSString *CellIdentifier = @"PhoneBookCellIdentifier";
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    NSLog(@"called");
     
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    Department * record = [self.fetchedDeptsArray objectAtIndex:indexPath.row];
-    //Department * record = [self.classListTest objectAtIndex:indexPath.row];
+
 
     
 //<<<<<<< HEAD
     // Configure the cell...
+
+
+    int section = indexPath.section;
+    int counter = 0;
+    int scounter = 0;
+    if (section != 0) {
+        while (section > scounter) {
+            if (self.alphabetCount[scounter] != [NSNull null]) {
+                int numberInSection = [self.alphabetCount[scounter] intValue];
+                counter += numberInSection;
+                scounter++;
+                if (section == scounter) {
+                    break;
+                }
+            }
+            else {
+                scounter++;
+            }
+        }
+    }
+    Department * record = [self.fetchedDeptsArray objectAtIndex:indexPath.row + counter];
     NSString *departmentTitle = record.name;
     NSString *departmentAbbrev = record.abbrev;
-///###########
-//    int section = indexPath.section;
-//    int counter = 0;
-//    int scounter = 0;
-//    if (section != 0) {
-//        while (section > scounter) {
-//            if (self.alphabetCount[scounter] != [NSNull null]) {
-//                int numberInSection = [self.alphabetCount[scounter] intValue];
-//                counter += numberInSection;
-//                scounter++;
-//                if (section == scounter) {
-//                    break;
-//                }
-//            }
-//            else {
-//                scounter++;
-//            }
-//        }
-//    }
-//    NSString *departmentTitle = self.departmentArray[indexPath.row + counter];
-//    NSString *departmentAbbrev = self.departmentAbbrevArray[indexPath.row + counter];
 
-//##############################
+
     UILabel *departmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 10, 210, 40)];
     UIFont *departmentFont = [UIFont fontWithName:@"Helvetica Light" size:20];
     departmentLabel.font = departmentFont;
@@ -178,12 +181,8 @@
     UIFont *abbrevFont = [UIFont fontWithName:@"Helvetica Light" size:36];
     departmentAbbrevLabel.font = abbrevFont;
     departmentAbbrevLabel.text = departmentAbbrev;
-//###########
-    departmentAbbrevLabel.textColor = [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1];//self.colorArray[indexPath.row];
+    departmentAbbrevLabel.textColor = self.colorArray[indexPath.row + counter];
 
-//=======
-//    //departmentAbbrevLabel.textColor = self.colorArray[indexPath.row + counter];
-//##########
     
     
     [cell addSubview: departmentLabel];
@@ -265,30 +264,30 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
-    NSArray *resultsAbbrev = [self searchThroughArray:(self.departmentAbbrevArray) withString: searchBar.text];
-    NSArray *resultsDept = [self searchThroughArray:(self.departmentArray) withString: searchBar.text];
+//    NSArray *resultsAbbrev = [self searchThroughArray:(self.departmentAbbrevArray) withString: searchBar.text];
+//    NSArray *resultsDept = [self searchThroughArray:(self.departmentArray) withString: searchBar.text];
 	
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     self.tableView.allowsSelection = YES;
     self.tableView.scrollEnabled = YES;
 	
-    [self.departmentAbbrevArray removeAllObjects];
-    [self.departmentArray removeAllObjects];
-    [self.colorArray removeAllObjects];
-    [self.alphabetCount removeAllObjects];
+//    [self.departmentAbbrevArray removeAllObjects];
+//    [self.departmentArray removeAllObjects];
+//    [self.colorArray removeAllObjects];
+//    [self.alphabetCount removeAllObjects];
+//    
+//    //NEED TO EITHER FIGURE OUT HOW TO SEARCH BOTH DEPARTMENT AND ABBREVS AT SAME TIME AND SHOW COMBINED RESULTS OR JUST SEARCH BY DEPARTMENT TITLE
+//    [self.departmentAbbrevArray addObjectsFromArray:resultsAbbrev];
+//    [self.departmentArray addObjectsFromArray:resultsDept];
+//    [self resetSections];
     
-    //NEED TO EITHER FIGURE OUT HOW TO SEARCH BOTH DEPARTMENT AND ABBREVS AT SAME TIME AND SHOW COMBINED RESULTS OR JUST SEARCH BY DEPARTMENT TITLE
-    [self.departmentAbbrevArray addObjectsFromArray:resultsAbbrev];
-    [self.departmentArray addObjectsFromArray:resultsDept];
-    [self resetSections];
     
-    
-    //NEED TO ALSO ADD BACK ASSOCIATED DEPARTMENT COLORS
-    for (int i = 0; i < (sizeof self.departmentAbbrevArray); i++) {
-        UIColor *color = [self.dict objectForKey: [self.departmentAbbrevArray objectAtIndex:i]];
-        [self.colorArray addObject:color];
-    }
+//    //NEED TO ALSO ADD BACK ASSOCIATED DEPARTMENT COLORS
+//    for (int i = 0; i < (sizeof self.departmentAbbrevArray); i++) {
+//        UIColor *color = [self.dict objectForKey: [self.departmentAbbrevArray objectAtIndex:i]];
+//        [self.colorArray addObject:color];
+//    }
     
     [self.tableView reloadData];
 }
@@ -305,8 +304,8 @@
 
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
-    for (int i = 0; i < (sizeof self.departmentAbbrevArray) - 1; i++) {
-        NSString *firstLetter = [self.departmentAbbrevArray[i] substringToIndex: 1];
+    for (int i = 0; i < (sizeof self.fetchedDeptsArray) - 1; i++) {
+        NSString *firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
         int letter = [firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
             NSNumber *one = [NSNumber numberWithInteger:1];
@@ -324,8 +323,6 @@
 
 -(void)loadData{
     //This is just to show y'all an example
-    self.departmentArray = [NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies", nil];
-    self.departmentAbbrevArray = [NSMutableArray arrayWithObjects:@"AFRI", @"CSCI", @"FRST", nil];
     [self resetSections];
     
     //75 colors

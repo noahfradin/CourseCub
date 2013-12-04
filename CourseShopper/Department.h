@@ -13,7 +13,7 @@
 
 @interface Department : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * color;
+@property (nonatomic, retain) UIColor * color;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * abbrev;
 @property (nonatomic, retain) NSSet *courses;
