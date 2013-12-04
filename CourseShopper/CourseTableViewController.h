@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong)NSArray* fetchedCourseArray;
 
+@property NSString *department;
+
 -(void)loadData;
 
 @end
