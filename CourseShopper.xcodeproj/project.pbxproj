@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3134D35A184124E5008DFEB6 /* CoreData.framework */; };
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
+		31841E4F184FA6F1004127EF /* abbrevs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31841E4D184FA6F1004127EF /* abbrevs.txt */; };
+		31841E50184FA6F1004127EF /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31841E4E184FA6F1004127EF /* titles.txt */; };
 		31B1CB7018452C1A007C0A12 /* class_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 31B1CB6F18452C1A007C0A12 /* class_list.json */; };
 		31B1CB72184A400C007C0A12 /* deps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31B1CB71184A400C007C0A12 /* deps.plist */; };
 		31B1CB76184A41FB007C0A12 /* deps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31B1CB75184A41FB007C0A12 /* deps.txt */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		3134D35A184124E5008DFEB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3134D35D1841252E008DFEB6 /* CourseShopper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseShopper.xcdatamodel; sourceTree = "<group>"; };
+		31841E4D184FA6F1004127EF /* abbrevs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = abbrevs.txt; path = ../../../../Desktop/abbrevs.txt; sourceTree = "<group>"; };
+		31841E4E184FA6F1004127EF /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = titles.txt; path = ../../../../Desktop/titles.txt; sourceTree = "<group>"; };
 		31B1CB6F18452C1A007C0A12 /* class_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = class_list.json; path = ../../../../Desktop/class_list.json; sourceTree = "<group>"; };
 		31B1CB71184A400C007C0A12 /* deps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = deps.plist; path = ../../../../Desktop/deps.plist; sourceTree = "<group>"; };
 		31B1CB75184A41FB007C0A12 /* deps.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = deps.txt; path = ../../../../Desktop/deps.txt; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				31841E4D184FA6F1004127EF /* abbrevs.txt */,
+				31841E4E184FA6F1004127EF /* titles.txt */,
 				31B1CB79184AF654007C0A12 /* deptLong.txt */,
 				31B1CB71184A400C007C0A12 /* deps.plist */,
 				31B1CB6F18452C1A007C0A12 /* class_list.json */,
@@ -328,7 +334,9 @@
 				31B1CB78184AABE9007C0A12 /* dps.plist in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
+				31841E50184FA6F1004127EF /* titles.txt in Resources */,
 				31B1CB7A184AF654007C0A12 /* deptLong.txt in Resources */,
+				31841E4F184FA6F1004127EF /* abbrevs.txt in Resources */,
 				31B1CB72184A400C007C0A12 /* deps.plist in Resources */,
 				31B1CB76184A41FB007C0A12 /* deps.txt in Resources */,
 				31B1CB7018452C1A007C0A12 /* class_list.json in Resources */,
