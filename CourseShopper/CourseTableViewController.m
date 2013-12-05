@@ -104,7 +104,7 @@
     Course * course = [self.fetchedCourseArray objectAtIndex:indexPath.row];
     NSString *courseTitle = course.title;
     NSString *courseNumber = course.number;
-    NSString *courseTime = @"jhkjh";
+    NSString *courseTime = course.time;
     UILabel *courseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 210, 40)];
     UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 20, 210, 40)];
     UIFont *courseFont = [UIFont fontWithName:@"Helvetica Light" size:14];

@@ -25,8 +25,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.window.tintColor = [UIColor redColor];
+    [self loadColours];
+    [self addDepartmentsToCD];
     [self addClassesToCD];
-    
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
     LoginViewController *login = [[LoginViewController alloc] init];
@@ -142,9 +143,10 @@
     
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"abbrev" ascending:YES];
+    NSArray *sortedArray=[fetchedRecords sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     // Returning Fetched Records
-    return fetchedRecords;
+    return sortedArray;
 }
 
 //this should return all classes of a given department (passed in as a string)
@@ -204,31 +206,19 @@
 }
 
 //reads from a text file of departmenst, parses the file and returns an nsarray of the deparment names
-- (NSArray *)getDepartmentsData
+- (NSArray *)getData:(NSString *)x
 {
-    NSString *title = @"deps";
+    NSString *title = x;
     NSString *type = @"txt";
     NSString *fileText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:title ofType:type] encoding:NSMacOSRomanStringEncoding error:nil];
     
-    NSArray *dataClient = [fileText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]; //to load txt
-    NSArray *chunks = [[dataClient objectAtIndex:1] componentsSeparatedByString: @"\\n', '"];
-    
-    //NSLog(@"%@", chunks);
-    return chunks;
+    NSArray *dataClient = [fileText componentsSeparatedByString: @"#"]; //to load txt
+    return dataClient;
 }
 
 
 -(void)addClassesToCD
 {
-    
-    //    NSString *departmentTitle = record.name;
-    //    NSString *departmentAbbrev = record.abbrev;
-    //    @dynamic descr;
-    //    @dynamic number;
-    //    @dynamic prof;
-    //    @dynamic time;
-    //    @dynamic title;
-    //    @dynamic department;
     
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
@@ -236,58 +226,133 @@
     NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList]
                                                             options:kNilOptions
                                                               error:&err];
-    NSMutableArray * abbrevs= [[NSMutableArray alloc]init];
 
-    
+     //add the class as a course, then set up relationship to department
     for(NSString *key in classes)
     {
-        //NSLog(@"key=%@ value=%@", key, [classes objectForKey:key]);
         NSString *firstWord = [[key componentsSeparatedByString:@" "] objectAtIndex:0];
-        [abbrevs addObject:firstWord];
+
         
-        //add the class as a course, then set up relationship to department
-        
-        Course * newCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course"
-                                                           inManagedObjectContext:self.managedObjectContext];
-        
-        newCourse.number = [[key componentsSeparatedByString:@" "] objectAtIndex:1];
-        newCourse.title = [classes objectForKey:key];
-        
-        newCourse.department = [self getDeptByAbbrev:firstWord];
-        
+        if ([self getDeptByAbbrev:firstWord]) {
+            Course * newCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course"
+                                                               inManagedObjectContext:self.managedObjectContext];
+            
+            newCourse.number = [[key componentsSeparatedByString:@" "] objectAtIndex:1];
+            newCourse.title = [classes objectForKey:key];
+            newCourse.time = @"MWF 9 - 10.30";
+            
+            newCourse.department = [self getDeptByAbbrev:firstWord];
+        }
     }
-    [abbrevs setArray:[[NSSet setWithArray:abbrevs] allObjects]];
-    [abbrevs sortUsingSelector:@selector(compare:)];
-    [self addDepartmentsToCD:abbrevs];
-    
 }
 
 #pragma addDepartments
--(void)addDepartmentsToCD:(NSMutableArray *)abbrevs
+-(void)addDepartmentsToCD
 {
-    
-    NSArray *deps = [self getDepartmentsData];
-//    NSLog(@"abbrev len is %ul",[abbrevs count]);
-//    NSLog(@"depts len is %ul",[deps count]);
-//    
-//    NSLog(@"abbrevs %@", abbrevs);
-    
+    NSArray *deps = [self getData: @"titles"];
+    NSArray *abbrevs = [self getData: @"abbrevs"];
+
     for(NSString *abr in abbrevs)
     {
-        NSUInteger i = [abbrevs indexOfObject:abr]%[deps count];
-        NSString * dep = [deps objectAtIndex:i];
-        Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
-                                                              inManagedObjectContext:self.managedObjectContext];
-        newEntry.name = dep;
-        newEntry.abbrev = abr;
-        
-        NSError *error;
-                if (![self.managedObjectContext save:&error]) {
-                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-                }
+        if (![abr  isEqual: @""]) {
+            NSUInteger i = [abbrevs indexOfObject:abr];
+            NSString * dep = [deps objectAtIndex:i];
+            Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
+                                                                  inManagedObjectContext:self.managedObjectContext];
+            newEntry.name = dep;
+            newEntry.abbrev = abr;
+            newEntry.color = [self.colorArray objectAtIndex:i];
+            
+            
+            NSError *error;
+            if (![self.managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
+        }
+      
     }
     
 
+}
+
+-(void)loadColours
+{
+    self.colorArray = [NSMutableArray arrayWithObjects:
+                       [UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.08 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.16 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.25 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.33 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.41 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.58 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.66 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.83 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:.91 blue:0 alpha:1],
+                       [UIColor colorWithRed:1 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.92 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:84 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.75 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.67 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.59 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.5 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.42 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.34 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0.25 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.17 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.09 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.08 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.16 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.25 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.33 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.41 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.5 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.58 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:66 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.83 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.91 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.92 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.84 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.75 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.67 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.59 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.5 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.42 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.34 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0.25 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.17 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:.09 blue:1 alpha:1],
+                       [UIColor colorWithRed:0 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.08 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.16 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.25 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.33 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.41 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.58 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.66 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:0.75 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.83 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:.91 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:1 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.92 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.84 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.75 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.67 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.59 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.5 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.42 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.34 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.20 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.15 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.10 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.05 alpha:1],
+                       [UIColor colorWithRed:1 green:0 blue:.02 alpha:1],nil];
 }
 
 @end

@@ -41,12 +41,12 @@
     
     //More database stuff
     // get an instance of app delegate
-    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
-    self.managedObjectContext = appDelegate.managedObjectContext;
-    self.fetchedDeptsArray = [appDelegate getAllDepartments];
-    //[appDelegate getClassList];
-    [self.tableView reloadData];
+//    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+//    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+//    self.managedObjectContext = appDelegate.managedObjectContext;
+//    self.fetchedDeptsArray = [appDelegate getAllDepartments];
+//    //[appDelegate getClassList];
+//    [self.tableView reloadData];
     
     
 }
@@ -78,7 +78,8 @@
     self.fetchedDeptsArray = [appDelegate getAllDepartments];
     //[appDelegate getClassList];
     [self.tableView reloadData];
-
+    NSLog(@"in dept table list returned: %@",self.fetchedDeptsArray);
+    NSLog(@"count of dept array: %ul",[self.fetchedDeptsArray count]);
     
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
@@ -105,6 +106,7 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
+    return 1;
     return 26;
 }
 
@@ -179,7 +181,7 @@
     departmentAbbrevLabel.font = abbrevFont;
     departmentAbbrevLabel.text = departmentAbbrev;
 //###########
-    departmentAbbrevLabel.textColor = [UIColor colorWithRed:0.5 green:0 blue:1 alpha:1];//self.colorArray[indexPath.row];
+    departmentAbbrevLabel.textColor = record.color;
 
 //=======
 //    //departmentAbbrevLabel.textColor = self.colorArray[indexPath.row + counter];
