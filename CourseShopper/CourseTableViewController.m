@@ -87,6 +87,7 @@
     //Then instantiate the course detail view and set the title to the correct course
     //Anything else we need to pass can go here as well
     CourseViewController *courseView = [[CourseViewController alloc] init];
+    courseView.navTitle = courseTitle;
     courseView.navigationItem.title = courseTitle;
     
     [self.navigationController pushViewController:courseView animated:YES];

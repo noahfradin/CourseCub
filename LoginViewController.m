@@ -38,6 +38,7 @@
 -(void)loginButtonWasPressed{
     CalendarViewController *cal = [[CalendarViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cal];
+    [navController.navigationBar setTintColor:[UIColor blackColor]];
     [self presentViewController:navController animated:YES completion:nil];
 }
 

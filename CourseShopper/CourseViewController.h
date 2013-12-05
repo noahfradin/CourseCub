@@ -7,9 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseAlertViewController.h"
 
-@interface CourseViewController : UIViewController
+@interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
 
+@property(readwrite,strong) UIButton *registerButton;
+@property(readwrite,strong) UIButton *coursePreviewButton;
+@property(readwrite,strong) UIButton *bookListButton;
+@property(readwrite,strong) UIButton *criticalReviewButton;
+@property UIView *navBarDivide;
+@property NSString *navTitle;
 @property NSString *courseTitle;
+@property NSString *professor;
+@property NSString *location;
+
+
+-(void)registerButtonWasPressed;
+-(void)bookListButtonWasPressed;
+-(void)coursePreviewButtonWasPressed;
+-(void)criticalReviewButtonWasPressed;
+
 
 @end
