@@ -104,19 +104,22 @@
     Course * course = [self.fetchedCourseArray objectAtIndex:indexPath.row];
     NSString *courseTitle = course.title;
     NSString *courseNumber = course.number;
-    NSString *courseTime = @"jhkjh";
+    NSString *courseTime = course.time;
+    
     UILabel *courseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 210, 40)];
-    UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 20, 210, 40)];
+    UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 20, 150, 40)];
     UIFont *courseFont = [UIFont fontWithName:@"Helvetica Light" size:14];
     courseLabel.font = courseFont;
     courseLabel.text = courseTitle;
     courseTimeLabel.font = courseFont;
     courseTimeLabel.text = courseTime;
+    
     UILabel *courseNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 95, 40)];
-    UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:36];
+    UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:31];
     courseNumberLabel.font = numberFont;
     courseNumberLabel.text = courseNumber;
     courseNumberLabel.textColor = _departmentColor;
+    
     
     [cell addSubview: courseLabel];
     [cell addSubview: courseTimeLabel];
@@ -156,6 +159,7 @@
     //In future this is where we'll populate array from nodejs api and the query will pull in utitlizing the department as a parameter to populate the array
     //can either access ns array built intially and only the parts I want or load all into core data and make a request
 }
+
 
 
 @end

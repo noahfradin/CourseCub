@@ -24,13 +24,14 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator ;
+@property (nonatomic, retain) NSArray *colorArray;
 
 -(NSArray*)getAllDepartments;
 -(void)addClassesToCD;
 -(NSArray*)getAllClassesOfDept:(NSString *)dept;
 -(Department *)getDeptByAbbrev:(NSString *)abbreviation;
--(NSArray *)getDepartmentsData;
--(void)addDepartmentsToCD:(NSMutableArray *)abbrevs;
+-(NSArray *)getData:(NSString *) x;
+-(void)addDepartmentsToCD;
 
 
 @end

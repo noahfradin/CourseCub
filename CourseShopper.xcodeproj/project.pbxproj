@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		173EBBE4184EB638006D0C17 /* deptLong.txt in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE3184EB638006D0C17 /* deptLong.txt */; };
-		173EBBE5184EB638006D0C17 /* deptLong.txt in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE3184EB638006D0C17 /* deptLong.txt */; };
 		173EBBE7184EB640006D0C17 /* dps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE6184EB640006D0C17 /* dps.plist */; };
 		173EBBE8184EB640006D0C17 /* dps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE6184EB640006D0C17 /* dps.plist */; };
-		173EBBEB184EB64A006D0C17 /* class_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE9184EB64A006D0C17 /* class_list.json */; };
-		173EBBEC184EB64A006D0C17 /* class_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE9184EB64A006D0C17 /* class_list.json */; };
-		173EBBED184EB64A006D0C17 /* deps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBEA184EB64A006D0C17 /* deps.txt */; };
-		173EBBEE184EB64A006D0C17 /* deps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBEA184EB64A006D0C17 /* deps.txt */; };
+		176D8C3E1852503700BCEF28 /* abbrevs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3B1852503700BCEF28 /* abbrevs.txt */; };
+		176D8C3F1852503700BCEF28 /* abbrevs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3B1852503700BCEF28 /* abbrevs.txt */; };
+		176D8C401852503700BCEF28 /* class_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3C1852503700BCEF28 /* class_list.json */; };
+		176D8C411852503700BCEF28 /* class_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3C1852503700BCEF28 /* class_list.json */; };
+		176D8C421852503700BCEF28 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3D1852503700BCEF28 /* titles.txt */; };
+		176D8C431852503700BCEF28 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3D1852503700BCEF28 /* titles.txt */; };
+		176D8C481852504900BCEF28 /* deps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C441852504900BCEF28 /* deps.txt */; };
+		176D8C491852504900BCEF28 /* deps.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C441852504900BCEF28 /* deps.txt */; };
+		176D8C4A1852504900BCEF28 /* deps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C451852504900BCEF28 /* deps.plist */; };
+		176D8C4B1852504900BCEF28 /* deps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C451852504900BCEF28 /* deps.plist */; };
+		176D8C4C1852504900BCEF28 /* deptLong.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C461852504900BCEF28 /* deptLong.txt */; };
+		176D8C4D1852504900BCEF28 /* deptLong.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C461852504900BCEF28 /* deptLong.txt */; };
+		176D8C4E1852504900BCEF28 /* deptList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C471852504900BCEF28 /* deptList.txt */; };
+		176D8C4F1852504900BCEF28 /* deptList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C471852504900BCEF28 /* deptList.txt */; };
 		3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3134D35A184124E5008DFEB6 /* CoreData.framework */; };
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
 		31B44A3218440BE1000DCAEC /* Department.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3118440BE1000DCAEC /* Department.m */; };
@@ -51,10 +59,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		173EBBE3184EB638006D0C17 /* deptLong.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptLong.txt; sourceTree = "<group>"; };
 		173EBBE6184EB640006D0C17 /* dps.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dps.plist; sourceTree = "<group>"; };
-		173EBBE9184EB64A006D0C17 /* class_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = class_list.json; sourceTree = "<group>"; };
-		173EBBEA184EB64A006D0C17 /* deps.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deps.txt; sourceTree = "<group>"; };
+		176D8C3B1852503700BCEF28 /* abbrevs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = abbrevs.txt; sourceTree = "<group>"; };
+		176D8C3C1852503700BCEF28 /* class_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = class_list.json; sourceTree = "<group>"; };
+		176D8C3D1852503700BCEF28 /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles.txt; sourceTree = "<group>"; };
+		176D8C441852504900BCEF28 /* deps.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deps.txt; sourceTree = "<group>"; };
+		176D8C451852504900BCEF28 /* deps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = deps.plist; sourceTree = "<group>"; };
+		176D8C461852504900BCEF28 /* deptLong.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptLong.txt; sourceTree = "<group>"; };
+		176D8C471852504900BCEF28 /* deptList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptList.txt; sourceTree = "<group>"; };
 		3134D35A184124E5008DFEB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3134D35D1841252E008DFEB6 /* CourseShopper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseShopper.xcdatamodel; sourceTree = "<group>"; };
 		31B44A3018440BE1000DCAEC /* Department.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Department.h; sourceTree = "<group>"; };
@@ -173,10 +185,14 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				173EBBE9184EB64A006D0C17 /* class_list.json */,
-				173EBBEA184EB64A006D0C17 /* deps.txt */,
 				173EBBE6184EB640006D0C17 /* dps.plist */,
-				173EBBE3184EB638006D0C17 /* deptLong.txt */,
+				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
+				176D8C3C1852503700BCEF28 /* class_list.json */,
+				176D8C441852504900BCEF28 /* deps.txt */,
+				176D8C451852504900BCEF28 /* deps.plist */,
+				176D8C461852504900BCEF28 /* deptLong.txt */,
+				176D8C471852504900BCEF28 /* deptList.txt */,
+				176D8C3D1852503700BCEF28 /* titles.txt */,
 				8C2CD68A17F2CC0500CAA5EF /* CourseShopper-Info.plist */,
 				8C2CD68B17F2CC0500CAA5EF /* InfoPlist.strings */,
 				8C2CD68E17F2CC0500CAA5EF /* main.m */,
@@ -324,14 +340,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176D8C3E1852503700BCEF28 /* abbrevs.txt in Resources */,
 				8C2CD69917F2CC0500CAA5EF /* Main_iPad.storyboard in Resources */,
-				173EBBEB184EB64A006D0C17 /* class_list.json in Resources */,
-				173EBBED184EB64A006D0C17 /* deps.txt in Resources */,
+				176D8C4E1852504900BCEF28 /* deptList.txt in Resources */,
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
-				173EBBE4184EB638006D0C17 /* deptLong.txt in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,
 				173EBBE7184EB640006D0C17 /* dps.plist in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
+				176D8C401852503700BCEF28 /* class_list.json in Resources */,
+				176D8C4A1852504900BCEF28 /* deps.plist in Resources */,
+				176D8C4C1852504900BCEF28 /* deptLong.txt in Resources */,
+				176D8C481852504900BCEF28 /* deps.txt in Resources */,
+				176D8C421852503700BCEF28 /* titles.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,11 +359,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				173EBBEC184EB64A006D0C17 /* class_list.json in Resources */,
 				8C2CD6AF17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
+				176D8C4B1852504900BCEF28 /* deps.plist in Resources */,
+				176D8C431852503700BCEF28 /* titles.txt in Resources */,
+				176D8C3F1852503700BCEF28 /* abbrevs.txt in Resources */,
+				176D8C411852503700BCEF28 /* class_list.json in Resources */,
+				176D8C4F1852504900BCEF28 /* deptList.txt in Resources */,
+				176D8C491852504900BCEF28 /* deps.txt in Resources */,
 				173EBBE8184EB640006D0C17 /* dps.plist in Resources */,
-				173EBBE5184EB638006D0C17 /* deptLong.txt in Resources */,
-				173EBBEE184EB64A006D0C17 /* deps.txt in Resources */,
+				176D8C4D1852504900BCEF28 /* deptLong.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

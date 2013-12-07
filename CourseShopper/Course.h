@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * descr;
 @property (nonatomic, retain) NSString * number;
 @property (nonatomic, retain) NSString * prof;
-@property (nonatomic, retain) NSNumber * time;
+@property (nonatomic, retain) NSString * time;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) Department *department;
 
