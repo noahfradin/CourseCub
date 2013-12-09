@@ -26,6 +26,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator ;
 @property (nonatomic, retain) NSArray *colorArray;
 
+
 -(NSArray*)getAllDepartments;
 -(void)addClassesToCD;
 -(NSArray*)getAllClassesOfDept:(NSString *)dept;

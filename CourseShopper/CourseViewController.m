@@ -15,7 +15,7 @@
 #import "CriticalReviewAlertViewController.h"
 #import "RegisterAlertViewController.h"
 #import "UnregisterAlertViewController.h"
-//#import "CourseAlertViewController.h"
+#import "CourseAlertViewController.h"
 
 #import "AppDelegate.h"
 
@@ -133,11 +133,11 @@
     
 
     
-    _totalSeats = arc4random() % 50;
-    NSString *strFromInt2 = [NSString stringWithFormat:@"%d",_totalSeats];
+    //_totalSeats = arc4random() % 50;
+    NSString *strFromInt2 = self.courseInfo.totalSeats;//[NSString stringWithFormat:@"%d",_totalSeats];
     
-    _seatsAvailable = arc4random() % _totalSeats;
-    NSString *strFromInt = [NSString stringWithFormat:@"%d",_seatsAvailable];
+   // _seatsAvailable = arc4random() % _totalSeats;
+    NSString *strFromInt = self.courseInfo.availableSeats;//[NSString stringWithFormat:@"%d",_seatsAvailable];
 
     _sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(seatsOffset, buttonHeight*4.3, screenWidth/3, buttonHeight*2)];
     UIColor *sizeLabelFontColor = [UIColor colorWithRed:153.0f/255.0f green:152.0f/255.0f blue:152.0f/255.0f alpha:1];
@@ -197,9 +197,11 @@
     [dividingLine3 setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:dividingLine3];
     
-    courseDetails.text = @"(most of the time) or used (rarely). Importantly, small defects (like creases or folds or dog ears, and even insufficient glue on the cover that a buyer can easily correct) do not qualify as defects that warrant returns. Inside the cover, the book text should be pristine—perfect. Ordering a few books together seems to be considerably cheaper on shipping costs than buying one book at a time. (You can see the costs of shipping different quantities on the order page.) I do not make any money on shipping. Our order page is just passing through the cost quoted by the shipping service. One final warning: shipwire tends to hold orders that do not have valid USPS addresses. So, shipping to the will not work. Make sure to enter a correct street address and zip code.(most of the time) or used (rarely). Importantly, small defects (like creases or folds or dog ears, and even insufficient glue on the cover that a buyer can easily correct) do not qualify as defects that warrant returns. Inside the cover, the book text should be pristine—perfect. Ordering a few books together seems to be considerably cheaper on shipping costs than buying one book at a time. (You can see the costs of shipping different quantities on the order page.) I do not make any money on shipping. Our order page is just passing through the cost quoted by the shipping service. One final warning: shipwire tends to hold orders that do not have valid USPS addresses. So, shipping to the will not work. Make sure to enter a correct street address and zip code.";
-        
+    courseDetails.font =  [UIFont fontWithName:@"Helvetica Light" size:16];
+    courseDetails.text = @"Course Details: \n\n";
+    courseDetails.text = [courseDetails.text stringByAppendingString:self.courseInfo.descr];
 
+   
     
 
     
@@ -208,7 +210,7 @@
 
      _bookListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_bookListButton addTarget:self action:@selector(bookListButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_bookListButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
+    [_bookListButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
      _bookListButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _bookListButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_bookListButton setTitle:@"Book\nList" forState: UIControlStateNormal];
@@ -221,7 +223,7 @@
     
      _coursePreviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth+buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_coursePreviewButton addTarget:self action:@selector(coursePreviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_coursePreviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
+    [_coursePreviewButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
      _coursePreviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _coursePreviewButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_coursePreviewButton setTitle:@"Course\nPreview" forState: UIControlStateNormal];
@@ -235,7 +237,10 @@
     
      _criticalReviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth*2+2*buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_criticalReviewButton addTarget:self action:@selector(criticalReviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
+     //[_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
+    [_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
+    
+    
      _criticalReviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _criticalReviewButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_criticalReviewButton setTitle:@"Critical\nReview" forState: UIControlStateNormal];
@@ -283,8 +288,8 @@
         
         [UIView commitAnimations];
         [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
-
-    }else if(_state == stopNotify){
+       
+        }else if(_state == stopNotify){
           btnImage = [UIImage imageNamed:@"NotifyMe"];
         [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
 
@@ -293,6 +298,7 @@
         registerAlert = [[RegisterAlertViewController alloc] init];
         registerAlert.courseView = self;
         [self.view addSubview:registerAlert.view];
+       
         
     }else if(_state == registered){
         unregisterAlert = [[UnregisterAlertViewController alloc] init];
@@ -340,6 +346,7 @@
     
     [_removeCartButton removeFromSuperview];
     [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)unregisterRoll{
@@ -348,7 +355,7 @@
       btnImage = [UIImage imageNamed:@"RegisterHalf2"];
     _state = registerRemove;
     btnImage2 = [UIImage imageNamed:@"Remove2"];
-    
+     [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
     [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
     
     [_removeCartButton setFrame:CGRectMake(registerButtonWidthOffset+85, registerButtonHeightOffset, btnImage2.size.width,btnImage2.size.height)];
@@ -369,7 +376,7 @@
     _seatAvailableLabel.alpha = 1;
     _sizeLabel.alpha = 0;
     _sizeLabel.alpha = 1;
-    
+  
     [UIView commitAnimations];
     
 }
@@ -430,13 +437,13 @@
 
 -(void)initButtonImage: UIBUtton{
     UIImage *btnImage;
-    if(_seatsAvailable == 0) {
-         NSLog(@"1");
+    if(  [NSNumber numberWithInt: self.courseInfo.availableSeats] == 0) {
+       
         btnImage = [UIImage imageNamed:@"NotifyMe"];
         _state = notifyMe;
     }
     else{
-         NSLog(@"2");
+ 
         btnImage = [UIImage imageNamed:@"AddToCart"];
         _state = addToCart;
         
