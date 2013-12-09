@@ -232,32 +232,34 @@
     return [fetchedRecords objectAtIndex:0];
 }
 
--(Department*)getCourseBySearch:(NSString *)searchTerm
+-(NSArray*)getCourseBySearch:(NSString *)searchTerm
+
 {
+    
+    NSLog(@"getCourse was called");
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     //Setting Entity to be Queried
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Coursee"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
+    
+    
     NSPredicate *predicate =
-            [NSPredicate predicateWithFormat:@"(title contains '%@') OR (professor contains '%@')",searchTerm];
+            [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@",searchTerm];
     
     [fetchRequest setPredicate:predicate];
     NSError* error;
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *temp = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    if ([temp count]>=1){
-        Department *fetchedDept = [temp objectAtIndex:0];
-        // Returning Fetched Records
-        return fetchedDept;
+    if ([temp count] == 0) {
+        NSLog(@"FUUUuUUUUUCK");
     }
-    else
-    {
-        return nil;
-    }
+    
+    return temp;
+
     
 }
 
@@ -414,9 +416,9 @@
                        [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:.83 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:.91 blue:0 alpha:1],
-                       [UIColor colorWithRed:1 green:1 blue:0 alpha:1],
-                       [UIColor colorWithRed:.92 green:1 blue:0 alpha:1],
-                       [UIColor colorWithRed:84 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.8 green:.8 blue:0 alpha:1],
+                       [UIColor colorWithRed:.72 green:.8 blue:0 alpha:1],
+                       [UIColor colorWithRed:.64 green:.8 blue:0 alpha:1],
                        [UIColor colorWithRed:0.75 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:.67 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:.59 green:1 blue:0 alpha:1],
@@ -434,7 +436,7 @@
                        [UIColor colorWithRed:0 green:1 blue:.41 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.5 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.58 alpha:1],
-                       [UIColor colorWithRed:0 green:1 blue:66 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.66 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.75 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.83 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.91 alpha:1],

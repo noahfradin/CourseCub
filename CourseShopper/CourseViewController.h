@@ -35,6 +35,7 @@
 @property int state;
 @property UILabel * sizeLabel;
 @property UILabel * seatAvailableLabel;
+@property Course *course;
 
 
 -(void)registerButtonWasPressed;
