@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 
 
+
 @implementation AppDelegate
 
 
@@ -31,7 +32,15 @@
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
     LoginViewController *login = [[LoginViewController alloc] init];
+    
+    //##########CHANGE THIS
     self.window.rootViewController = login;
+    //#####################
+//    //For testing
+//    CourseViewController *courseView = [[CourseViewController alloc] init];
+//    self.window.rootViewController = courseView;
+//    //End of for testing
+
     [self.window makeKeyAndVisible];
     return YES;
 }

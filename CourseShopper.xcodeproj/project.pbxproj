@@ -25,27 +25,27 @@
 		176D8C4F1852504900BCEF28 /* deptList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C471852504900BCEF28 /* deptList.txt */; };
 		3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3134D35A184124E5008DFEB6 /* CoreData.framework */; };
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
-		31980A9B185580C200D6C82B /* desc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31980A98185580C200D6C82B /* desc.txt */; };
-		31980A9C185580C200D6C82B /* locs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31980A99185580C200D6C82B /* locs.txt */; };
-		31980A9D185580C200D6C82B /* profs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31980A9A185580C200D6C82B /* profs.txt */; };
 		31B44A3218440BE1000DCAEC /* Department.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3118440BE1000DCAEC /* Department.m */; };
 		31B44A3518440BE2000DCAEC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3418440BE2000DCAEC /* Course.m */; };
+		703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BC18559989005C9047 /* RegisterHalf2@1x.png */; };
+		703A55C118559989005C9047 /* RegisterHalf2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BD18559989005C9047 /* RegisterHalf2@2x.png */; };
+		703A55C218559989005C9047 /* Remove2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BE18559989005C9047 /* Remove2@1x.png */; };
+		703A55C318559989005C9047 /* Remove2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BF18559989005C9047 /* Remove2@2x.png */; };
+		703A55CD18559CB9005C9047 /* locs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CA18559CB9005C9047 /* locs.txt */; };
+		703A55CE18559CB9005C9047 /* profs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CB18559CB9005C9047 /* profs.txt */; };
+		703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */; };
 		703D627118514F9E004F263A /* CoursePreviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */; };
 		703D627418514FAB004F263A /* CriticalReviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627318514FAB004F263A /* CriticalReviewAlertViewController.m */; };
 		70572E3C1843CB7A00118ECD /* CourseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */; };
 		705E61BD184EB4C500BAA7D2 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705E61BC184EB4C500BAA7D2 /* WebViewController.m */; };
+		70C2AFCA185590420086D9CE /* UnregisterAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C2AFC9185590420086D9CE /* UnregisterAlertViewController.m */; };
+		70C2AFCD1855904C0086D9CE /* RegisterAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C2AFCC1855904C0086D9CE /* RegisterAlertViewController.m */; };
 		70D99907185539D9009346BE /* AddToCart@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998F9185539D9009346BE /* AddToCart@1x.png */; };
 		70D99908185539D9009346BE /* AddToCart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FA185539D9009346BE /* AddToCart@2x.png */; };
 		70D99909185539D9009346BE /* DoNotNotify@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FB185539D9009346BE /* DoNotNotify@1x.png */; };
 		70D9990A185539D9009346BE /* DoNotNotify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FC185539D9009346BE /* DoNotNotify@2x.png */; };
 		70D9990B185539D9009346BE /* NotifyMe@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FD185539D9009346BE /* NotifyMe@1x.png */; };
 		70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FE185539D9009346BE /* NotifyMe@2x.png */; };
-		70D9990D185539D9009346BE /* Register@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FF185539D9009346BE /* Register@1x.png */; };
-		70D9990E185539D9009346BE /* Register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99900185539D9009346BE /* Register@2x.png */; };
-		70D9990F185539D9009346BE /* RegisterHalf@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99901185539D9009346BE /* RegisterHalf@1x.png */; };
-		70D99910185539D9009346BE /* RegisterHalf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99902185539D9009346BE /* RegisterHalf@2x.png */; };
-		70D99911185539D9009346BE /* Remove@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99903185539D9009346BE /* Remove@1x.png */; };
-		70D99912185539D9009346BE /* Remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99904185539D9009346BE /* Remove@2x.png */; };
 		70D99913185539D9009346BE /* Unregister@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99905185539D9009346BE /* Unregister@1x.png */; };
 		70D99914185539D9009346BE /* Unregister@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99906185539D9009346BE /* Unregister@2x.png */; };
 		8C2A095C18555C27000C517B /* CalendarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A095B18555C27000C517B /* CalendarMenuViewController.m */; };
@@ -92,13 +92,17 @@
 		176D8C471852504900BCEF28 /* deptList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptList.txt; sourceTree = "<group>"; };
 		3134D35A184124E5008DFEB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3134D35D1841252E008DFEB6 /* CourseShopper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseShopper.xcdatamodel; sourceTree = "<group>"; };
-		31980A98185580C200D6C82B /* desc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = desc.txt; path = ../../../../Desktop/desc.txt; sourceTree = "<group>"; };
-		31980A99185580C200D6C82B /* locs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = locs.txt; path = ../../../../Desktop/locs.txt; sourceTree = "<group>"; };
-		31980A9A185580C200D6C82B /* profs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = profs.txt; path = ../../../../Desktop/profs.txt; sourceTree = "<group>"; };
 		31B44A3018440BE1000DCAEC /* Department.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Department.h; sourceTree = "<group>"; };
 		31B44A3118440BE1000DCAEC /* Department.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Department.m; sourceTree = "<group>"; };
 		31B44A3318440BE2000DCAEC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		31B44A3418440BE2000DCAEC /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		703A55BC18559989005C9047 /* RegisterHalf2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@1x.png"; sourceTree = "<group>"; };
+		703A55BD18559989005C9047 /* RegisterHalf2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@2x.png"; sourceTree = "<group>"; };
+		703A55BE18559989005C9047 /* Remove2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@1x.png"; sourceTree = "<group>"; };
+		703A55BF18559989005C9047 /* Remove2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@2x.png"; sourceTree = "<group>"; };
+		703A55CA18559CB9005C9047 /* locs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = locs.txt; path = ../../Desktop/locs.txt; sourceTree = "<group>"; };
+		703A55CB18559CB9005C9047 /* profs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = profs.txt; path = ../../Desktop/profs.txt; sourceTree = "<group>"; };
+		703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "fakedata!!!!.rtf"; path = "../../Desktop/fakedata!!!!.rtf"; sourceTree = "<group>"; };
 		703D626F18514F9E004F263A /* CoursePreviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePreviewAlertViewController.h; sourceTree = "<group>"; };
 		703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePreviewAlertViewController.m; sourceTree = "<group>"; };
 		703D627218514FAB004F263A /* CriticalReviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CriticalReviewAlertViewController.h; sourceTree = "<group>"; };
@@ -107,18 +111,16 @@
 		70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseAlertViewController.m; sourceTree = "<group>"; };
 		705E61BB184EB4C500BAA7D2 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		705E61BC184EB4C500BAA7D2 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		70C2AFC8185590420086D9CE /* UnregisterAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnregisterAlertViewController.h; sourceTree = "<group>"; };
+		70C2AFC9185590420086D9CE /* UnregisterAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnregisterAlertViewController.m; sourceTree = "<group>"; };
+		70C2AFCB1855904C0086D9CE /* RegisterAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterAlertViewController.h; sourceTree = "<group>"; };
+		70C2AFCC1855904C0086D9CE /* RegisterAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAlertViewController.m; sourceTree = "<group>"; };
 		70D998F9185539D9009346BE /* AddToCart@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddToCart@1x.png"; sourceTree = "<group>"; };
 		70D998FA185539D9009346BE /* AddToCart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddToCart@2x.png"; sourceTree = "<group>"; };
 		70D998FB185539D9009346BE /* DoNotNotify@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DoNotNotify@1x.png"; sourceTree = "<group>"; };
 		70D998FC185539D9009346BE /* DoNotNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DoNotNotify@2x.png"; sourceTree = "<group>"; };
 		70D998FD185539D9009346BE /* NotifyMe@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotifyMe@1x.png"; sourceTree = "<group>"; };
 		70D998FE185539D9009346BE /* NotifyMe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotifyMe@2x.png"; sourceTree = "<group>"; };
-		70D998FF185539D9009346BE /* Register@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Register@1x.png"; sourceTree = "<group>"; };
-		70D99900185539D9009346BE /* Register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Register@2x.png"; sourceTree = "<group>"; };
-		70D99901185539D9009346BE /* RegisterHalf@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf@1x.png"; sourceTree = "<group>"; };
-		70D99902185539D9009346BE /* RegisterHalf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf@2x.png"; sourceTree = "<group>"; };
-		70D99903185539D9009346BE /* Remove@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove@1x.png"; sourceTree = "<group>"; };
-		70D99904185539D9009346BE /* Remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove@2x.png"; sourceTree = "<group>"; };
 		70D99905185539D9009346BE /* Unregister@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unregister@1x.png"; sourceTree = "<group>"; };
 		70D99906185539D9009346BE /* Unregister@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unregister@2x.png"; sourceTree = "<group>"; };
 		8C2A095A18555C27000C517B /* CalendarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMenuViewController.h; path = ../CalendarMenuViewController.h; sourceTree = "<group>"; };
@@ -196,6 +198,10 @@
 			children = (
 				70572E3A1843CB7A00118ECD /* CourseAlertViewController.h */,
 				70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */,
+				70C2AFC8185590420086D9CE /* UnregisterAlertViewController.h */,
+				70C2AFC9185590420086D9CE /* UnregisterAlertViewController.m */,
+				70C2AFCB1855904C0086D9CE /* RegisterAlertViewController.h */,
+				70C2AFCC1855904C0086D9CE /* RegisterAlertViewController.m */,
 			);
 			name = "Course Alert";
 			sourceTree = "<group>";
@@ -271,9 +277,9 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				31980A98185580C200D6C82B /* desc.txt */,
-				31980A99185580C200D6C82B /* locs.txt */,
-				31980A9A185580C200D6C82B /* profs.txt */,
+				703A55CA18559CB9005C9047 /* locs.txt */,
+				703A55CB18559CB9005C9047 /* profs.txt */,
+				703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */,
 				173EBBE6184EB640006D0C17 /* dps.plist */,
 				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
 				176D8C3C1852503700BCEF28 /* class_list.json */,
@@ -283,17 +289,15 @@
 				176D8C471852504900BCEF28 /* deptList.txt */,
 				176D8C3D1852503700BCEF28 /* titles.txt */,
 				70D998F9185539D9009346BE /* AddToCart@1x.png */,
+				703A55BC18559989005C9047 /* RegisterHalf2@1x.png */,
+				703A55BD18559989005C9047 /* RegisterHalf2@2x.png */,
+				703A55BE18559989005C9047 /* Remove2@1x.png */,
+				703A55BF18559989005C9047 /* Remove2@2x.png */,
 				70D998FA185539D9009346BE /* AddToCart@2x.png */,
 				70D998FB185539D9009346BE /* DoNotNotify@1x.png */,
 				70D998FC185539D9009346BE /* DoNotNotify@2x.png */,
 				70D998FD185539D9009346BE /* NotifyMe@1x.png */,
 				70D998FE185539D9009346BE /* NotifyMe@2x.png */,
-				70D998FF185539D9009346BE /* Register@1x.png */,
-				70D99900185539D9009346BE /* Register@2x.png */,
-				70D99901185539D9009346BE /* RegisterHalf@1x.png */,
-				70D99902185539D9009346BE /* RegisterHalf@2x.png */,
-				70D99903185539D9009346BE /* Remove@1x.png */,
-				70D99904185539D9009346BE /* Remove@2x.png */,
 				70D99905185539D9009346BE /* Unregister@1x.png */,
 				70D99906185539D9009346BE /* Unregister@2x.png */,
 				8C2CD68A17F2CC0500CAA5EF /* CourseShopper-Info.plist */,
@@ -446,33 +450,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				176D8C3E1852503700BCEF28 /* abbrevs.txt in Resources */,
-				31980A9B185580C200D6C82B /* desc.txt in Resources */,
 				8C2CD69917F2CC0500CAA5EF /* Main_iPad.storyboard in Resources */,
 				176D8C4E1852504900BCEF28 /* deptList.txt in Resources */,
 				70D9990B185539D9009346BE /* NotifyMe@1x.png in Resources */,
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
+				703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */,
 				70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */,
+				703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */,
 				70D99914185539D9009346BE /* Unregister@2x.png in Resources */,
+				703A55C218559989005C9047 /* Remove2@1x.png in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,
 				173EBBE7184EB640006D0C17 /* dps.plist in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
-				31980A9D185580C200D6C82B /* profs.txt in Resources */,
-				31980A9C185580C200D6C82B /* locs.txt in Resources */,
 				176D8C401852503700BCEF28 /* class_list.json in Resources */,
 				176D8C4A1852504900BCEF28 /* deps.plist in Resources */,
+				703A55C118559989005C9047 /* RegisterHalf2@2x.png in Resources */,
 				176D8C4C1852504900BCEF28 /* deptLong.txt in Resources */,
+				703A55C318559989005C9047 /* Remove2@2x.png in Resources */,
 				176D8C481852504900BCEF28 /* deps.txt in Resources */,
 				176D8C421852503700BCEF28 /* titles.txt in Resources */,
 				70D99909185539D9009346BE /* DoNotNotify@1x.png in Resources */,
 				70D9990A185539D9009346BE /* DoNotNotify@2x.png in Resources */,
-				70D9990D185539D9009346BE /* Register@1x.png in Resources */,
-				70D99912185539D9009346BE /* Remove@2x.png in Resources */,
 				70D99913185539D9009346BE /* Unregister@1x.png in Resources */,
-				70D9990F185539D9009346BE /* RegisterHalf@1x.png in Resources */,
 				70D99908185539D9009346BE /* AddToCart@2x.png in Resources */,
-				70D99910185539D9009346BE /* RegisterHalf@2x.png in Resources */,
-				70D99911185539D9009346BE /* Remove@1x.png in Resources */,
-				70D9990E185539D9009346BE /* Register@2x.png in Resources */,
+				703A55CE18559CB9005C9047 /* profs.txt in Resources */,
+				703A55CD18559CB9005C9047 /* locs.txt in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
 				70D99907185539D9009346BE /* AddToCart@1x.png in Resources */,
 			);
@@ -510,8 +512,10 @@
 				705E61BD184EB4C500BAA7D2 /* WebViewController.m in Sources */,
 				8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */,
 				8C2A095C18555C27000C517B /* CalendarMenuViewController.m in Sources */,
+				70C2AFCA185590420086D9CE /* UnregisterAlertViewController.m in Sources */,
 				8C2CD69317F2CC0500CAA5EF /* AppDelegate.m in Sources */,
 				70572E3C1843CB7A00118ECD /* CourseAlertViewController.m in Sources */,
+				70C2AFCD1855904C0086D9CE /* RegisterAlertViewController.m in Sources */,
 				703D627418514FAB004F263A /* CriticalReviewAlertViewController.m in Sources */,
 				8C2CD68F17F2CC0500CAA5EF /* main.m in Sources */,
 				31B44A3218440BE1000DCAEC /* Department.m in Sources */,

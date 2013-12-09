@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CourseAlertViewController.h"
+
 #import "Course.h"
 
 @interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
@@ -35,6 +35,8 @@
 @property int state;
 @property UILabel * sizeLabel;
 @property UILabel * seatAvailableLabel;
+
+@property NSString * fractionLabel;
 @property Course *course;
 
 
@@ -43,5 +45,7 @@
 -(void)coursePreviewButtonWasPressed;
 -(void)criticalReviewButtonWasPressed;
 -(void)initButtonImage: UIBUtton;
+-(void)unregisterRoll;
+-(void)registerRoll;
 
 @end
