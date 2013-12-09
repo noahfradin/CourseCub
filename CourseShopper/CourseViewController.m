@@ -13,12 +13,19 @@
 #import <time.h>
 #import "CoursePreviewAlertViewController.h"
 #import "CriticalReviewAlertViewController.h"
+#import "RegisterAlertViewController.h"
+#import "UnregisterAlertViewController.h"
+#import "CourseAlertViewController.h"
 
 
 @interface CourseViewController (){
     CourseAlertViewController * alert;
     CoursePreviewAlertViewController * coursePreview;
     CriticalReviewAlertViewController * criticalReview;
+    UnregisterAlertViewController * unregisterAlert;
+    RegisterAlertViewController * registerAlert;
+
+    
 }
 
 @end
@@ -26,11 +33,11 @@
 #define screenWidth self.view.bounds.size.width
 #define screenHeight self.view.bounds.size.height
 #define buttonHeight screenHeight/13
-#define buttonSpacing screenWidth/100
+#define buttonSpacing 0
 #define buttonWidth (screenWidth - buttonSpacing*2 )/3
 #define textViewHeight screenHeight*28/64
 #define textViewWidth screenWidth
-#define registerButtonWidthOffset screenWidth * 48 /100
+#define registerButtonWidthOffset screenWidth * 45 /100
 #define registerButtonHeightOffset screenHeight *98/256
 #define dividingLines screenHeight/400
 #define navLine screenHeight / 175
@@ -67,7 +74,7 @@
     [super viewDidLoad];
     
     UILabel *courseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3/4, screenWidth, buttonHeight*3)];
-    UIColor *titleLabelFontColor = [UIColor colorWithRed:78/255 green:77/255 blue:79/255 alpha:1];
+    UIColor *titleLabelFontColor = [UIColor colorWithRed:78.0f/255.0f green:77.0f/255.0f blue:79.0f/255.0f alpha:1];
     UIFont *titleFont = [UIFont fontWithName:@"Helvetica Light" size:18.0];
     courseTitleLabel.font = titleFont;
     courseTitleLabel.textColor = titleLabelFontColor;
@@ -87,7 +94,7 @@
     [self.view addSubview:timeLabel];
     
     UILabel *professorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*2.40, screenWidth, buttonHeight*3)];
-    UIColor *professorLabelFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];;
+    UIColor *professorLabelFontColor = [UIColor colorWithRed:153.0f/255.0f green:152.0f/255.0f blue:152.0f/255.0f alpha:1];;
     UIFont *professorLabelFont = [UIFont fontWithName:@"Helvetica Light" size:18.0];
     professorLabel.font = professorLabelFont;
     professorLabel.textColor = professorLabelFontColor;
@@ -100,7 +107,7 @@
     [self.view addSubview:professorLabel];
     
     UILabel *locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*2.92, screenWidth, buttonHeight*3)];
-    UIColor *locationLabelFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];
+    UIColor *locationLabelFontColor = [UIColor colorWithRed:153.0f/255.0f green:152.0f/255.0f blue:152.0f/255.0f alpha:1];
     UIFont *locationFont = [UIFont fontWithName:@"Helvetica Light" size:18.0];
     locationLabel.font = locationFont;
     locationLabel.textColor = locationLabelFontColor;
@@ -119,7 +126,7 @@
     NSString *strFromInt = [NSString stringWithFormat:@"%d",_seatsAvailable];
 
     _sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(seatsOffset, buttonHeight*4.3, screenWidth/3, buttonHeight*2)];
-    UIColor *sizeLabelFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];
+    UIColor *sizeLabelFontColor = [UIColor colorWithRed:153.0f/255.0f green:152.0f/255.0f blue:152.0f/255.0f alpha:1];
     UIFont *sizeLabelFont = [UIFont fontWithName:@"Helvetica Light" size:24.0];
     _sizeLabel.font = sizeLabelFont;
     _sizeLabel.textColor = sizeLabelFontColor;
@@ -130,10 +137,11 @@
     seatsLeft = [seatsLeft stringByAppendingString:@" / "];
     seatsLeft = [seatsLeft stringByAppendingString:strFromInt2];
     _sizeLabel.text = seatsLeft;
+    _fractionLabel = seatsLeft;
     [self.view addSubview:_sizeLabel];
     
     _seatAvailableLabel = [[UILabel alloc] initWithFrame:CGRectMake(seatsOffset, buttonHeight*4.8, screenWidth/3, buttonHeight*2)];
-    UIColor *seatAvailableFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];;
+    UIColor *seatAvailableFontColor = [UIColor colorWithRed:153.0f/255.0f green:152.0f/255.0f blue:152.0f/255.0f alpha:1];;
     UIFont *seatAvailableLabelFont = [UIFont fontWithName:@"Helvetica Light" size:12];
     _seatAvailableLabel.font = seatAvailableLabelFont;
     _seatAvailableLabel.textColor = seatAvailableFontColor;
@@ -156,7 +164,8 @@
     
 
     _navBarDivide = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, screenWidth, navLine)];
-    [_navBarDivide setBackgroundColor:[UIColor yellowColor]];
+    [_navBarDivide setBackgroundColor:_departmentColor];
+
     [self.navigationController.navigationBar addSubview:_navBarDivide];
     
     UIView *dividingLine2 = [[UIView alloc] initWithFrame:CGRectMake(0, (screenHeight*299/300)-buttonHeight-textViewHeight, screenWidth, dividingLines)];
@@ -166,7 +175,7 @@
     UITextView *courseDetails = [[UITextView alloc] initWithFrame:CGRectMake(0, screenHeight-buttonHeight-textViewHeight, textViewWidth, textViewHeight)];
     courseDetails.alwaysBounceVertical = YES;
     courseDetails.editable = NO;
-    courseDetails.textColor = [UIColor colorWithRed:102/255 green:102/255 blue:102/255 alpha:1];
+    courseDetails.textColor = [UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1];
                                        
     [self.view addSubview:courseDetails];
     
@@ -185,35 +194,41 @@
 
      _bookListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_bookListButton addTarget:self action:@selector(bookListButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_bookListButton setBackgroundColor:[UIColor yellowColor]];
+     [_bookListButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
      _bookListButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _bookListButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_bookListButton setTitle:@"Book\nList" forState: UIControlStateNormal];
      [_bookListButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      _bookListButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [[_bookListButton titleLabel] setFont:buttonFont];
+    _bookListButton.layer.borderWidth = 1;
+   
      [self.view addSubview:_bookListButton];
     
      _coursePreviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth+buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_coursePreviewButton addTarget:self action:@selector(coursePreviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_coursePreviewButton setBackgroundColor:[UIColor yellowColor]];
+     [_coursePreviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
      _coursePreviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _coursePreviewButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_coursePreviewButton setTitle:@"Course\nPreview" forState: UIControlStateNormal];
      [_coursePreviewButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      [[_coursePreviewButton titleLabel] setFont:buttonFont];
+    _coursePreviewButton.layer.borderWidth = 1;
+
      [self.view addSubview:_coursePreviewButton];
    
     
     
      _criticalReviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth*2+2*buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_criticalReviewButton addTarget:self action:@selector(criticalReviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-     [_criticalReviewButton setBackgroundColor:[UIColor yellowColor]];
+     [_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
      _criticalReviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _criticalReviewButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_criticalReviewButton setTitle:@"Critical\nReview" forState: UIControlStateNormal];
      [_criticalReviewButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      [[_criticalReviewButton titleLabel] setFont:buttonFont];
+    _criticalReviewButton.layer.borderWidth = 1;
+
      [self.view addSubview:_criticalReviewButton];
     
 
@@ -226,39 +241,123 @@
     UIImage *btnImage;
     UIImage * btnImage2;
     if(_state == notifyMe){
-          btnImage = [UIImage imageNamed:@"NotifyMe"];
+          btnImage = [UIImage imageNamed:@"DoNotNotify"];
        
         _state = stopNotify;
+        [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+
     }else if(_state == addToCart){
-          btnImage = [UIImage imageNamed:@"Register.png"];
+          btnImage = [UIImage imageNamed:@"RegisterHalf2"];
         _state = registerRemove;
-        btnImage2 = [UIImage imageNamed:@"Remove"];
+        btnImage2 = [UIImage imageNamed:@"Remove2"];
+        
+        [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+        
+        [_removeCartButton setFrame:CGRectMake(registerButtonWidthOffset+85, registerButtonHeightOffset, btnImage2.size.width,btnImage2.size.height)];
+        
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:1.0f];
         
-        [_registerButton setFrame:CGRectMake(registerButtonWidthOffset-150, registerButtonHeightOffset, btnImage2.size.width,btnImage2.size.height)];
+        _registerButton.alpha = 0;
+        _registerButton.alpha = 1;
+        _removeCartButton.alpha = 0;
+        _removeCartButton.alpha = 1;
+
         [self.view addSubview:_removeCartButton];
         
         
+        
         [UIView commitAnimations];
+        [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+
     }else if(_state == stopNotify){
           btnImage = [UIImage imageNamed:@"NotifyMe"];
+        [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+
         _state = notifyMe;
     }else if(_state == registerRemove){
-        _sizeLabel.text = @"Registered";
-
+        registerAlert = [[RegisterAlertViewController alloc] init];
+        registerAlert.courseView = self;
+        [self.view addSubview:registerAlert.view];
         
-        _state = registered;
     }else if(_state == registered){
-        NSLog(@"switch button arangments");
-          btnImage = [UIImage imageNamed:@"Register"];
-        _state = registerRemove;
+        unregisterAlert = [[UnregisterAlertViewController alloc] init];
+        unregisterAlert.courseView = self;
+        [self.view addSubview:unregisterAlert.view];
+        
+
     }else{
         NSLog( @"WTF?");
     }
+   
+
+}
+
+-(void)registerRoll{
+    UIImage *btnImage;
+    UIImage * btnImage2;
+    btnImage = [UIImage imageNamed:@"Unregister"];
+    _sizeLabel.text = @"Registered";
+    _seatAvailableLabel.text = @"";
+    _state = registered;
+    
+    
+    UIColor *sizeLabelFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];
+    UIFont *sizeLabelFont = [UIFont fontWithName:@"Helvetica Light" size:20.0];
+    _sizeLabel.font = sizeLabelFont;
+    
+    
+    
+    [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0f];
+    
+    _registerButton.alpha = 0;
+    _registerButton.alpha = 1;
+    _sizeLabel.alpha = 0;
+    _sizeLabel.alpha = 1;
+    _seatAvailableLabel.alpha = 0;
+    _seatAvailableLabel.alpha = 1;
+    _sizeLabel.alpha = 0;
+    _sizeLabel.alpha = 1;
+    
+    [UIView commitAnimations];
+    
+    [_removeCartButton removeFromSuperview];
     [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+}
 
-
+-(void)unregisterRoll{
+    UIImage *btnImage;
+    UIImage * btnImage2;
+      btnImage = [UIImage imageNamed:@"RegisterHalf2"];
+    _state = registerRemove;
+    btnImage2 = [UIImage imageNamed:@"Remove2"];
+    
+    [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+    
+    [_removeCartButton setFrame:CGRectMake(registerButtonWidthOffset+85, registerButtonHeightOffset, btnImage2.size.width,btnImage2.size.height)];
+    [self.view addSubview:_removeCartButton];
+    
+    
+    _seatAvailableLabel.text = @"Seats Available";
+    _sizeLabel.text = _fractionLabel;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0f];
+    
+    _registerButton.alpha = 0;
+    _registerButton.alpha = 1;
+    _removeCartButton.alpha = 0;
+    _removeCartButton.alpha = 1;
+    _seatAvailableLabel.alpha = 0;
+    _seatAvailableLabel.alpha = 1;
+    _sizeLabel.alpha = 0;
+    _sizeLabel.alpha = 1;
+    
+    [UIView commitAnimations];
+    
 }
 
 -(void)bookListButtonWasPressed{
@@ -290,6 +389,31 @@
     
 }
 
+-(void)removeCartButtonWasPressed{
+    UIImage *btnImage;
+    UIImage *btnImage2;
+    btnImage = [UIImage imageNamed:@"AddToCart"];
+    _state = addToCart;
+    
+    [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+    [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+    
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0f];
+    
+    _registerButton.alpha = 0;
+    _registerButton.alpha = 1;
+    _removeCartButton.alpha = 0;
+    
+    
+    
+    [UIView commitAnimations];
+
+    [_removeCartButton removeFromSuperview];
+
+}
+
 -(void)initButtonImage: UIBUtton{
     UIImage *btnImage;
     if(_seatsAvailable == 0) {
@@ -315,10 +439,10 @@
 
 -(void)initButtonImage2: UIBUtton{
     UIImage *btnImage;
-    btnImage = [UIImage imageNamed:@"Remove"];
+    btnImage = [UIImage imageNamed:@"Remove2"];
     
     _removeCartButton = [[UIButton alloc] initWithFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
-    [_removeCartButton addTarget:self action:@selector(registerButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    [_removeCartButton addTarget:self action:@selector(removeCartButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     _removeCartButton.layer.backgroundColor = [[UIColor grayColor] CGColor];
     _removeCartButton.layer.borderWidth = 1;
     [_removeCartButton setBackgroundImage:btnImage forState:UIControlStateNormal];
