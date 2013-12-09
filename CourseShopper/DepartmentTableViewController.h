@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate> {
+@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate> {
     UISearchBar *theSearchBar;
 }
 
@@ -25,6 +25,7 @@
 @property NSMutableArray *alphabetCount;
 @property (nonatomic, retain) UISearchBar *theSearchBar;
 @property BOOL wasSearched;
+@property NSString *firstLetter;
 
 
 -(void)loadData;

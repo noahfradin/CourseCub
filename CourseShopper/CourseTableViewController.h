@@ -17,8 +17,11 @@
 //database stuff
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong)NSArray* fetchedCourseArray;
+@property NSMutableDictionary *dict;
+
 
 @property NSString *department;
+@property UIView *navBarDivide;
 
 -(void)loadData;
 -(void) setWasSearched:(BOOL *)wasSearched;

@@ -15,7 +15,10 @@
 #import "CriticalReviewAlertViewController.h"
 #import "RegisterAlertViewController.h"
 #import "UnregisterAlertViewController.h"
-#import "CourseAlertViewController.h"
+//#import "CourseAlertViewController.h"
+
+#import "AppDelegate.h"
+
 
 
 @interface CourseViewController (){
@@ -64,7 +67,7 @@
     //This gets rid of the text in the default back button
     self.navigationController.navigationBar.topItem.title = @"";
     
-    self.navigationItem.title = _navTitle;
+    self.navigationItem.title = self.courseTitle;
     [_navBarDivide setHidden:NO];
 }
 
@@ -72,6 +75,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Kappi database stuff
+    // get an instance of app delegate
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    self.courseInfo = [appDelegate getCourseInfo: self.courseTitle];
+
+    
+    
     
     UILabel *courseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3/4, screenWidth, buttonHeight*3)];
     UIColor *titleLabelFontColor = [UIColor colorWithRed:78.0f/255.0f green:77.0f/255.0f blue:79.0f/255.0f alpha:1];
@@ -81,7 +95,7 @@
     courseTitleLabel.textAlignment = UITextAlignmentCenter;
     courseTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     courseTitleLabel.numberOfLines = 0;
-    courseTitleLabel.text = @"Seminar in Electronic Music:\n Real-Time Systems";
+    courseTitleLabel.text = self.courseInfo.title;
     [self.view addSubview:courseTitleLabel];
     
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3, screenWidth, buttonHeight/2)];
@@ -90,7 +104,7 @@
     timeLabel.backgroundColor = timeLabelBackgroundColor;
     timeLabel.textColor = timeLabelFontColor;
     timeLabel.textAlignment = UITextAlignmentCenter;
-    timeLabel.text = @"T R 1:00-2:30";
+    timeLabel.text = self.courseInfo.time;
     [self.view addSubview:timeLabel];
     
     UILabel *professorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*2.40, screenWidth, buttonHeight*3)];
@@ -102,7 +116,7 @@
     professorLabel.lineBreakMode = NSLineBreakByWordWrapping;
     professorLabel.numberOfLines = 0;
     NSString *profPrefix = @"Prof: ";
-    profPrefix = [profPrefix stringByAppendingString:@"Dror Brener"];
+    profPrefix = [profPrefix stringByAppendingString:self.courseInfo.prof];
     professorLabel.text = profPrefix ;
     [self.view addSubview:professorLabel];
     
@@ -114,7 +128,7 @@
     locationLabel.textAlignment = UITextAlignmentCenter;
     locationLabel.lineBreakMode = NSLineBreakByWordWrapping;
     locationLabel.numberOfLines = 0;
-    locationLabel.text = @"Grant Recital Hall";
+    locationLabel.text = self.courseInfo.location;
     [self.view addSubview:locationLabel];
     
 

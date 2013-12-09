@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CourseViewController.h";
+#import "CourseViewController.h"
 
 @interface CoursePreviewAlertViewController : UIViewController
 

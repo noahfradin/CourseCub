@@ -8,11 +8,14 @@
 
 #import "DepartmentTableViewController.h"
 #import "CourseTableViewController.h"
+#import "CourseViewController.h"
 //for database use
 #import "AppDelegate.h"
 #import "Department.h"
 
 @interface DepartmentTableViewController ()
+
+#define SCREEN_WIDTH 320
 
 @end
 
@@ -40,7 +43,6 @@
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
     self.managedObjectContext = appDelegate.managedObjectContext;
-    self.fetchedDeptsArray = [appDelegate getAllDepartments];
     //[appDelegate getClassList];
 
     [self.tableView reloadData];
@@ -62,7 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"we are back loading");
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
@@ -73,7 +74,7 @@
     // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
     self.managedObjectContext = appDelegate.managedObjectContext;
     
-    self.fetchedDeptsArray = [appDelegate getAllDepartments];
+    self.fetchedDeptsArray = (NSMutableArray *)[appDelegate getAllDepartments];
     //[appDelegate getClassList];
     NSLog(@"in dept table list returned: %@",self.fetchedDeptsArray);
     NSLog(@"count of dept array: %ul",[self.fetchedDeptsArray count]);
@@ -89,8 +90,16 @@
     }
     self.theSearchBar = [[UISearchBar alloc] init];
     self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+    self.theSearchBar.delegate = self;
     self.wasSearched = NO;
     [self loadData];//This populates the department array
+    
+    //Accessory view stuff
+    UIView *accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    [accessoryView setBackgroundColor:[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5]];
+    
+    self.theSearchBar.inputAccessoryView = accessoryView;
+    
 
 }
 
@@ -145,6 +154,9 @@
 //<<<<<<< HEAD
     // Configure the cell...
 
+    if ([self.fetchedDeptsArray count] == 0) {
+        return cell;
+    }
 
     int section = indexPath.section;
     int counter = 0;
@@ -184,13 +196,18 @@
         courseNumberLabel.text = courseNumber;
         courseNumberLabel.textColor = course.department.color;
 
-        UILabel *deptLabel = [[UILabel alloc] initWithFrame:CGRectMake(155, 20, 60, 40)];
+        UILabel *deptLabel = [[UILabel alloc] initWithFrame:CGRectMake(255, 20, 60, 40)];
         deptLabel.font = courseFont;
-        deptLabel.text = course.department.name;
+        deptLabel.text = course.department.abbrev;
         [cell addSubview: courseLabel];
         [cell addSubview: courseTimeLabel];
         [cell addSubview: courseNumberLabel];
         [cell addSubview:deptLabel];
+        
+        NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+        NSString *courseKey = [index stringByAppendingString: @"course"];
+        
+        [self.dict setObject:course forKey:courseKey];
     }
     else {
         Department * record = [self.fetchedDeptsArray objectAtIndex:indexPath.row + counter];
@@ -233,30 +250,45 @@
     //First get the cell from the table based on the click event/indexpath
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
+    if (self.wasSearched) {
+        NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+        NSString *courseKey = [index stringByAppendingString: @"course"];
+        
+        Course *course = [self.dict objectForKey:courseKey];
+        
+        CourseViewController *courseController = [[CourseViewController alloc] init];
+        courseController.course = course;
+        courseController.navigationItem.title = course.title;
+        courseController.departmentColor = course.department.color;
+        [self.navigationController pushViewController:courseController animated:YES];
+        
+    }
+    else {
+        NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+        NSString *depKey = [index stringByAppendingString: @"dep"];
+        NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
+        NSString *depAbbrevCode = [index stringByAppendingString: @"depAbbrevCode"];
     
-    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
-    NSString *depKey = [index stringByAppendingString: @"dep"];
-    NSString *depAbbrevKey = [index stringByAppendingString: @"depAbbrev"];
-    NSString *depAbbrevCode = [index stringByAppendingString: @"depAbbrevCode"];
+        NSString *department = [self.dict objectForKey:depKey];
+        UIColor *departmentColor = [self.dict objectForKey:depAbbrevKey];
+        NSString *abbr = [self.dict objectForKey:depAbbrevCode];
     
-    NSString *department = [self.dict objectForKey:depKey];
-    UIColor *departmentColor = [self.dict objectForKey:depAbbrevKey];
-    NSString *abbr = [self.dict objectForKey:depAbbrevCode];
-    
-    //Then instantiate the courses table and set the title to the correct department
-    //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
-    CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
-    courseTable.navigationItem.title = department;
-    courseTable.department = department;
-    courseTable.departmentColor = departmentColor;
+        //Then instantiate the courses table and set the title to the correct department
+        //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
+        CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
+        courseTable.navigationItem.title = department;
+        courseTable.department = department;
+        courseTable.departmentColor = departmentColor;
     
     
-    NSLog(@"setting the abrrev of the page to %@",abbr);
-    courseTable.abbrev = abbr;
+        NSLog(@"setting the abrrev of the page to %@",abbr);
+        courseTable.abbrev = abbr;
 
-    [self.navigationController pushViewController:courseTable animated:YES];
+        [self.navigationController pushViewController:courseTable animated:YES];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
+    
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -268,14 +300,12 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    searchBar = theSearchBar;
     [searchBar setShowsCancelButton:YES animated:YES];
     self.tableView.allowsSelection = NO;
     self.tableView.scrollEnabled = NO;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    searchBar = theSearchBar;
     searchBar.text=@"";
     
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -286,7 +316,7 @@
     // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
     self.managedObjectContext = appDelegate.managedObjectContext;
     
-    self.fetchedDeptsArray = [appDelegate getAllDepartments];
+    self.fetchedDeptsArray = (NSMutableArray *)[appDelegate getAllDepartments];
     self.wasSearched = NO;
     [self resetSections];
     [self.tableView reloadData];
@@ -302,7 +332,7 @@
     self.tableView.allowsSelection = YES;
     self.tableView.scrollEnabled = YES;
 	
-    [self.fetchedDeptsArray removeAllObjects];
+    self.fetchedDeptsArray = [[NSMutableArray alloc] init];
     self.wasSearched = YES;
     NSArray *results = [self searchWithString:searchBar.text];
     [self.fetchedDeptsArray addObjectsFromArray:results];
@@ -328,8 +358,13 @@
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
     for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
-        NSString *firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
-        int letter = [firstLetter characterAtIndex:0] - 65;
+        if (self.wasSearched) {
+            self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] title] substringToIndex: 1];
+        }
+        else {
+            self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
+        }
+        int letter = [self.firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
             NSNumber *one = [NSNumber numberWithInteger:1];
             [self.alphabetCount insertObject:one atIndex:letter];

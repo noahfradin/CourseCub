@@ -31,6 +31,9 @@
 		703A55C118559989005C9047 /* RegisterHalf2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BD18559989005C9047 /* RegisterHalf2@2x.png */; };
 		703A55C218559989005C9047 /* Remove2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BE18559989005C9047 /* Remove2@1x.png */; };
 		703A55C318559989005C9047 /* Remove2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BF18559989005C9047 /* Remove2@2x.png */; };
+		703A55CD18559CB9005C9047 /* locs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CA18559CB9005C9047 /* locs.txt */; };
+		703A55CE18559CB9005C9047 /* profs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CB18559CB9005C9047 /* profs.txt */; };
+		703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */; };
 		703D627118514F9E004F263A /* CoursePreviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */; };
 		703D627418514FAB004F263A /* CriticalReviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627318514FAB004F263A /* CriticalReviewAlertViewController.m */; };
 		70572E3C1843CB7A00118ECD /* CourseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */; };
@@ -97,6 +100,9 @@
 		703A55BD18559989005C9047 /* RegisterHalf2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@2x.png"; sourceTree = "<group>"; };
 		703A55BE18559989005C9047 /* Remove2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@1x.png"; sourceTree = "<group>"; };
 		703A55BF18559989005C9047 /* Remove2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@2x.png"; sourceTree = "<group>"; };
+		703A55CA18559CB9005C9047 /* locs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = locs.txt; path = ../../Desktop/locs.txt; sourceTree = "<group>"; };
+		703A55CB18559CB9005C9047 /* profs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = profs.txt; path = ../../Desktop/profs.txt; sourceTree = "<group>"; };
+		703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "fakedata!!!!.rtf"; path = "../../Desktop/fakedata!!!!.rtf"; sourceTree = "<group>"; };
 		703D626F18514F9E004F263A /* CoursePreviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePreviewAlertViewController.h; sourceTree = "<group>"; };
 		703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePreviewAlertViewController.m; sourceTree = "<group>"; };
 		703D627218514FAB004F263A /* CriticalReviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CriticalReviewAlertViewController.h; sourceTree = "<group>"; };
@@ -271,6 +277,9 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				703A55CA18559CB9005C9047 /* locs.txt */,
+				703A55CB18559CB9005C9047 /* profs.txt */,
+				703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */,
 				173EBBE6184EB640006D0C17 /* dps.plist */,
 				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
 				176D8C3C1852503700BCEF28 /* class_list.json */,
@@ -447,6 +456,7 @@
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
 				703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */,
 				70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */,
+				703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */,
 				70D99914185539D9009346BE /* Unregister@2x.png in Resources */,
 				703A55C218559989005C9047 /* Remove2@1x.png in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,
@@ -463,6 +473,8 @@
 				70D9990A185539D9009346BE /* DoNotNotify@2x.png in Resources */,
 				70D99913185539D9009346BE /* Unregister@1x.png in Resources */,
 				70D99908185539D9009346BE /* AddToCart@2x.png in Resources */,
+				703A55CE18559CB9005C9047 /* profs.txt in Resources */,
+				703A55CD18559CB9005C9047 /* locs.txt in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
 				70D99907185539D9009346BE /* AddToCart@1x.png in Resources */,
 			);

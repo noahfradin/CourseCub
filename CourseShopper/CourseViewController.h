@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "CourseAlertViewController.h"
+
+#import "Course.h"
 
 @interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
 
@@ -16,6 +17,11 @@
 @property(readwrite,strong) UIButton *coursePreviewButton;
 @property(readwrite,strong) UIButton *bookListButton;
 @property(readwrite,strong) UIButton *criticalReviewButton;
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+@property Course *courseInfo;
+
 @property UIView *navBarDivide;
 @property NSString *navTitle;
 @property NSString *courseTitle;
@@ -29,7 +35,9 @@
 @property int state;
 @property UILabel * sizeLabel;
 @property UILabel * seatAvailableLabel;
+
 @property NSString * fractionLabel;
+@property Course *course;
 
 
 -(void)registerButtonWasPressed;
