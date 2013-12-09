@@ -139,9 +139,10 @@
     //Then instantiate the course detail view and set the title to the correct course
     //Anything else we need to pass can go here as well
     CourseViewController *courseView = [[CourseViewController alloc] init];
+    courseView.navTitle = courseTitle;
     courseView.navigationItem.title = courseTitle;
     
-    [self.navigationController pushViewController:courseView animated:YES];
+    [self.navigationController pushViewController:courseView animated:NO];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
 }

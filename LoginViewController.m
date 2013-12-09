@@ -10,7 +10,9 @@
 #import "CalendarViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface LoginViewController ()
+@interface LoginViewController (){
+    UITextField *password;
+}
 
 @end
 
@@ -67,6 +69,7 @@
 -(void)loginButtonWasPressed{
     CalendarViewController *cal = [[CalendarViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cal];
+    [navController.navigationBar setTintColor:[UIColor blackColor]];
     [self presentViewController:navController animated:YES completion:nil];
 }
 
@@ -89,6 +92,11 @@
         [textField resignFirstResponder];
     }
     return NO; // We do not want UITextField to insert line-breaks.
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    [password setSecureTextEntry:YES];
+    return YES;
 }
 
 @end
