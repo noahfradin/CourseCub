@@ -23,6 +23,7 @@
 		176D8C4D1852504900BCEF28 /* deptLong.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C461852504900BCEF28 /* deptLong.txt */; };
 		176D8C4E1852504900BCEF28 /* deptList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C471852504900BCEF28 /* deptList.txt */; };
 		176D8C4F1852504900BCEF28 /* deptList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C471852504900BCEF28 /* deptList.txt */; };
+		17FFC48818559F7000A2699F /* desc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17FFC48718559F7000A2699F /* desc.txt */; };
 		3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3134D35A184124E5008DFEB6 /* CoreData.framework */; };
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
 		31B44A3218440BE1000DCAEC /* Department.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3118440BE1000DCAEC /* Department.m */; };
@@ -33,7 +34,6 @@
 		703A55C318559989005C9047 /* Remove2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BF18559989005C9047 /* Remove2@2x.png */; };
 		703A55CD18559CB9005C9047 /* locs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CA18559CB9005C9047 /* locs.txt */; };
 		703A55CE18559CB9005C9047 /* profs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CB18559CB9005C9047 /* profs.txt */; };
-		703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */; };
 		703D627118514F9E004F263A /* CoursePreviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */; };
 		703D627418514FAB004F263A /* CriticalReviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627318514FAB004F263A /* CriticalReviewAlertViewController.m */; };
 		70572E3C1843CB7A00118ECD /* CourseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */; };
@@ -90,6 +90,7 @@
 		176D8C451852504900BCEF28 /* deps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = deps.plist; sourceTree = "<group>"; };
 		176D8C461852504900BCEF28 /* deptLong.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptLong.txt; sourceTree = "<group>"; };
 		176D8C471852504900BCEF28 /* deptList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deptList.txt; sourceTree = "<group>"; };
+		17FFC48718559F7000A2699F /* desc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = desc.txt; sourceTree = "<group>"; };
 		3134D35A184124E5008DFEB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3134D35D1841252E008DFEB6 /* CourseShopper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseShopper.xcdatamodel; sourceTree = "<group>"; };
 		31B44A3018440BE1000DCAEC /* Department.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Department.h; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		703A55BF18559989005C9047 /* Remove2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@2x.png"; sourceTree = "<group>"; };
 		703A55CA18559CB9005C9047 /* locs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = locs.txt; path = ../../Desktop/locs.txt; sourceTree = "<group>"; };
 		703A55CB18559CB9005C9047 /* profs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = profs.txt; path = ../../Desktop/profs.txt; sourceTree = "<group>"; };
-		703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "fakedata!!!!.rtf"; path = "../../Desktop/fakedata!!!!.rtf"; sourceTree = "<group>"; };
 		703D626F18514F9E004F263A /* CoursePreviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePreviewAlertViewController.h; sourceTree = "<group>"; };
 		703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePreviewAlertViewController.m; sourceTree = "<group>"; };
 		703D627218514FAB004F263A /* CriticalReviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CriticalReviewAlertViewController.h; sourceTree = "<group>"; };
@@ -277,9 +277,9 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				17FFC48718559F7000A2699F /* desc.txt */,
 				703A55CA18559CB9005C9047 /* locs.txt */,
 				703A55CB18559CB9005C9047 /* profs.txt */,
-				703A55CC18559CB9005C9047 /* fakedata!!!!.rtf */,
 				173EBBE6184EB640006D0C17 /* dps.plist */,
 				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
 				176D8C3C1852503700BCEF28 /* class_list.json */,
@@ -450,13 +450,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				176D8C3E1852503700BCEF28 /* abbrevs.txt in Resources */,
+				17FFC48818559F7000A2699F /* desc.txt in Resources */,
 				8C2CD69917F2CC0500CAA5EF /* Main_iPad.storyboard in Resources */,
 				176D8C4E1852504900BCEF28 /* deptList.txt in Resources */,
 				70D9990B185539D9009346BE /* NotifyMe@1x.png in Resources */,
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
 				703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */,
 				70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */,
-				703A55CF18559CB9005C9047 /* fakedata!!!!.rtf in Resources */,
 				70D99914185539D9009346BE /* Unregister@2x.png in Resources */,
 				703A55C218559989005C9047 /* Remove2@1x.png in Resources */,
 				8C2CD69617F2CC0500CAA5EF /* Main_iPhone.storyboard in Resources */,

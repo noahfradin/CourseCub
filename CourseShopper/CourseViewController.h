@@ -25,6 +25,7 @@
 @property UIView *navBarDivide;
 @property NSString *navTitle;
 @property NSString *courseTitle;
+@property NSString *abbrevNum;
 
 @property UIColor *departmentColor;
 
