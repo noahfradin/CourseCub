@@ -66,6 +66,7 @@
 		8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91748183D3E650059A923 /* DepartmentTableViewController.m */; };
 		8CA9174D183D42C20059A923 /* CourseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA9174C183D42C20059A923 /* CourseTableViewController.m */; };
 		8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91750183D42FA0059A923 /* CourseViewController.m */; };
+		8CF1A0041855A84E00F091A8 /* Cart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF1A0031855A84E00F091A8 /* Cart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,8 @@
 		8CA9174C183D42C20059A923 /* CourseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTableViewController.m; sourceTree = "<group>"; };
 		8CA9174F183D42FA0059A923 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		8CA91750183D42FA0059A923 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
+		8CF1A0021855A84E00F091A8 /* Cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart.h; sourceTree = "<group>"; };
+		8CF1A0031855A84E00F091A8 /* Cart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,8 @@
 				705E61BA184EB24900BAA7D2 /* WebView */,
 				8C2CD69117F2CC0500CAA5EF /* AppDelegate.h */,
 				8C2CD69217F2CC0500CAA5EF /* AppDelegate.m */,
+				8CF1A0021855A84E00F091A8 /* Cart.h */,
+				8CF1A0031855A84E00F091A8 /* Cart.m */,
 				8C2CD69417F2CC0500CAA5EF /* Main_iPhone.storyboard */,
 				8C2CD69717F2CC0500CAA5EF /* Main_iPad.storyboard */,
 				8CA91746183D39470059A923 /* Login */,
@@ -505,6 +510,7 @@
 				31B44A3218440BE1000DCAEC /* Department.m in Sources */,
 				8C2A095F18555CB4000C517B /* TWTSideMenuViewController.m in Sources */,
 				703D627118514F9E004F263A /* CoursePreviewAlertViewController.m in Sources */,
+				8CF1A0041855A84E00F091A8 /* Cart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

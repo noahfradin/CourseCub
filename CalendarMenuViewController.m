@@ -106,7 +106,10 @@
 
 -(void)loadData{
     //This is just to show y'all an example
-    self.cartArray = [NSMutableArray arrayWithObjects:@"Da Best Cart", @"Fradin's Cart", @"Mediocre Cart", nil];
+    self.cartArray = [NSMutableArray arrayWithObjects:@"Hello", @"THIS", @"works", nil];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    // getting an NSString
+    self.cartArray = [prefs objectForKey:@"cartArray"];
 }
 - (void)didReceiveMemoryWarning
 {

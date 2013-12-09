@@ -26,6 +26,7 @@
     
     self.window.tintColor = [UIColor redColor];
     
+    [self loadColours];
     [self oneTimeMethodCall];
     
     //Setting the initial viewcontroller like a boss
@@ -34,6 +35,14 @@
     self.window.rootViewController = login;
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
+    //###########Calendar stuff
+    self.adCartArray = [NSMutableArray arrayWithObjects:@"Da Best Cart", @"Fradin's Cart", @"Mediocre Cart", nil];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.adCartArray forKey:@"cartArray"];
+    //########################
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -253,9 +262,7 @@
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
     
-    NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList]
-                                                            options:kNilOptions
-                                                              error:&err];
+    NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList] options:kNilOptions error:&err];
 
      //add the class as a course, then set up relationship to department
     for(NSString *key in classes)
@@ -287,8 +294,7 @@
         if (![abr  isEqual: @""]) {
             NSUInteger i = [abbrevs indexOfObject:abr];
             NSString * dep = [deps objectAtIndex:i];
-            Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
-                                                                  inManagedObjectContext:self.managedObjectContext];
+            Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.managedObjectContext];
             newEntry.name = dep;
             newEntry.abbrev = abr;
             newEntry.color = [self.colorArray objectAtIndex:i];
@@ -312,7 +318,6 @@
     BOOL is_first_time = [[NSUserDefaults standardUserDefaults] boolForKey: @"is_first_time"];
     if (!is_first_time) {
         //Call method you want to be called once here
-        [self loadColours];
         [self addDepartmentsToCD];
         [self addClassesToCD];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"is_first_time"];
