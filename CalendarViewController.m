@@ -60,9 +60,6 @@
     
     
     
-    
-    
-    
 }
 
 //And this is a place for post view load stuff anything happening on the main view is cool to put here usually
@@ -195,7 +192,7 @@
     //Then instantiate the course detail view and set the title to the correct course
     //Anything else we need to pass can go here as well
     CourseViewController *courseView = [[CourseViewController alloc] init];
-    courseView.navigationItem.title = courseTitle;
+    courseView.courseTitle = courseTitle;
     [self.navigationController pushViewController:courseView animated:YES];
 }
 
@@ -258,6 +255,7 @@
 
 -(void)loadData{
     self.course_title_array =[NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies",@"Advanced Fradin Studies",@"Intro to Fradin Studies", nil];
+    
 }
 
 -(NSInteger)numberToTime{

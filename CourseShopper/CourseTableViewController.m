@@ -16,6 +16,9 @@
 
 @end
 
+#define screenHeight self.view.bounds.size.height
+#define navLine screenHeight / 175
+
 @implementation CourseTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -33,6 +36,8 @@
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = self.department;
     
+
+    [self.navBarDivide setHidden:NO];
     [self loadData];//this calls our own method to populate array we set as a data source
 }
 
@@ -53,6 +58,7 @@
     
     NSArray *temp = [appDelegate getAllClassesOfDept:self.abbrev];
     //self.fetchedCourseArray = [appDelegate getAllClassesOfDept:self.abbrev];
+    self.dict = [[NSMutableDictionary alloc] init];
 
 
     
@@ -61,6 +67,11 @@
     NSArray *sortDescriptors = [NSArray arrayWithObject:dateDescriptor];
     self.fetchedCourseArray = [temp sortedArrayUsingDescriptors:sortDescriptors];
         NSLog(@"I have fetched this: %@", self.fetchedCourseArray);
+    
+    self.navBarDivide = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.tableView.frame.size.width, navLine)];
+    [self.navBarDivide setBackgroundColor: self.departmentColor];
+    [self.navigationController.navigationBar addSubview:self.navBarDivide];
+
     
     //[appDelegate getClassList];
     [self.tableView reloadData];
@@ -124,6 +135,11 @@
     [cell addSubview: courseLabel];
     [cell addSubview: courseTimeLabel];
     [cell addSubview: courseNumberLabel];
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *courseKey = [index stringByAppendingString: @"course"];
+    
+    [self.dict setObject:course forKey:courseKey];
 
     
     
@@ -134,15 +150,27 @@
     
     //First get the cell from the table based on the click event/indexpath
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *courseKey = [index stringByAppendingString: @"course"];
+    
+    Course *course = [self.dict objectForKey:courseKey];
+    NSLog(@"course is : %@", self.dict);
     //Then get the department title from the text on the cell's label
-    NSString *courseTitle = cell.textLabel.text;
+    NSString *courseTitle = course.title;
     //Then instantiate the course detail view and set the title to the correct course
     //Anything else we need to pass can go here as well
     CourseViewController *courseView = [[CourseViewController alloc] init];
-    courseView.navTitle = courseTitle;
-    courseView.navigationItem.title = courseTitle;
+
+    NSLog(@"setting the navTitle to: %@",courseTitle);
+    courseView.courseTitle = courseTitle;
+    NSString *abbrev = course.department.abbrev;
+    NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
+    courseView.navigationItem.title = abbrevNum;
+    courseView.abbrevNum = abbrevNum;
+    courseView.departmentColor = course.department.color;
     
-    [self.navigationController pushViewController:courseView animated:NO];
+    [self.navigationController pushViewController:courseView animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
 }
@@ -159,6 +187,10 @@
     
     //In future this is where we'll populate array from nodejs api and the query will pull in utitlizing the department as a parameter to populate the array
     //can either access ns array built intially and only the parts I want or load all into core data and make a request
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.navBarDivide setHidden:YES];
 }
 
 

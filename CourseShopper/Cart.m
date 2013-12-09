@@ -20,6 +20,13 @@
     return self;
 }
 
+/////////////////////////
+//Set Metadata properties
+/////////////////////////
+-(void)setCartTitle:(NSString *)title{
+    self.title = title;
+}
+
 ////////////////////
 //Cart Manipulation
 ///////////////////

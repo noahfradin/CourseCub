@@ -14,6 +14,7 @@
 
 
 @property NSMutableArray *course_title_array;
+@property NSMutableArray *courseArray;
 
 @property NSMutableDictionary *durationDict;
 @property NSMutableDictionary *timeDict;

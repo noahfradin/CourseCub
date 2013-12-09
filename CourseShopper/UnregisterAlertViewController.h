@@ -1,16 +1,15 @@
 //
-//  CoursePreviewAlertViewController.h
+//  UnregisterAlertViewController.h
 //  CourseShopper
 //
-//  Created by Alexander Meade on 12/5/13.
+//  Created by Alexander Meade on 12/9/13.
 //  Copyright (c) 2013 Noah Fradin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
 #import "CourseViewController.h"
 
-@interface CoursePreviewAlertViewController : UIViewController
+@interface UnregisterAlertViewController : UIViewController
 
 @property UIView * buttonPane;
 
@@ -21,5 +20,6 @@
 
 -(void) showBlur;
 -(void) cancelButtonWasPressed;
+
 
 @end

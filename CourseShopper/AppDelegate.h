@@ -26,7 +26,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator ;
 @property (nonatomic, retain) NSArray *colorArray;
 
-@property (nonatomic, retain) NSMutableArray *adCartArray;
+@property (nonatomic, retain) NSMutableArray *cartArray;
 
 -(NSArray*)getAllDepartments;
 -(void)addClassesToCD;
@@ -35,6 +35,7 @@
 -(NSArray *)getData:(NSString *) x;
 -(void)addDepartmentsToCD;
 - (NSArray *)getCourseBySearch:(NSString *)searchText;
+-(Course*)getCourseInfo:(NSString *)title;
 
 
 @end

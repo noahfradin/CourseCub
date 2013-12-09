@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "Cart.h"
 
 
 @implementation AppDelegate
@@ -16,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
     
     // Override point for customization after application launch.
     
@@ -32,17 +33,25 @@
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
     LoginViewController *login = [[LoginViewController alloc] init];
+    
     self.window.rootViewController = login;
+
     [self.window makeKeyAndVisible];
-    return YES;
+    
     
     
     //###########Calendar stuff
-    self.adCartArray = [NSMutableArray arrayWithObjects:@"Da Best Cart", @"Fradin's Cart", @"Mediocre Cart", nil];
+    //    self.adCartArray = [NSMutableArray arrayWithObjects:@"Da Best Cart", @"Fradin's Cart", @"Mediocre Cart", nil];
     
+    //Set up initial cart
+    Cart *cart = [[Cart alloc] init];
+    [cart setTitle:@"Da Best Cart"];
+    self.cartArray = [[NSMutableArray alloc] init];
+    [self.cartArray addObject:cart];
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.adCartArray forKey:@"cartArray"];
+//    [[NSUserDefaults standardUserDefaults] setObject:self.cartArray forKey:@"cartArray"];
     //########################
+    return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -214,32 +223,64 @@
     
 }
 
--(Department*)getCourseBySearch:(NSString *)searchTerm
+
+-(Course*)getCourseInfo:(NSString *)title
 {
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     //Setting Entity to be Queried
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Coursee"
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
+    
+    NSLog(@"the title given to me is: %@", title);
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"title like %@", title];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return [fetchedRecords objectAtIndex:0];
+}
+
+-(NSArray*)getCourseBySearch:(NSString *)searchTerm
+
+{
+    
+    NSLog(@"getCourse was called");
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    
     NSPredicate *predicate =
-            [NSPredicate predicateWithFormat:@"(title contains '%@') OR (professor contains '%@')",searchTerm];
+            [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@",searchTerm];
     
     [fetchRequest setPredicate:predicate];
     NSError* error;
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *temp = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    if ([temp count]>=1){
-        Department *fetchedDept = [temp objectAtIndex:0];
-        // Returning Fetched Records
-        return fetchedDept;
+    if ([temp count] == 0) {
+        NSLog(@"FUUUuUUUUUCK");
     }
-    else
-    {
-        return nil;
-    }
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"department.abbrev" ascending:YES];
+    NSArray *sortedArray=[temp sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    return sortedArray;
+
     
 }
 
@@ -258,11 +299,27 @@
 
 -(void)addClassesToCD
 {
+    NSArray *desc = [self getData: @"desc"];
+    NSArray *profs = [self getData: @"profs"];
+    NSArray *locs = [self getData: @"locs"];
+    
+    NSMutableArray *times = [NSMutableArray arrayWithObjects:
+                             @"MFW 9-10",
+                             @"MFW 11-12.30",
+                             @"MFW 12-1",
+                             @"TR 10-12",
+                             @"TR 2-4.30",
+                             @"MFW 6-8",
+                             @"MFW 1-2.30",
+                             nil];
+    
     
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
     
+
     NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList] options:kNilOptions error:&err];
+
 
      //add the class as a course, then set up relationship to department
     for(NSString *key in classes)
@@ -276,7 +333,27 @@
             
             newCourse.number = [[key componentsSeparatedByString:@" "] objectAtIndex:1];
             newCourse.title = [classes objectForKey:key];
-            newCourse.time = @"MWF 9 - 10.30";
+            
+            NSUInteger randomIndexTimes = arc4random() % [times count];
+            newCourse.time = [times objectAtIndex:randomIndexTimes];
+            
+            NSUInteger randomIndexDesc = arc4random() % [desc count];
+            newCourse.descr = [desc objectAtIndex:randomIndexDesc];
+            
+            NSUInteger randomIndexProfs = arc4random() % [profs count];
+            newCourse.prof = [profs objectAtIndex:randomIndexProfs];
+
+            //FIX THIS RANDOM THING!
+            NSNumber *n1 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
+            NSNumber *n2 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
+
+            newCourse.availableSeats = [n2 stringValue];
+            newCourse.totalSeats = [n1 stringValue];
+            
+            
+            NSUInteger randomIndexLocs = arc4random() % [locs count];
+            NSString *loc = [locs objectAtIndex:randomIndexLocs];
+            newCourse.location = loc;
             
             newCourse.department = [self getDeptByAbbrev:firstWord];
         }
@@ -291,7 +368,7 @@
 
     for(NSString *abr in abbrevs)
     {
-        if (![abr  isEqual: @""]) {
+        if (![abr  isEqual: @""] && ![abr isEqualToString:@"AMST"]) {
             NSUInteger i = [abbrevs indexOfObject:abr];
             NSString * dep = [deps objectAtIndex:i];
             Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.managedObjectContext];
@@ -339,9 +416,9 @@
                        [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:.83 blue:0 alpha:1],
                        [UIColor colorWithRed:1 green:.91 blue:0 alpha:1],
-                       [UIColor colorWithRed:1 green:1 blue:0 alpha:1],
-                       [UIColor colorWithRed:.92 green:1 blue:0 alpha:1],
-                       [UIColor colorWithRed:84 green:1 blue:0 alpha:1],
+                       [UIColor colorWithRed:.8 green:.8 blue:0 alpha:1],
+                       [UIColor colorWithRed:.72 green:.8 blue:0 alpha:1],
+                       [UIColor colorWithRed:.64 green:.8 blue:0 alpha:1],
                        [UIColor colorWithRed:0.75 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:.67 green:1 blue:0 alpha:1],
                        [UIColor colorWithRed:.59 green:1 blue:0 alpha:1],
@@ -359,7 +436,7 @@
                        [UIColor colorWithRed:0 green:1 blue:.41 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.5 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.58 alpha:1],
-                       [UIColor colorWithRed:0 green:1 blue:66 alpha:1],
+                       [UIColor colorWithRed:0 green:1 blue:.66 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:0.75 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.83 alpha:1],
                        [UIColor colorWithRed:0 green:1 blue:.91 alpha:1],
