@@ -67,10 +67,24 @@
 }
 
 -(void)loginButtonWasPressed{
-    CalendarViewController *cal = [[CalendarViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cal];
-    [navController.navigationBar setTintColor:[UIColor blackColor]];
-    [self presentViewController:navController animated:YES completion:nil];
+//    CalendarViewController *cal = [[CalendarViewController alloc] init];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cal];
+//    [navController.navigationBar setTintColor:[UIColor blackColor]];
+//    [self presentViewController:navController animated:YES completion:nil];
+    
+    
+    self.menuViewController = [[CalendarMenuViewController alloc] initWithNibName:nil bundle:nil];
+    self.mainViewController = [[CalendarViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.sideMenuViewController = [[TWTSideMenuViewController alloc] initWithMenuViewController:self.menuViewController mainViewController:[[UINavigationController alloc] initWithRootViewController:self.mainViewController]];
+    self.sideMenuViewController.shadowColor = [UIColor blackColor];
+    self.sideMenuViewController.edgeOffset = (UIOffset) { .horizontal = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 18.0f : 0.0f };
+    self.sideMenuViewController.zoomScale = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 0.5634f : 0.85f;
+    
+    [self presentViewController:self.sideMenuViewController animated:YES completion:nil];
+//    self.window.rootViewController = self.sideMenuViewController;
+//    
+//    self.window.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
