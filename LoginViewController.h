@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TWTSideMenuViewController.h"
+#import "CalendarMenuViewController.h"
+#import "CalendarViewController.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, strong) TWTSideMenuViewController *sideMenuViewController;
+@property (nonatomic, strong) CalendarMenuViewController *menuViewController;
+@property (nonatomic, strong) CalendarViewController *mainViewController;
+
 -(void)loginButtonWasPressed;
+
+
 
 @end
