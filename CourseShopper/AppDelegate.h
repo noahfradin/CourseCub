@@ -33,6 +33,7 @@
 -(NSArray *)getData:(NSString *) x;
 -(void)addDepartmentsToCD;
 - (NSArray *)getCourseBySearch:(NSString *)searchText;
+-(Course*)getCourseInfo:(NSString *)title;
 
 
 @end

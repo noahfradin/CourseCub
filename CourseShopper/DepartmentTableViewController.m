@@ -62,7 +62,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"we are back loading");
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;

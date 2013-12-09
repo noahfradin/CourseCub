@@ -53,6 +53,7 @@
     
     NSArray *temp = [appDelegate getAllClassesOfDept:self.abbrev];
     //self.fetchedCourseArray = [appDelegate getAllClassesOfDept:self.abbrev];
+    self.dict = [[NSMutableDictionary alloc] init];
 
 
     
@@ -124,6 +125,11 @@
     [cell addSubview: courseLabel];
     [cell addSubview: courseTimeLabel];
     [cell addSubview: courseNumberLabel];
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *courseKey = [index stringByAppendingString: @"course"];
+    
+    [self.dict setObject:course forKey:courseKey];
 
     
     
@@ -134,13 +140,22 @@
     
     //First get the cell from the table based on the click event/indexpath
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
+    NSString *courseKey = [index stringByAppendingString: @"course"];
+    
+    Course *course = [self.dict objectForKey:courseKey];
+    NSLog(@"course is : %@", self.dict);
     //Then get the department title from the text on the cell's label
-    NSString *courseTitle = cell.textLabel.text;
+    NSString *courseTitle = course.title;
     //Then instantiate the course detail view and set the title to the correct course
     //Anything else we need to pass can go here as well
     CourseViewController *courseView = [[CourseViewController alloc] init];
-    courseView.navTitle = courseTitle;
-    courseView.navigationItem.title = courseTitle;
+    NSLog(@"setting the navTitle to: %@",courseTitle);
+    courseView.courseTitle = courseTitle;
+    NSString *abbrev = course.department.abbrev;
+    NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
+    courseView.navigationItem.title = abbrevNum;
     
     [self.navigationController pushViewController:courseView animated:NO];
     

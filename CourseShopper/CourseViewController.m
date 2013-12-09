@@ -13,6 +13,7 @@
 #import <time.h>
 #import "CoursePreviewAlertViewController.h"
 #import "CriticalReviewAlertViewController.h"
+#import "AppDelegate.h"
 
 
 @interface CourseViewController (){
@@ -66,6 +67,17 @@
 {
     [super viewDidLoad];
     
+    //Kappi database stuff
+    // get an instance of app delegate
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    self.courseInfo = [appDelegate getCourseInfo: self.courseTitle];
+
+    
+    
+    
     UILabel *courseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3/4, screenWidth, buttonHeight*3)];
     UIColor *titleLabelFontColor = [UIColor colorWithRed:78/255 green:77/255 blue:79/255 alpha:1];
     UIFont *titleFont = [UIFont fontWithName:@"Helvetica Light" size:18.0];
@@ -74,7 +86,7 @@
     courseTitleLabel.textAlignment = UITextAlignmentCenter;
     courseTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     courseTitleLabel.numberOfLines = 0;
-    courseTitleLabel.text = @"Seminar in Electronic Music:\n Real-Time Systems";
+    courseTitleLabel.text = self.courseInfo.title;
     [self.view addSubview:courseTitleLabel];
     
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3, screenWidth, buttonHeight/2)];
@@ -83,7 +95,7 @@
     timeLabel.backgroundColor = timeLabelBackgroundColor;
     timeLabel.textColor = timeLabelFontColor;
     timeLabel.textAlignment = UITextAlignmentCenter;
-    timeLabel.text = @"T R 1:00-2:30";
+    timeLabel.text = self.courseInfo.time;
     [self.view addSubview:timeLabel];
     
     UILabel *professorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*2.40, screenWidth, buttonHeight*3)];
@@ -95,7 +107,7 @@
     professorLabel.lineBreakMode = NSLineBreakByWordWrapping;
     professorLabel.numberOfLines = 0;
     NSString *profPrefix = @"Prof: ";
-    profPrefix = [profPrefix stringByAppendingString:@"Dror Brener"];
+    profPrefix = [profPrefix stringByAppendingString:self.courseInfo.prof];
     professorLabel.text = profPrefix ;
     [self.view addSubview:professorLabel];
     
@@ -107,7 +119,7 @@
     locationLabel.textAlignment = UITextAlignmentCenter;
     locationLabel.lineBreakMode = NSLineBreakByWordWrapping;
     locationLabel.numberOfLines = 0;
-    locationLabel.text = @"Grant Recital Hall";
+    locationLabel.text = self.courseInfo.location;
     [self.view addSubview:locationLabel];
     
 
