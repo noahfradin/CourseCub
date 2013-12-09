@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CourseAlertViewController.h"
+#import "Course.h"
 
 @interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
 
@@ -29,6 +30,7 @@
 @property int state;
 @property UILabel * sizeLabel;
 @property UILabel * seatAvailableLabel;
+@property Course *course;
 
 
 -(void)registerButtonWasPressed;

@@ -57,7 +57,7 @@
     //This gets rid of the text in the default back button
     self.navigationController.navigationBar.topItem.title = @"";
     
-    self.navigationItem.title = _navTitle;
+    self.navigationItem.title = self.courseTitle;
     [_navBarDivide setHidden:NO];
 }
 

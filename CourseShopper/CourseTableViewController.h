@@ -19,6 +19,7 @@
 @property (nonatomic,strong)NSArray* fetchedCourseArray;
 
 @property NSString *department;
+@property UIView *navBarDivide;
 
 -(void)loadData;
 -(void) setWasSearched:(BOOL *)wasSearched;
