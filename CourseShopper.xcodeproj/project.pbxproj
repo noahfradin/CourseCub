@@ -32,9 +32,6 @@
 		703A55C118559989005C9047 /* RegisterHalf2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BD18559989005C9047 /* RegisterHalf2@2x.png */; };
 		703A55C218559989005C9047 /* Remove2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BE18559989005C9047 /* Remove2@1x.png */; };
 		703A55C318559989005C9047 /* Remove2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BF18559989005C9047 /* Remove2@2x.png */; };
-		703A55CD18559CB9005C9047 /* locs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CA18559CB9005C9047 /* locs.txt */; };
-		703A55CE18559CB9005C9047 /* profs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 703A55CB18559CB9005C9047 /* profs.txt */; };
-
 		703D627118514F9E004F263A /* CoursePreviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */; };
 		703D627418514FAB004F263A /* CriticalReviewAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D627318514FAB004F263A /* CriticalReviewAlertViewController.m */; };
 		70572E3C1843CB7A00118ECD /* CourseAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */; };
@@ -102,9 +99,6 @@
 		703A55BD18559989005C9047 /* RegisterHalf2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@2x.png"; sourceTree = "<group>"; };
 		703A55BE18559989005C9047 /* Remove2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@1x.png"; sourceTree = "<group>"; };
 		703A55BF18559989005C9047 /* Remove2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@2x.png"; sourceTree = "<group>"; };
-		703A55CA18559CB9005C9047 /* locs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = locs.txt; path = ../../Desktop/locs.txt; sourceTree = "<group>"; };
-		703A55CB18559CB9005C9047 /* profs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = profs.txt; path = ../../Desktop/profs.txt; sourceTree = "<group>"; };
-
 		703D626F18514F9E004F263A /* CoursePreviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursePreviewAlertViewController.h; sourceTree = "<group>"; };
 		703D627018514F9E004F263A /* CoursePreviewAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursePreviewAlertViewController.m; sourceTree = "<group>"; };
 		703D627218514FAB004F263A /* CriticalReviewAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CriticalReviewAlertViewController.h; sourceTree = "<group>"; };
@@ -280,9 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				17FFC48718559F7000A2699F /* desc.txt */,
-				703A55CA18559CB9005C9047 /* locs.txt */,
-				703A55CB18559CB9005C9047 /* profs.txt */,
-
 				173EBBE6184EB640006D0C17 /* dps.plist */,
 				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
 				176D8C3C1852503700BCEF28 /* class_list.json */,
