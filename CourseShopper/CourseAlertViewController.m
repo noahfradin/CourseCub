@@ -112,8 +112,6 @@
 }
 
 -(void)cancelButtonWasPressed{
-   // _details.view.userInteractionEnabled = YES;
-  //  _details.navigationController.view.userInteractionEnabled = YES;
     for (UIView *subView in self.view.subviews) {
         [subView removeFromSuperview];
     }
@@ -121,10 +119,7 @@
         subView.userInteractionEnabled = YES;
     }
     [self.view removeFromSuperview];
-   // [self.view setHidden:YES];
-  //  self.view.userInteractionEnabled = NO;
-    //[self removeFromParentViewController];
- //   _details.view.backgroundColor = [UIColor blueColor];
+   
  
 }
 
