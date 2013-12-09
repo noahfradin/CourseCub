@@ -21,5 +21,6 @@
 @property NSString *department;
 
 -(void)loadData;
+-(void) setWasSearched:(BOOL *)wasSearched;
 
 @end
