@@ -67,7 +67,8 @@
     //This gets rid of the text in the default back button
     self.navigationController.navigationBar.topItem.title = @"";
     
-    self.navigationItem.title = self.courseTitle;
+    self.navigationItem.title = self.abbrevNum;
+    self.view.backgroundColor = [UIColor whiteColor];
     [_navBarDivide setHidden:NO];
 }
 
