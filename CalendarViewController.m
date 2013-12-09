@@ -58,8 +58,11 @@
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonWasPressed)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
+
     
     
+
+
 }
 
 //And this is a place for post view load stuff anything happening on the main view is cool to put here usually

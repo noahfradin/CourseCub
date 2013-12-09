@@ -8,13 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DepartmentTableViewController : UITableViewController
+@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate> {
+    UISearchBar *theSearchBar;
+}
 
-@property NSMutableArray *departmentArray;
-@property NSMutableArray *departmentAbbrevArray;
 @property NSMutableArray *colorArray;
 @property NSMutableDictionary *dict;
 
+@property NSNumber *counter;
+//testing inserting into table
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong)NSMutableArray* fetchedDeptsArray;
+@property (nonatomic,strong)NSArray* classListTest;
+
+@property NSMutableArray *alphabet;
+@property NSMutableArray *alphabetCount;
+@property (nonatomic, retain) UISearchBar *theSearchBar;
+@property BOOL wasSearched;
+
+
 -(void)loadData;
+
 
 @end
