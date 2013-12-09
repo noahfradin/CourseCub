@@ -25,9 +25,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.window.tintColor = [UIColor redColor];
-    [self loadColours];
-    [self addDepartmentsToCD];
-    [self addClassesToCD];
+    
+    [self oneTimeMethodCall];
+    
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
     LoginViewController *login = [[LoginViewController alloc] init];
@@ -304,6 +304,20 @@
     }
     
 
+}
+
+//Place this in the appdelegate and call it from didFinishLaunchingWithOptions method
+#pragma oneTimeMethodCall
+//Checks to see if flag set in NSUserDefaults is set and if not calls desired method and sets the flag.
+- (void)oneTimeMethodCall{
+    BOOL is_first_time = [[NSUserDefaults standardUserDefaults] boolForKey: @"is_first_time"];
+    if (!is_first_time) {
+        //Call method you want to be called once here
+        [self loadColours];
+        [self addDepartmentsToCD];
+        [self addClassesToCD];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"is_first_time"];
+    }
 }
 
 -(void)loadColours
