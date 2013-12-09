@@ -18,11 +18,9 @@
 @dynamic time;
 @dynamic title;
 @dynamic department;
-<<<<<<< HEAD
-=======
+
 @dynamic location;
 @dynamic availableSeats;
 @dynamic totalSeats;
->>>>>>> dfade6419d3c1cc911a23a494cbdd67bb60fa2a9
 
 @end
