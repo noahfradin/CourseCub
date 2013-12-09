@@ -267,7 +267,10 @@
         NSLog(@"FUUUuUUUUUCK");
     }
     
-    return temp;
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"department.abbrev" ascending:YES];
+    NSArray *sortedArray=[temp sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    return sortedArray;
 
     
 }
@@ -301,28 +304,6 @@
                              @"MFW 1-2.30",
                              nil];
     
-    NSMutableArray *seatsAv = [NSMutableArray arrayWithObjects:
-                             @"1",
-                             @"20",
-                             @"999",
-                             @"890",
-                             @"3",
-                             @"30",
-                             @"0",
-                             nil];
-    
-    
-    NSMutableArray *seatsTot = [NSMutableArray arrayWithObjects:
-                               @"12",
-                               @"40",
-                               @"999",
-                               @"999",
-                               @"30",
-                               @"30",
-                               @"45",
-                               nil];
-    
-    
     
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
@@ -353,10 +334,13 @@
             
             NSUInteger randomIndexProfs = arc4random() % [profs count];
             newCourse.prof = [profs objectAtIndex:randomIndexProfs];
-            
-            NSUInteger randomIndexSeats = arc4random() % [seatsAv count];
-            newCourse.availableSeats = [seatsAv objectAtIndex:randomIndexSeats];
-            newCourse.totalSeats = [seatsTot objectAtIndex:randomIndexSeats];
+
+            //FIX THIS RANDOM THING!
+            NSNumber *n1 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
+            NSNumber *n2 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
+
+            newCourse.availableSeats = [n2 stringValue];
+            newCourse.totalSeats = [n1 stringValue];
             
             NSUInteger randomIndexLocs = arc4random() % [locs count];
             NSString *loc = [locs objectAtIndex:randomIndexLocs];
