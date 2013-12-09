@@ -18,5 +18,8 @@
 @dynamic time;
 @dynamic title;
 @dynamic department;
+@dynamic location;
+@dynamic availableSeats;
+@dynamic totalSeats;
 
 @end

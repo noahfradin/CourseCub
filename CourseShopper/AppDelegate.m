@@ -205,6 +205,36 @@
     
 }
 
+-(Department*)getCourseBySearch:(NSString *)searchTerm
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Coursee"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate =
+            [NSPredicate predicateWithFormat:@"(title contains '%@') OR (professor contains '%@')",searchTerm];
+    
+    [fetchRequest setPredicate:predicate];
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *temp = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if ([temp count]>=1){
+        Department *fetchedDept = [temp objectAtIndex:0];
+        // Returning Fetched Records
+        return fetchedDept;
+    }
+    else
+    {
+        return nil;
+    }
+    
+}
+
+
 //reads from a text file of departmenst, parses the file and returns an nsarray of the deparment names
 - (NSArray *)getData:(NSString *)x
 {

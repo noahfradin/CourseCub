@@ -32,6 +32,7 @@
 -(Department *)getDeptByAbbrev:(NSString *)abbreviation;
 -(NSArray *)getData:(NSString *) x;
 -(void)addDepartmentsToCD;
+- (NSArray *)getCourseBySearch:(NSString *)searchText;
 
 
 @end
