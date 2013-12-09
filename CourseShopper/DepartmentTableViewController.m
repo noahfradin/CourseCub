@@ -320,7 +320,7 @@
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
     self.managedObjectContext = appDelegate.managedObjectContext;
-    return;
+    return self.fetchedDeptsArray;
     //return [appDelegate getCourseBySearch:stringToSearch];
 
 }
