@@ -342,6 +342,7 @@
             newCourse.availableSeats = [n2 stringValue];
             newCourse.totalSeats = [n1 stringValue];
             
+            
             NSUInteger randomIndexLocs = arc4random() % [locs count];
             NSString *loc = [locs objectAtIndex:randomIndexLocs];
             newCourse.location = loc;

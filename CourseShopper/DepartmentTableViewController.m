@@ -190,15 +190,17 @@
         courseTimeLabel.font = courseFont;
         courseTimeLabel.text = courseTime;
         
+        //Actually department (sorry)
         UILabel *courseNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 95, 40)];
         UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:31];
         courseNumberLabel.font = numberFont;
-        courseNumberLabel.text = courseNumber;
+        courseNumberLabel.text = course.department.abbrev;
         courseNumberLabel.textColor = course.department.color;
 
+        //Actually course number (sorry)
         UILabel *deptLabel = [[UILabel alloc] initWithFrame:CGRectMake(255, 20, 60, 40)];
         deptLabel.font = courseFont;
-        deptLabel.text = course.department.abbrev;
+        deptLabel.text = courseNumber;
         [cell addSubview: courseLabel];
         [cell addSubview: courseTimeLabel];
         [cell addSubview: courseNumberLabel];
@@ -257,9 +259,12 @@
         Course *course = [self.dict objectForKey:courseKey];
         
         CourseViewController *courseController = [[CourseViewController alloc] init];
-        courseController.course = course;
-        courseController.navigationItem.title = course.title;
+        courseController.courseTitle = course.title;
         courseController.departmentColor = course.department.color;
+        NSString *abbrev = course.department.abbrev;
+        NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
+        courseController.navigationItem.title = abbrevNum;
+        courseController.abbrevNum = abbrevNum;
         [self.navigationController pushViewController:courseController animated:YES];
         
     }
@@ -358,12 +363,7 @@
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
     for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
-        if (self.wasSearched) {
-            self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] title] substringToIndex: 1];
-        }
-        else {
-            self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
-        }
+        self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
         int letter = [self.firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
             NSNumber *one = [NSNumber numberWithInteger:1];
