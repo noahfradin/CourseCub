@@ -134,6 +134,27 @@
         float day = 0+i;
         //End of test/example data
         
+        
+        if (day == 0||day==2||day==4) {
+            
+            for (int j = 0; j<4; j++) {
+                if (j== 0||j==2||j==4){
+                    UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+                    courseButton.tag = i;
+                    [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+                    [courseButton setBackgroundColor:[UIColor grayColor]];
+                    [self.view addSubview:courseButton];
+                }
+            }
+//            UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+//            courseButton.tag = i;
+//            [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+//            [courseButton setBackgroundColor:[UIColor grayColor]];
+//            
+//            //Create top color bumper
+//            
+//            [self.view addSubview:courseButton];
+        }
         UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
         courseButton.tag = i;
         [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];

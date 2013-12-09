@@ -51,7 +51,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.tableView.tableHeaderView = self.theSearchBar;
+//    self.tableView.tableHeaderView = self.theSearchBar;
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
@@ -82,14 +82,22 @@
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
     self.dict = [[NSMutableDictionary alloc] init];
-    self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",nil];
+    self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z" ,nil];
     self.alphabetCount = [NSMutableArray arrayWithCapacity:26];
     for (int i = 0; i < 26; i++) {
         [self.alphabetCount insertObject:[NSNull null] atIndex:i];
     }
-    self.theSearchBar = [[UISearchBar alloc] init];
-    self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+//    self.theSearchBar = [[UISearchBar alloc] init];
+//    self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+    
+    self.theSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    
+    self.theSearchBar.delegate = self;
+    
+    self.tableView.tableHeaderView = self.theSearchBar;
     self.wasSearched = NO;
+    
+    
     [self loadData];//This populates the department array
 
 }
