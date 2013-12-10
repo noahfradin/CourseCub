@@ -21,5 +21,7 @@
 @dynamic location;
 @dynamic availableSeats;
 @dynamic totalSeats;
+@dynamic lats;
+@dynamic longs;
 
 @end

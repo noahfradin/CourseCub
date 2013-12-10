@@ -28,6 +28,8 @@
 		17FFC48818559F7000A2699F /* desc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17FFC48718559F7000A2699F /* desc.txt */; };
 		3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3134D35A184124E5008DFEB6 /* CoreData.framework */; };
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
+		31980AA01856E8A600D6C82B /* lats.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31980A9E1856E8A600D6C82B /* lats.txt */; };
+		31980AA11856E8A600D6C82B /* longs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31980A9F1856E8A600D6C82B /* longs.txt */; };
 		31B44A3218440BE1000DCAEC /* Department.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3118440BE1000DCAEC /* Department.m */; };
 		31B44A3518440BE2000DCAEC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3418440BE2000DCAEC /* Course.m */; };
 		703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BC18559989005C9047 /* RegisterHalf2@1x.png */; };
@@ -100,6 +102,8 @@
 		17FFC48718559F7000A2699F /* desc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = desc.txt; sourceTree = "<group>"; };
 		3134D35A184124E5008DFEB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3134D35D1841252E008DFEB6 /* CourseShopper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseShopper.xcdatamodel; sourceTree = "<group>"; };
+		31980A9E1856E8A600D6C82B /* lats.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lats.txt; path = ../../../../Desktop/lats.txt; sourceTree = "<group>"; };
+		31980A9F1856E8A600D6C82B /* longs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = longs.txt; path = ../../../../Desktop/longs.txt; sourceTree = "<group>"; };
 		31B44A3018440BE1000DCAEC /* Department.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Department.h; sourceTree = "<group>"; };
 		31B44A3118440BE1000DCAEC /* Department.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Department.m; sourceTree = "<group>"; };
 		31B44A3318440BE2000DCAEC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				31980A9E1856E8A600D6C82B /* lats.txt */,
+				31980A9F1856E8A600D6C82B /* longs.txt */,
 				8CF1A00D185655C100F091A8 /* lightg@2x.png */,
 				8CF1A00B1855E4B500F091A8 /* add_button@2x.png */,
 				8CF1A0071855CA5100F091A8 /* locs.txt */,
@@ -494,9 +500,11 @@
 				70D9990A185539D9009346BE /* DoNotNotify@2x.png in Resources */,
 				70D99913185539D9009346BE /* Unregister@1x.png in Resources */,
 				8CF1A0061855CA4500F091A8 /* profs.txt in Resources */,
+				31980AA11856E8A600D6C82B /* longs.txt in Resources */,
 				70D99908185539D9009346BE /* AddToCart@2x.png in Resources */,
 				8C2CD68D17F2CC0500CAA5EF /* InfoPlist.strings in Resources */,
 				70D99907185539D9009346BE /* AddToCart@1x.png in Resources */,
+				31980AA01856E8A600D6C82B /* lats.txt in Resources */,
 				8CF1A0081855CA5100F091A8 /* locs.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -329,7 +329,7 @@
         courseTable.navigationItem.title = department;
         courseTable.department = department;
         courseTable.departmentColor = departmentColor;
-    
+        courseTable.cart = self.cart;
     
         NSLog(@"setting the abrrev of the page to %@",abbr);
         courseTable.abbrev = abbr;
