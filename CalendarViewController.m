@@ -168,6 +168,7 @@
 
 -(void)addButtonWasPressed{
     DepartmentTableViewController *addView = [[DepartmentTableViewController alloc] init];
+    addView.cart = self.cart;
     [self.navigationController pushViewController:addView animated:YES];
 }
 
