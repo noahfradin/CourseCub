@@ -53,7 +53,7 @@
     [_buttonPane addSubview: bookListLabel];
     
     
-     UIFont *buttonFont2 = [UIFont fontWithName:@"Helvetica Light" size:28.0];
+     UIFont *buttonFont2 = [UIFont fontWithName:@"Helvetica Light" size:20.0];
     
     UITextView *bookList = [[UITextView alloc] initWithFrame:CGRectMake(offset, labelHeight+offset*2, textViewWidth, textViewHeight)];
     bookList.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -63,9 +63,10 @@
     bookList.alwaysBounceVertical = YES;
     bookList.editable = NO;
     bookList.textColor = timeLabelFontColor;
+    bookList.textAlignment = UITextAlignmentCenter;
     
     
-    bookList.text = @"-GitHub for Fools\n-Harry Potter\n-Dangers of Botswana\n-Sports Books";
+    bookList.text = @"\n\n\nSo far as we know\nthis course doesn't HAVE\n\"books\"";
     
 
     

@@ -28,6 +28,7 @@
 		3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */; };
 		31B44A3218440BE1000DCAEC /* Department.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3118440BE1000DCAEC /* Department.m */; };
 		31B44A3518440BE2000DCAEC /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B44A3418440BE2000DCAEC /* Course.m */; };
+		7024654518571F3F0055A5F9 /* CustumUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7024654418571F3F0055A5F9 /* CustumUI.m */; };
 		703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BC18559989005C9047 /* RegisterHalf2@1x.png */; };
 		703A55C118559989005C9047 /* RegisterHalf2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BD18559989005C9047 /* RegisterHalf2@2x.png */; };
 		703A55C218559989005C9047 /* Remove2@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 703A55BE18559989005C9047 /* Remove2@1x.png */; };
@@ -46,6 +47,7 @@
 		70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D998FE185539D9009346BE /* NotifyMe@2x.png */; };
 		70D99913185539D9009346BE /* Unregister@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99905185539D9009346BE /* Unregister@1x.png */; };
 		70D99914185539D9009346BE /* Unregister@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70D99906185539D9009346BE /* Unregister@2x.png */; };
+		70F3F1711856EA3800B98D35 /* YouHaveFiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F3F1701856EA3800B98D35 /* YouHaveFiveViewController.m */; };
 		8C2A095C18555C27000C517B /* CalendarMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A095B18555C27000C517B /* CalendarMenuViewController.m */; };
 		8C2A095F18555CB4000C517B /* TWTSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A095E18555CB4000C517B /* TWTSideMenuViewController.m */; };
 		8C2CD68317F2CC0500CAA5EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2CD68217F2CC0500CAA5EF /* Foundation.framework */; };
@@ -100,6 +102,8 @@
 		31B44A3118440BE1000DCAEC /* Department.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Department.m; sourceTree = "<group>"; };
 		31B44A3318440BE2000DCAEC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		31B44A3418440BE2000DCAEC /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		7024654318571F3F0055A5F9 /* CustumUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustumUI.h; sourceTree = "<group>"; };
+		7024654418571F3F0055A5F9 /* CustumUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustumUI.m; sourceTree = "<group>"; };
 		703A55BC18559989005C9047 /* RegisterHalf2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@1x.png"; sourceTree = "<group>"; };
 		703A55BD18559989005C9047 /* RegisterHalf2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RegisterHalf2@2x.png"; sourceTree = "<group>"; };
 		703A55BE18559989005C9047 /* Remove2@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove2@1x.png"; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		70D998FE185539D9009346BE /* NotifyMe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotifyMe@2x.png"; sourceTree = "<group>"; };
 		70D99905185539D9009346BE /* Unregister@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unregister@1x.png"; sourceTree = "<group>"; };
 		70D99906185539D9009346BE /* Unregister@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unregister@2x.png"; sourceTree = "<group>"; };
+		70F3F16F1856EA3800B98D35 /* YouHaveFiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouHaveFiveViewController.h; sourceTree = "<group>"; };
+		70F3F1701856EA3800B98D35 /* YouHaveFiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouHaveFiveViewController.m; sourceTree = "<group>"; };
 		8C2A095A18555C27000C517B /* CalendarMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarMenuViewController.h; path = ../CalendarMenuViewController.h; sourceTree = "<group>"; };
 		8C2A095B18555C27000C517B /* CalendarMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarMenuViewController.m; path = ../CalendarMenuViewController.m; sourceTree = "<group>"; };
 		8C2A095D18555CA7000C517B /* TWTSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWTSideMenuViewController.h; sourceTree = "<group>"; };
@@ -209,6 +215,10 @@
 				70C2AFC9185590420086D9CE /* UnregisterAlertViewController.m */,
 				70C2AFCB1855904C0086D9CE /* RegisterAlertViewController.h */,
 				70C2AFCC1855904C0086D9CE /* RegisterAlertViewController.m */,
+				70F3F16F1856EA3800B98D35 /* YouHaveFiveViewController.h */,
+				70F3F1701856EA3800B98D35 /* YouHaveFiveViewController.m */,
+				7024654318571F3F0055A5F9 /* CustumUI.h */,
+				7024654418571F3F0055A5F9 /* CustumUI.m */,
 			);
 			name = "Course Alert";
 			sourceTree = "<group>";
@@ -520,9 +530,11 @@
 				8CA91745183D39370059A923 /* LoginViewController.m in Sources */,
 				8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */,
 				8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */,
+				70F3F1711856EA3800B98D35 /* YouHaveFiveViewController.m in Sources */,
 				31B44A3518440BE2000DCAEC /* Course.m in Sources */,
 				3134D35E1841252E008DFEB6 /* CourseShopper.xcdatamodeld in Sources */,
 				705E61BD184EB4C500BAA7D2 /* WebViewController.m in Sources */,
+				7024654518571F3F0055A5F9 /* CustumUI.m in Sources */,
 				8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */,
 				8C2A095C18555C27000C517B /* CalendarMenuViewController.m in Sources */,
 				70C2AFCA185590420086D9CE /* UnregisterAlertViewController.m in Sources */,
