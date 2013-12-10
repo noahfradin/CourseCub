@@ -16,7 +16,7 @@
 #import "RegisterAlertViewController.h"
 #import "UnregisterAlertViewController.h"
 #import "CourseAlertViewController.h"
-
+#import "YouHaveFiveViewController.h"
 #import "AppDelegate.h"
 
 
@@ -27,6 +27,7 @@
     CriticalReviewAlertViewController * criticalReview;
     UnregisterAlertViewController * unregisterAlert;
     RegisterAlertViewController * registerAlert;
+    YouHaveFiveViewController * youHaveFive;
 
     
 }
@@ -411,9 +412,30 @@
 
         _state = notifyMe;
     }else if(_state == registerRemove){
-        registerAlert = [[RegisterAlertViewController alloc] init];
-        registerAlert.courseView = self;
-        [self.view addSubview:registerAlert.view];
+        
+        NSMutableArray * temp =  [[ NSMutableArray alloc] init];
+        [temp addObjectsFromArray:[_currentCart getCartArray]];
+        Course * tempCourse;
+        int counter = 0;
+        for (int i=0; i<[temp count]; i++) {
+            tempCourse = temp[i];
+            if([_currentCart isRegistered:tempCourse]){
+                counter++;
+            }
+        }
+        
+        
+        if(counter == 5){
+            youHaveFive = [[YouHaveFiveViewController alloc]init];
+            youHaveFive.courseView =self;
+            youHaveFive.courseInfo = _courseInfo;
+            youHaveFive.currentCart = _currentCart;
+            [self.view addSubview:youHaveFive.view];
+        }else{
+            registerAlert = [[RegisterAlertViewController alloc] init];
+            registerAlert.courseView = self;
+            [self.view addSubview:registerAlert.view];
+        }
        
         
     }else if(_state == registered){
