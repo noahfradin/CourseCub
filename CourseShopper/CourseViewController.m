@@ -184,7 +184,7 @@
     [self.navigationController.navigationBar addSubview:_navBarDivide];
     
     UIView *dividingLine2 = [[UIView alloc] initWithFrame:CGRectMake(0, (screenHeight*299/300)-buttonHeight-textViewHeight, screenWidth, dividingLines)];
-    [dividingLine2 setBackgroundColor:[UIColor blackColor]];
+    [dividingLine2 setBackgroundColor:_departmentColor];
     [self.view addSubview:dividingLine2];
     
     UITextView *courseDetails = [[UITextView alloc] initWithFrame:CGRectMake(0, screenHeight-buttonHeight-textViewHeight, textViewWidth, textViewHeight)];
@@ -194,8 +194,8 @@
                                        
     [self.view addSubview:courseDetails];
     
-    UIView *dividingLine3 = [[UIView alloc] initWithFrame:CGRectMake(0, (screenHeight-dividingLines)-buttonHeight, screenWidth, dividingLines)];
-    [dividingLine3 setBackgroundColor:[UIColor blackColor]];
+    UIView *dividingLine3 = [[UIView alloc] initWithFrame:CGRectMake(0, (screenHeight-dividingLines)-buttonHeight, screenWidth, dividingLines/2)];
+    [dividingLine3 setBackgroundColor:_departmentColor];
     [self.view addSubview:dividingLine3];
     
     courseDetails.font =  [UIFont fontWithName:@"Helvetica Light" size:16];
@@ -211,25 +211,27 @@
 
      _bookListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_bookListButton addTarget:self action:@selector(bookListButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-    [_bookListButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
+    [_bookListButton setBackgroundColor:[UIColor whiteColor]];
      _bookListButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _bookListButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_bookListButton setTitle:@"Book\nList" forState: UIControlStateNormal];
      [_bookListButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      _bookListButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [[_bookListButton titleLabel] setFont:buttonFont];
+    _bookListButton.layer.borderColor = [_departmentColor CGColor];
     _bookListButton.layer.borderWidth = 1;
    
      [self.view addSubview:_bookListButton];
     
      _coursePreviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth+buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_coursePreviewButton addTarget:self action:@selector(coursePreviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-    [_coursePreviewButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
+    [_coursePreviewButton setBackgroundColor:[UIColor whiteColor]];
      _coursePreviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
      _coursePreviewButton.titleLabel.textAlignment = UITextAlignmentCenter;
      [_coursePreviewButton setTitle:@"Course\nPreview" forState: UIControlStateNormal];
      [_coursePreviewButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      [[_coursePreviewButton titleLabel] setFont:buttonFont];
+      _coursePreviewButton.layer.borderColor = [_departmentColor CGColor];
     _coursePreviewButton.layer.borderWidth = 1;
 
      [self.view addSubview:_coursePreviewButton];
@@ -239,7 +241,7 @@
      _criticalReviewButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth*2+2*buttonSpacing, screenHeight-buttonHeight, buttonWidth,buttonHeight)];
      [_criticalReviewButton addTarget:self action:@selector(criticalReviewButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
      //[_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
-    [_criticalReviewButton setBackgroundColor:[UIColor colorWithRed:222.0f/255.0f green:250.0f/255.0f blue:255.0f/255.0f alpha:1]];
+    [_criticalReviewButton setBackgroundColor:[UIColor whiteColor]];
     
     
      _criticalReviewButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -247,6 +249,7 @@
      [_criticalReviewButton setTitle:@"Critical\nReview" forState: UIControlStateNormal];
      [_criticalReviewButton setTitleColor:buttonFontColor forState:UIControlStateNormal];
      [[_criticalReviewButton titleLabel] setFont:buttonFont];
+    _criticalReviewButton.layer.borderColor = [ _departmentColor CGColor];
     _criticalReviewButton.layer.borderWidth = 1;
 
      [self.view addSubview:_criticalReviewButton];
