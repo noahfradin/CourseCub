@@ -44,7 +44,7 @@
     NSLog(@"hello hello hello %ul",[self.courses_Array count]);
 }
 
--(void)unregisterCourse:(Course *)course:(Course *)course{
+-(void)unregisterCourse:(Course *)course{
     NSLog(@"Add");
     [self.courses_Dict setObject:[NSNumber numberWithInt:1] forKey:course.number];
 }
