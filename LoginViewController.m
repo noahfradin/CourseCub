@@ -47,7 +47,12 @@
     [self.view addSubview:username];
     
     UITextField *password = [[UITextField alloc] initWithFrame:CGRectMake(20, 96, 275, 38)];
+
+    password.clearsOnBeginEditing = YES;
+    password.secureTextEntry = YES;
+
 //    password.clearsOnBeginEditing = YES;
+
     [password setBorderStyle: UITextBorderStyleLine];
     [[password layer] setBorderColor:[[UIColor colorWithRed:171.0/255.0 green:171.0/255.0 blue:171.0/255.0 alpha:1.0] CGColor]];
     password.placeholder = @" Password";
