@@ -78,8 +78,7 @@
     [super viewDidLoad];
     
     
-    NSLog(@"sadfasfdgsdfgdsfg dsfgfdgsgdfg %ul",[[_currentCart getCartArray] count]);
-    
+  
     
     //Kappi database stuff
     // get an instance of app delegate
@@ -89,7 +88,20 @@
     
     self.courseInfo = [appDelegate getCourseInfo: self.courseTitle];
 
+
+    Course * tempCourse;
+    NSMutableArray * temp =  [[ NSMutableArray alloc] init];
+    [temp addObjectsFromArray:[_currentCart getCartArray]];
+    NSLog(@"*****************************\n");
+    for (int i=0; i<[temp count]; i++) {
+        tempCourse = temp[i];
+        NSLog(tempCourse.title);
+        NSLog(@"%i",[_currentCart isRegistered:tempCourse]);
+    }
+    NSLog(@"*****************************\n");
+
     
+
     
     
     UILabel *courseTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight*3/4, screenWidth, buttonHeight*3)];
@@ -180,6 +192,98 @@
     
     [self initButtonImage:_registerButton];
     [self initButtonImage2:_removeCartButton];
+    
+
+        if([_currentCart isRegistered:self.courseInfo]){
+            NSLog(@"sdfasdfasdfasdf");
+            _state = registered;
+            UIImage *btnImage;
+            UIImage * btnImage2;
+            btnImage = [UIImage imageNamed:@"Unregister"];
+            _sizeLabel.text = @"Registered";
+            _seatAvailableLabel.text = @"";
+            _state = registered;
+            
+            
+            UIColor *sizeLabelFontColor = [UIColor colorWithRed:153/255 green:152/255 blue:152/255 alpha:1];
+            UIFont *sizeLabelFont = [UIFont fontWithName:@"Helvetica Light" size:20.0];
+            _sizeLabel.font = sizeLabelFont;
+            
+            
+            
+            [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:1.0f];
+            
+            _registerButton.alpha = 0;
+            _registerButton.alpha = 1;
+            _sizeLabel.alpha = 0;
+            _sizeLabel.alpha = 1;
+            _seatAvailableLabel.alpha = 0;
+            _seatAvailableLabel.alpha = 1;
+            _sizeLabel.alpha = 0;
+            _sizeLabel.alpha = 1;
+            
+            [UIView commitAnimations];
+            
+            [_removeCartButton removeFromSuperview];
+            [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+            
+            
+            
+        }else if([_currentCart isNotifying:self.courseInfo]){
+            UIImage *btnImage;
+
+            _state = stopNotify;
+            btnImage = [UIImage imageNamed:@"DoNotNotify"];
+            
+            _state = stopNotify;
+            [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+
+        }else if ([_currentCart isInCart:self.courseInfo]){
+            _state = registerRemove;
+            
+            UIImage *btnImage;
+            UIImage * btnImage2;
+            btnImage = [UIImage imageNamed:@"RegisterHalf2"];
+            _state = registerRemove;
+            btnImage2 = [UIImage imageNamed:@"Remove2"];
+            [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+            [_registerButton setFrame:CGRectMake(registerButtonWidthOffset, registerButtonHeightOffset, btnImage.size.width,btnImage.size.height)];
+            
+            [_removeCartButton setFrame:CGRectMake(registerButtonWidthOffset+85, registerButtonHeightOffset, btnImage2.size.width,btnImage2.size.height)];
+            [self.view addSubview:_removeCartButton];
+            
+            
+            _seatAvailableLabel.text = @"Seats Available";
+            _sizeLabel.text = _fractionLabel;
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:1.0f];
+            
+            _registerButton.alpha = 0;
+            _registerButton.alpha = 1;
+            _removeCartButton.alpha = 0;
+            _removeCartButton.alpha = 1;
+            _seatAvailableLabel.alpha = 0;
+            _seatAvailableLabel.alpha = 1;
+            _sizeLabel.alpha = 0;
+            _sizeLabel.alpha = 1;
+            
+            [UIView commitAnimations];
+        }
+        
+    
+  
+    
+    
+    
+    
+    
+    
+    
+
     
 
     _navBarDivide = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, screenWidth, navLine)];
@@ -274,6 +378,8 @@
         [_registerButton setBackgroundImage:btnImage forState:UIControlStateNormal];
 
     }else if(_state == addToCart){
+        
+         [_currentCart addCourse: self.courseInfo];
           btnImage = [UIImage imageNamed:@"RegisterHalf2"];
         _state = registerRemove;
         btnImage2 = [UIImage imageNamed:@"Remove2"];
@@ -322,6 +428,7 @@
 }
 
 -(void)registerRoll{
+    [_currentCart registerCourse:self.courseInfo];
     UIImage *btnImage;
     UIImage * btnImage2;
     btnImage = [UIImage imageNamed:@"Unregister"];
@@ -358,6 +465,8 @@
 }
 
 -(void)unregisterRoll{
+    NSLog(@"asdasasd");
+    [_currentCart unregisterCourse:self.courseInfo];
     UIImage *btnImage;
     UIImage * btnImage2;
       btnImage = [UIImage imageNamed:@"RegisterHalf2"];
@@ -419,6 +528,7 @@
 }
 
 -(void)removeCartButtonWasPressed{
+    [_currentCart removeCourse: self.courseInfo];
     UIImage *btnImage;
     UIImage *btnImage2;
     btnImage = [UIImage imageNamed:@"AddToCart"];
