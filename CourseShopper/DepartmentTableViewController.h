@@ -32,6 +32,7 @@
 
 
 -(void)loadData;
+-(BOOL)array:(NSMutableArray *)array contains: (Course *)course;
 
 
 @end

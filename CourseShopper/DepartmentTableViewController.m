@@ -206,16 +206,29 @@
         UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:31];
         courseNumberLabel.font = numberFont;
         courseNumberLabel.text = course.department.abbrev;
-        courseNumberLabel.textColor = course.department.color;
-
+        
         //Actually course number (sorry)
         UILabel *deptLabel = [[UILabel alloc] initWithFrame:CGRectMake(255, 20, 60, 40)];
         deptLabel.font = courseFont;
         deptLabel.text = courseNumber;
+        
+        if ([self array:self.cart.getCartArray contains:course]) {
+
+            courseNumberLabel.textColor = [UIColor whiteColor];
+            courseLabel.textColor = [UIColor whiteColor];
+            courseTimeLabel.textColor = [UIColor whiteColor];
+            deptLabel.textColor = [UIColor whiteColor];
+            
+            cell.backgroundColor = course.department.color;
+        }
+        else {
+            courseNumberLabel.textColor = course.department.color;
+        }
+        
         [cell addSubview: courseLabel];
         [cell addSubview: courseTimeLabel];
         [cell addSubview: courseNumberLabel];
-        [cell addSubview:deptLabel];
+        [cell addSubview: deptLabel];
         
         NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
         NSString *courseKey = [index stringByAppendingString: @"course"];
@@ -384,7 +397,7 @@
 
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
-    for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
+    for (int i = 0; i < [self.fetchedDeptsArray count]; i++) {
         if (self.wasSearched) {
             self.firstLetter = [[[(Course *)[self.fetchedDeptsArray objectAtIndex:i] department] abbrev] substringToIndex: 1];
         }
@@ -412,6 +425,15 @@
     
     
     //In future this is where we'll populate array from nodejs api
+}
+
+-(BOOL)array:(NSMutableArray *)array contains:(Course *)course {
+    for (int i = 0; i < [array count]; i++) {
+        if (course == array[i]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 -(void)testingDatabase{

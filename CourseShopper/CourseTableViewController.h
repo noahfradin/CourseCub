@@ -28,5 +28,6 @@
 
 -(void)loadData;
 -(void) setWasSearched:(BOOL *)wasSearched;
+-(BOOL)array:(NSMutableArray *)array contains: (Course *)course;
 
 @end
