@@ -18,6 +18,7 @@
 #import "CourseAlertViewController.h"
 
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 
 
 
@@ -130,7 +131,10 @@
     locationLabel.lineBreakMode = NSLineBreakByWordWrapping;
     locationLabel.numberOfLines = 0;
     locationLabel.text = self.courseInfo.location;
+    UIButton *mapsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, buttonHeight*2.92, screenWidth, buttonHeight*3)];
+    [mapsButton addTarget:self action:@selector(mapsButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:locationLabel];
+    [self.view addSubview:mapsButton];
     
 
     
@@ -409,6 +413,18 @@
     criticalReview.courseView = self;
     [self.view addSubview:criticalReview.view];
     
+}
+
+-(void)mapsButtonWasPressed{
+    //double toLatDouble = [to_lat doubleValue];
+    //double toLongDouble = [to_long doubleValue];
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(41.8267, -71.3977);
+    
+    // Apple Maps, using the MKMapItem class
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location addressDictionary:nil];
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+    item.name = self.courseInfo.location;
+    [item openInMapsWithLaunchOptions:@{MKLaunchOptionsDirectionsModeKey :MKLaunchOptionsDirectionsModeWalking}];
 }
 
 -(void)removeCartButtonWasPressed{

@@ -108,8 +108,29 @@
     //Accessory view stuff
     UIView *accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
     [accessoryView setBackgroundColor:[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5]];
+    self.WRIT = [[UIButton alloc] initWithFrame:CGRectMake(70, 5, 80, 30)];
+    [self.WRIT setTitle:@"WRIT" forState:UIControlStateNormal];
+    [self.WRIT addTarget:self action:@selector(WRITWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.WRIT setBackgroundColor:[UIColor whiteColor]];
+    [self.WRIT setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+    self.toggle = 0;
+    
+    self.time = [[UIButton alloc] initWithFrame:CGRectMake(160, 5, 80, 30)];
+    [self.time setTitle:@"TIME" forState:UIControlStateNormal];
+    [self.time addTarget:self action:@selector(timeWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.time setBackgroundColor:[UIColor whiteColor]];
+    [self.time setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+    
+    UILabel *filters = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 80, 30)];
+    filters.text = @"Filters:";
+    filters.textColor = [UIColor whiteColor];
+    UIFont *filtersFont = [UIFont fontWithName:@"Helvetica Light" size:18];
+    filters.font = filtersFont;
     
     self.theSearchBar.inputAccessoryView = accessoryView;
+    [accessoryView addSubview:self.WRIT];
+    [accessoryView addSubview:filters];
+    [accessoryView addSubview:self.time];
     
 
 }
@@ -434,6 +455,21 @@
         }
     }
     return NO;
+}
+
+-(void)WRITWasPressed {
+    if (self.toggle == 0){
+        [self.WRIT setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:208.0f/255.0f blue:139.0f/255.0f alpha:1] forState: UIControlStateNormal];
+        self.toggle = 1;
+    }
+    else {
+        [self.WRIT setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+        self.toggle = 0;
+    }
+}
+
+-(void)timeWasPressed{
+    
 }
 
 -(void)testingDatabase{

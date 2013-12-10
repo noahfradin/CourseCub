@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1738DC251856DA8D0060F3E0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1738DC241856DA8D0060F3E0 /* MapKit.framework */; };
+		1738DC271856ECFD0060F3E0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1738DC261856ECFD0060F3E0 /* Icon@2x.png */; };
 		173EBBE7184EB640006D0C17 /* dps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE6184EB640006D0C17 /* dps.plist */; };
 		173EBBE8184EB640006D0C17 /* dps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173EBBE6184EB640006D0C17 /* dps.plist */; };
 		176D8C3E1852503700BCEF28 /* abbrevs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 176D8C3B1852503700BCEF28 /* abbrevs.txt */; };
@@ -85,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1738DC241856DA8D0060F3E0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1738DC261856ECFD0060F3E0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		173EBBE6184EB640006D0C17 /* dps.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dps.plist; sourceTree = "<group>"; };
 		176D8C3B1852503700BCEF28 /* abbrevs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = abbrevs.txt; sourceTree = "<group>"; };
 		176D8C3C1852503700BCEF28 /* class_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = class_list.json; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1738DC251856DA8D0060F3E0 /* MapKit.framework in Frameworks */,
 				3134D35B184124E5008DFEB6 /* CoreData.framework in Frameworks */,
 				8C2CD68517F2CC0500CAA5EF /* CoreGraphics.framework in Frameworks */,
 				8C2CD68717F2CC0500CAA5EF /* UIKit.framework in Frameworks */,
@@ -244,6 +249,7 @@
 		8C2CD68117F2CC0500CAA5EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1738DC241856DA8D0060F3E0 /* MapKit.framework */,
 				3134D35A184124E5008DFEB6 /* CoreData.framework */,
 				8C2CD68217F2CC0500CAA5EF /* Foundation.framework */,
 				8C2CD68417F2CC0500CAA5EF /* CoreGraphics.framework */,
@@ -294,6 +300,7 @@
 				173EBBE6184EB640006D0C17 /* dps.plist */,
 				176D8C3B1852503700BCEF28 /* abbrevs.txt */,
 				176D8C3C1852503700BCEF28 /* class_list.json */,
+				1738DC261856ECFD0060F3E0 /* Icon@2x.png */,
 				176D8C441852504900BCEF28 /* deps.txt */,
 				176D8C451852504900BCEF28 /* deps.plist */,
 				176D8C461852504900BCEF28 /* deptLong.txt */,
@@ -466,6 +473,7 @@
 				176D8C4E1852504900BCEF28 /* deptList.txt in Resources */,
 				70D9990B185539D9009346BE /* NotifyMe@1x.png in Resources */,
 				8C2CD69E17F2CC0500CAA5EF /* Images.xcassets in Resources */,
+				1738DC271856ECFD0060F3E0 /* Icon@2x.png in Resources */,
 				703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */,
 				70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */,
 				70D99914185539D9009346BE /* Unregister@2x.png in Resources */,
