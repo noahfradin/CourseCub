@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface CalendarMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CalendarMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
 
 @property UIImageView *backgroundImageView;
 @property UITableView *tableView;
 
-@property NSMutableArray *cartArray;
+@property NSMutableArray *cart_title_array;
+
+@property AppDelegate *appDelegate;
 
 -(void)loadData;
-
+-(void)addCartButtonWasTapped:(UIButton *)sender;
+-(void)addNewCart;
 @end

@@ -38,24 +38,28 @@
     [self.view addSubview:logoView];
     
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(20, 50, 275, 38)];
-    username.clearsOnBeginEditing = YES;
     [username setBorderStyle: UITextBorderStyleLine];
     [[username layer] setBorderColor:[[UIColor colorWithRed:171.0/255.0 green:171.0/255.0 blue:171.0/255.0 alpha:1.0] CGColor]];
-    username.text = @" Username";
+    username.placeholder = @" Username";
     username.textColor = [UIColor grayColor];
     username.tag = 1;
     username.delegate = self;
     [self.view addSubview:username];
     
     UITextField *password = [[UITextField alloc] initWithFrame:CGRectMake(20, 96, 275, 38)];
+
     password.clearsOnBeginEditing = YES;
     password.secureTextEntry = YES;
+
+//    password.clearsOnBeginEditing = YES;
+
     [password setBorderStyle: UITextBorderStyleLine];
     [[password layer] setBorderColor:[[UIColor colorWithRed:171.0/255.0 green:171.0/255.0 blue:171.0/255.0 alpha:1.0] CGColor]];
-    password.text = @" Password";
+    password.placeholder = @" Password";
     password.textColor = [UIColor grayColor];
     password.tag = 2;
     password.delegate = self;
+    [password setSecureTextEntry:YES];
     [self.view addSubview:password];
     
     UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(175, 142, 120, 38)];
@@ -107,11 +111,6 @@
         [textField resignFirstResponder];
     }
     return NO; // We do not want UITextField to insert line-breaks.
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    [password setSecureTextEntry:YES];
-    return YES;
 }
 
 @end

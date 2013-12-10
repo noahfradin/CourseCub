@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-
+#import "Cart.h"
 
 
 @implementation AppDelegate
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
     
     // Override point for customization after application launch.
     
@@ -27,21 +27,33 @@
     
     self.window.tintColor = [UIColor redColor];
     
-    [self oneTimeMethodCall];
+
+//    [self oneTimeMethodCall];
+    [self loadColours];
+    [self addDepartmentsToCD];
+    [self addClassesToCD];
     
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
     LoginViewController *login = [[LoginViewController alloc] init];
     
-    //##########CHANGE THIS
     self.window.rootViewController = login;
-    //#####################
-//    //For testing
-//    CourseViewController *courseView = [[CourseViewController alloc] init];
-//    self.window.rootViewController = courseView;
-//    //End of for testing
 
     [self.window makeKeyAndVisible];
+    
+    
+    
+    //###########Calendar stuff
+    //    self.adCartArray = [NSMutableArray arrayWithObjects:@"Da Best Cart", @"Fradin's Cart", @"Mediocre Cart", nil];
+    
+    //Set up initial cart
+    Cart *cart = [[Cart alloc] init];
+    [cart setTitle:@"Da Best Cart"];
+    self.cartArray = [[NSMutableArray alloc] init];
+    [self.cartArray addObject:cart];
+    
+//    [[NSUserDefaults standardUserDefaults] setObject:self.cartArray forKey:@"cartArray"];
+    //########################
     return YES;
 }
 							
@@ -180,7 +192,7 @@
     
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    NSLog(@"the resulting array is %@",fetchedRecords);
     // Returning Fetched Records
     return fetchedRecords;
     
@@ -308,10 +320,9 @@
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
     
-    NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList]
-                                                            options:kNilOptions
-                                                              error:&err];
-    
+
+    NSDictionary *classes = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:classList] options:kNilOptions error:&err];
+
 
      //add the class as a course, then set up relationship to department
     for(NSString *key in classes)
@@ -363,17 +374,19 @@
         if (![abr  isEqual: @""] && ![abr isEqualToString:@"AMST"]) {
             NSUInteger i = [abbrevs indexOfObject:abr];
             NSString * dep = [deps objectAtIndex:i];
-            Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department"
-                                                                  inManagedObjectContext:self.managedObjectContext];
+            Department * newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.managedObjectContext];
             newEntry.name = dep;
             newEntry.abbrev = abr;
             newEntry.color = [self.colorArray objectAtIndex:i];
             
             
             NSError *error;
-            if (![self.managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            if ([self getDeptByAbbrev:abr] == nil) {
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                }
             }
+            
         }
       
     }
@@ -388,9 +401,9 @@
     BOOL is_first_time = [[NSUserDefaults standardUserDefaults] boolForKey: @"is_first_time"];
     if (!is_first_time) {
         //Call method you want to be called once here
-        [self loadColours];
-        [self addDepartmentsToCD];
-        [self addClassesToCD];
+
+//        [self addDepartmentsToCD];
+//        [self addClassesToCD];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"is_first_time"];
     }
 }

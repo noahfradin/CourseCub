@@ -53,7 +53,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.tableView.tableHeaderView = self.theSearchBar;
+//    self.tableView.tableHeaderView = self.theSearchBar;
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
@@ -76,22 +76,33 @@
     
     self.fetchedDeptsArray = (NSMutableArray *)[appDelegate getAllDepartments];
     //[appDelegate getClassList];
-    NSLog(@"in dept table list returned: %@",self.fetchedDeptsArray);
-    NSLog(@"count of dept array: %ul",[self.fetchedDeptsArray count]);
+//    NSLog(@"in dept table list returned: %@",self.fetchedDeptsArray);
+//    NSLog(@"count of dept array: %ul",[self.fetchedDeptsArray count]);
     
     self.tableView.rowHeight = 60;
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     self.tableView.showsVerticalScrollIndicator=NO;
     self.dict = [[NSMutableDictionary alloc] init];
-    self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",nil];
+    self.alphabet = [NSMutableArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z" ,nil];
     self.alphabetCount = [NSMutableArray arrayWithCapacity:26];
     for (int i = 0; i < 26; i++) {
         [self.alphabetCount insertObject:[NSNull null] atIndex:i];
     }
+
+//    self.theSearchBar = [[UISearchBar alloc] init];
+//    self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
+    
+//    self.theSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+//    
+//    self.theSearchBar.delegate = self;
+//    
+//    self.tableView.tableHeaderView = self.theSearchBar;
     self.theSearchBar = [[UISearchBar alloc] init];
     self.theSearchBar.searchBarStyle = UISearchBarStyleDefault;
     self.theSearchBar.delegate = self;
     self.wasSearched = NO;
+    
+    
     [self loadData];//This populates the department array
     
     //Accessory view stuff
@@ -210,6 +221,7 @@
         NSString *courseKey = [index stringByAppendingString: @"course"];
         
         [self.dict setObject:course forKey:courseKey];
+#warning yay
     }
     else {
         Department * record = [self.fetchedDeptsArray objectAtIndex:indexPath.row + counter];
@@ -257,7 +269,6 @@
         NSString *courseKey = [index stringByAppendingString: @"course"];
         
         Course *course = [self.dict objectForKey:courseKey];
-        
         CourseViewController *courseController = [[CourseViewController alloc] init];
         courseController.courseTitle = course.title;
         courseController.departmentColor = course.department.color;
@@ -277,7 +288,7 @@
         NSString *department = [self.dict objectForKey:depKey];
         UIColor *departmentColor = [self.dict objectForKey:depAbbrevKey];
         NSString *abbr = [self.dict objectForKey:depAbbrevCode];
-    
+        NSLog(@"the course value is: %@", department);
         //Then instantiate the courses table and set the title to the correct department
         //This is also potentially a nice place where we will eventually query for the courses for the selected department to then display in the next view.. or we'll at least pass the department to then query in the next view
         CourseTableViewController *courseTable = [[CourseTableViewController alloc] init];
@@ -413,7 +424,15 @@
  
 }
 
-
+- (void)oneTimeMethodCall{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL dict_is_populated = [defaults boolForKey: @"dict_is_populated"];
+    if (!dict_is_populated) {
+        //Call method you want to be called once here
+        [defaults setObject:self.dict forKey:@"dept_dict"];
+        [defaults setBool:YES forKey: @"dict_is_populated"];
+    }
+}
 
 
 @end
