@@ -172,6 +172,8 @@
     courseView.abbrevNum = abbrevNum;
     courseView.departmentColor = course.department.color;
     
+    courseView.currentCart = self.cart;
+    
     [self.navigationController pushViewController:courseView animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view

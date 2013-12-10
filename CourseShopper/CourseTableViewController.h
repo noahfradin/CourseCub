@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Cart.h"
 
 @interface CourseTableViewController : UITableViewController
 
@@ -19,6 +20,8 @@
 @property (nonatomic,strong)NSArray* fetchedCourseArray;
 @property NSMutableDictionary *dict;
 
+
+@property Cart *cart;
 
 @property NSString *department;
 @property UIView *navBarDivide;
