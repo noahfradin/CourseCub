@@ -71,7 +71,7 @@
         NSArray *cartArray = [self.cart getCartArray];
         for (int i = 0; i<[cartArray count]; i++) {
             [self compileCourseInfo:cartArray[i]];
-            [self addToCalendarView];
+            [self addToCalendarView:cartArray[i]];
 //        }
 
     }
@@ -330,21 +330,23 @@
     }
 }
 
--(void)addToCalendarView{
+-(void)addToCalendarView:(Course *) course{
     NSInteger duration = endTimeInt - startTimeInt;
-    if (startTimeInt < 9) {//Afternoon courses
+    if (startTimeInt < 8) {//Afternoon courses
         startTimeInt = startTimeInt +12;
     }
-    NSInteger startTime = startTimeInt-9;//Start 9am classes at position 0
+    NSInteger startTime = startTimeInt-8;//Start 9am classes at position 0
+    UIColor *lightGrey= [UIColor colorWithRed:0.925 green:0.941 blue:0.945 alpha:1]; /*#ecf0f1*/
+    
     if (day == 0) {
         for (int i = 0; i<5; i++) {
             if (i == 0 || i==2 || i==4) {
                 UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(i*DAY_WIDTH, startTime*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
                 [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [courseButton setBackgroundColor:[UIColor grayColor]];
+                [courseButton setBackgroundColor:lightGrey];
                 
                 //Create top color bumper
-                
+                [self addTitleToView:course withCourseButton:courseButton];
                 [self.view addSubview:courseButton];
             }
         }
@@ -354,15 +356,47 @@
             if (i == 1 || i==3) {
                 UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(i*DAY_WIDTH, startTime*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
                 [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [courseButton setBackgroundColor:[UIColor grayColor]];
+                [courseButton setBackgroundColor:lightGrey];
                 
                 //Create top color bumper
-                
+                [self addTitleToView:course withCourseButton:courseButton];
                 [self.view addSubview:courseButton];
             }
         }
     }
     
+    
+    
+}
+
+-(void)addTitleToView:(Course *)course withCourseButton:(UIButton *)courseButton{
+    
+    UIColor *darkGrey = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1]; /*#7f8c8d*/
+    //Add course data to view
+    //Start with title
+    NSString *abbrev = course.department.abbrev;
+    NSString *abbrevNum = course.number;
+    
+    UIView *colorBumper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DAY_WIDTH, 10)];
+    UIColor *deptColor = course.department.color;
+    [colorBumper setBackgroundColor:deptColor];
+    [courseButton addSubview:colorBumper];
+    
+    UILabel *deptAbbrevLabel = [[UILabel alloc] initWithFrame:CGRectMake(2, 13, DAY_WIDTH, 15)];
+    [deptAbbrevLabel setText:abbrev];
+    [deptAbbrevLabel setTextColor:darkGrey];
+    [deptAbbrevLabel setFont:[UIFont fontWithName:@"Helvetica Light" size:16]];
+    [courseButton addSubview:deptAbbrevLabel];
+    
+    UILabel *courseNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(2, 28, DAY_WIDTH, 15)];
+    [courseNumberLabel setText:abbrevNum];
+    [courseNumberLabel setTextColor:darkGrey];
+    [courseNumberLabel setFont:[UIFont fontWithName:@"Helvetica Light" size:12]];
+    [courseButton addSubview:courseNumberLabel];
+    
+    
+    [courseButton bringSubviewToFront:courseNumberLabel];
+    [courseButton bringSubviewToFront:courseNumberLabel];
 }
 
 @end

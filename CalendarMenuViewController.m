@@ -152,7 +152,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Did select row at index path");
-    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:[CalendarViewController new]];
+    CalendarViewController *calendar = [[CalendarViewController alloc] init];
+    //set Cart
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:calendar];
     [self.sideMenuViewController setMainViewController:controller animated:YES closeMenu:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

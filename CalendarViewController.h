@@ -30,6 +30,7 @@
 -(void) loadData;
 -(void)dayButtonWasPressed:(UIButton*)sender;
 -(void)compileCourseInfo:(Course *) course;
--(void)addToCalendarView;
+-(void)addToCalendarView:(Course *) course;
+-(void)addTitleToView:(Course *)course withCourseButton:(UIButton *)courseButton;
 
 @end
