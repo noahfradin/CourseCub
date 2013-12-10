@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Cart.h"
 
 @interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate> {
     UISearchBar *theSearchBar;
@@ -20,6 +21,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong)NSMutableArray* fetchedDeptsArray;
 @property (nonatomic,strong)NSArray* classListTest;
+
+@property Cart *cart;
 
 @property NSMutableArray *alphabet;
 @property NSMutableArray *alphabetCount;
