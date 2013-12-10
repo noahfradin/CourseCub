@@ -12,7 +12,10 @@
 #import "CourseViewController.h"
 
 
-@interface CalendarViewController ()
+@interface CalendarViewController (){
+    int startTimeInt;
+    int endTimeInt;
+}
 
 #define SCREEN_WIDTH 320
 #warning set screen height conditionally based on model
@@ -59,7 +62,16 @@
     self.navigationItem.leftBarButtonItem = menuButton;
     
     
-    
+    ////////////////////////////////
+    //Now for populating the calendar
+    ///////////////////////////////
+    if (self.cart) {
+        NSArray *cartArray = [self.cart getCartArray];
+        for (int i = 0; i<[cartArray count]; i++) {
+            [self compileCourseInfo:cartArray[i]];
+        }
+
+    }
 }
 
 //And this is a place for post view load stuff anything happening on the main view is cool to put here usually
@@ -115,50 +127,47 @@
     
     [self.view addSubview:self.dayBar];
     
-    
-    ////////////////////////////////
-    //Now for populating the calendar
-    ///////////////////////////////
-    
-    [self loadData];
-    
-    for (int i = 0; i<self.course_title_array.count; i++) {
-        
-        //Test data
-        float startTime = 9.0+i*2;
-        float duration = 1.0;
-        float position = startTime - 9;
-        float day = 0+i;
-        //End of test/example data
-        
-        
-        if (day == 0||day==2||day==4) {
-            
-            for (int j = 0; j<4; j++) {
-                if (j== 0||j==2||j==4){
-                    UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
-                    courseButton.tag = i;
-                    [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-                    [courseButton setBackgroundColor:[UIColor grayColor]];
-                    [self.view addSubview:courseButton];
-                }
-            }
-        }
-        UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
-        courseButton.tag = i;
-        [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [courseButton setBackgroundColor:[UIColor grayColor]];
+//    [self loadData];
+//    NSArray *cartArray = [self.cart getCartArray];
+//    for (int i = 0; i<[cartArray count]; i++) {
+//        
+//        
+//        [self compileCourseInfo:cartArray[i]];
+//        //Test data
+//        float startTime = 9.0+i*2;
+//        float duration = 1.0;
+//        float position = startTime - 9;
+//        float day = 0+i;
+//        //End of test/example data
+//        
+//        
+//        if (day == 0||day==2||day==4) {
+//            
+//            for (int j = 0; j<4; j++) {
+//                if (j== 0||j==2||j==4){
+//                    UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+//                    courseButton.tag = i;
+//                    [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+//                    [courseButton setBackgroundColor:[UIColor grayColor]];
+//                    [self.view addSubview:courseButton];
+//                }
+//            }
+//        }
+//        UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+//        courseButton.tag = i;
+//        [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [courseButton setBackgroundColor:[UIColor grayColor]];
         
         //Create top color bumper
         
-        [self.view addSubview:courseButton];
-    }
-    
+//        [self.view addSubview:courseButton];
+//    }
+
 }
 
--(void) setCart:(Cart *)cart{
-    self.cart = cart;
-}
+//-(void) setCart:(Cart *)cart{
+//    self.cart = cart;
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -251,17 +260,47 @@
 }
 
 -(void)loadData{
-    self.course_title_array =[NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies",@"Advanced Fradin Studies",@"Intro to Fradin Studies", nil];
     
-//    NSMutableArray *temp = [self.cart getCartArray];
-//    for (int i= 0; i<temp.count; i++) {
-//        [self.course_title_array addObject:temp[i].title];
-//    }
+//    NSMutableArray course
+    NSMutableArray *temp = [self.cart getCartArray];
+    for (int i= 0; i<temp.count; i++) {
+        Course *course = temp[i];
+        [self.course_title_array addObject:course.title];
+    }
     
 }
 
 -(NSInteger)numberToTime{
     return 0;
+}
+
+-(void)compileCourseInfo:(Course *) course{
+    NSString *timeString = course.time;
+    if ([timeString hasPrefix:@"MWF"]) {
+        NSMutableString *data = [NSMutableString stringWithString:timeString];
+        [data deleteCharactersInRange:NSMakeRange(0, 3)];
+    }
+    else if([timeString hasPrefix:@"TR"]){
+        NSMutableString *data = [NSMutableString stringWithString:timeString];
+        [data deleteCharactersInRange:NSMakeRange(0, 2)];
+        for (int j = 0; j<[data length]; j++) {
+            if ([data characterAtIndex:j] == '-') {
+                NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+                [f setNumberStyle:NSNumberFormatterDecimalStyle];
+                //Convert start time to number
+                NSNumber * startTimeNumber = [f numberFromString:[data substringWithRange:NSMakeRange(0, j-1)]];
+                
+                //Convert end time to number
+                NSNumber * endTimeNumber = [f numberFromString:[data substringWithRange:NSMakeRange(j+1, [data length])]];
+                
+                //Convert times to ints
+                startTimeInt = [startTimeNumber intValue];
+                endTimeInt = [endTimeNumber intValue];
+                NSLog(@"###################END%i", startTimeInt);
+                NSLog(@"###################START%i", endTimeInt);
+            }
+        }
+    }
 }
 
 @end

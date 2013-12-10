@@ -316,7 +316,6 @@
                              @"MFW 1-2.30",
                              nil];
     
-    
     NSError* err = nil;
     NSString *classList = [[NSBundle mainBundle] pathForResource:@"class_list" ofType:@"json"];
     
