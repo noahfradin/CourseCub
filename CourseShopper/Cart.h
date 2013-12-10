@@ -18,7 +18,9 @@
 
 -(void)registerCourse:(Course *)course;
 -(void)addCourse:(Course *)course;
+-(void)removeCourse:(Course *)course;
 -(void)notifyCourse:(Course *)course;
+-(void)unregisterCourse:(Course *)course;
 
 -(BOOL)isRegistered:(Course *)course;
 -(BOOL)isInCart:(Course *)course;

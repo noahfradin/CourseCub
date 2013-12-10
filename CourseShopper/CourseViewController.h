@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "Course.h"
+#import "cart.h"
 
 @interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
 
@@ -39,6 +40,8 @@
 
 @property NSString * fractionLabel;
 @property Course *course;
+@property Cart *currentCart;
+@property NSMutableArray *registeredCourses;
 
 
 -(void)registerButtonWasPressed;

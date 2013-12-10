@@ -84,6 +84,9 @@
     //////////////////////
     
     //Initial configuration and data needs like array of day title strings
+    
+    self.cart = [[Cart alloc] init];
+    
     self.dayBar = [[UIView alloc]initWithFrame:CGRectMake(0, TOPBAR_HEIGHT, SCREEN_WIDTH, DAYBAR_HEIGHT)];
     [self.dayBar setBackgroundColor:[UIColor whiteColor]];
     NSArray *dayInitials = [NSArray arrayWithObjects:@"M", @"T", @"W",@"TH",@"F", nil];
@@ -155,10 +158,10 @@
     }
     
 }
-
--(void) setCart:(Cart *)cart{
-    self.cart = cart;
-}
+//
+//-(void) setCart:(Cart *)cart{
+//    self.cart = cart;
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -168,6 +171,7 @@
 
 -(void)addButtonWasPressed{
     DepartmentTableViewController *addView = [[DepartmentTableViewController alloc] init];
+    addView.cart = self.cart;
     [self.navigationController pushViewController:addView animated:YES];
 }
 
