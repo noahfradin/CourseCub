@@ -33,7 +33,7 @@
 //Takes course and sets state to registered
 -(void)registerCourse:(Course *)course{
     NSLog(@"Register");
-    [self.courses_Dict setObject:[NSNumber numberWithInt:0] forKey:course.number];
+    [self.courses_Dict setObject:[NSNumber numberWithInt:3] forKey:course.number];
 }
 
 //Takes course and adds it to cart with pending state
@@ -41,6 +41,12 @@
     NSLog(@"Add");
     [self.courses_Dict setObject:[NSNumber numberWithInt:1] forKey:course.number];
     [self.courses_Array addObject:course];
+    NSLog(@"hello hello hello %ul",[self.courses_Array count]);
+}
+
+-(void)unregisterCourse:(Course *)course:(Course *)course{
+    NSLog(@"Add");
+    [self.courses_Dict setObject:[NSNumber numberWithInt:1] forKey:course.number];
 }
 
 //Takes course and sets state to notify
@@ -62,7 +68,7 @@
 //Takes course and returns registration status
 -(BOOL)isRegistered:(Course *)course{
     int state = [[self.courses_Dict objectForKey:course.number] intValue];
-    if (state==0) {
+    if (state==3) {
         return YES;
     }
     else{

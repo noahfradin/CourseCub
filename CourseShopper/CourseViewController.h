@@ -41,6 +41,7 @@
 @property NSString * fractionLabel;
 @property Course *course;
 @property Cart *currentCart;
+@property NSMutableArray *registeredCourses;
 
 
 -(void)registerButtonWasPressed;

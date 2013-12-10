@@ -13,8 +13,9 @@
 
 
 @interface CalendarViewController (){
-    int startTimeInt;
-    int endTimeInt;
+    NSInteger startTimeInt;
+    NSInteger endTimeInt;
+    NSInteger day;
 }
 
 #define SCREEN_WIDTH 320
@@ -48,12 +49,13 @@
 }
 
 //So we can do stuff in this method you want to happen preload.. good place to put navbar stuff
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated{
     //Navbar stuff
     
     //Setting the title but in the future this will be dynamic based on chosen cart
     self.navigationItem.title = @"Da Best Cart";
-    
+    self.navigationItem.title = self.cart.title;
+    NSLog(@"I'm here");
     //If we want to customize we'd just make this a normal button with a normal cgrect frame and add a button background
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonWasPressed)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -65,11 +67,12 @@
     ////////////////////////////////
     //Now for populating the calendar
     ///////////////////////////////
-    if (self.cart) {
+//    if (self.cart) {
         NSArray *cartArray = [self.cart getCartArray];
         for (int i = 0; i<[cartArray count]; i++) {
             [self compileCourseInfo:cartArray[i]];
-        }
+            [self addToCalendarView];
+//        }
 
     }
 }
@@ -96,6 +99,9 @@
     //////////////////////
     
     //Initial configuration and data needs like array of day title strings
+    
+    self.cart = [[Cart alloc] init];
+    
     self.dayBar = [[UIView alloc]initWithFrame:CGRectMake(0, TOPBAR_HEIGHT, SCREEN_WIDTH, DAYBAR_HEIGHT)];
     [self.dayBar setBackgroundColor:[UIColor whiteColor]];
     NSArray *dayInitials = [NSArray arrayWithObjects:@"M", @"T", @"W",@"TH",@"F", nil];
@@ -128,19 +134,19 @@
     [self.view addSubview:self.dayBar];
     
 //    [self loadData];
-//    NSArray *cartArray = [self.cart getCartArray];
-//    for (int i = 0; i<[cartArray count]; i++) {
-//        
-//        
-//        [self compileCourseInfo:cartArray[i]];
-//        //Test data
-//        float startTime = 9.0+i*2;
-//        float duration = 1.0;
-//        float position = startTime - 9;
-//        float day = 0+i;
-//        //End of test/example data
-//        
-//        
+    NSArray *cartArray = [self.cart getCartArray];
+    for (int i = 0; i<[cartArray count]; i++) {
+        
+        
+        [self compileCourseInfo:cartArray[i]];
+        //Test data
+        float startTime = 9.0+i*2;
+        float duration = 1.0;
+        float position = startTime - 9;
+        float day = 0+i;
+        //End of test/example data
+        
+        
 //        if (day == 0||day==2||day==4) {
 //            
 //            for (int j = 0; j<4; j++) {
@@ -153,18 +159,10 @@
 //                }
 //            }
 //        }
-//        UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
-//        courseButton.tag = i;
-//        [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-//        [courseButton setBackgroundColor:[UIColor grayColor]];
-        
-        //Create top color bumper
-        
-//        [self.view addSubview:courseButton];
-//    }
+    }
 
 }
-
+//
 //-(void) setCart:(Cart *)cart{
 //    self.cart = cart;
 //}
@@ -276,31 +274,95 @@
 
 -(void)compileCourseInfo:(Course *) course{
     NSString *timeString = course.time;
+    NSLog(course.time);
     if ([timeString hasPrefix:@"MWF"]) {
-        NSMutableString *data = [NSMutableString stringWithString:timeString];
-        [data deleteCharactersInRange:NSMakeRange(0, 3)];
+        day = 0;//Set day to MWF
+        NSString *timeStringCopy = [NSString stringWithString:timeString];
+        NSString *startTimeStringCopy = [NSString stringWithString:timeString];
+        NSString *endTimeStringCopy = [NSString stringWithString:timeString];
+//        timeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(4, 7)];
+        NSLog(@"Monday/Wednesday/Friday");
+        NSRange start = [timeStringCopy rangeOfString:@" "];
+        NSRange end = [timeStringCopy rangeOfString:@"-"];
+        if (start.location != NSNotFound && end.location != NSNotFound && end.location > start.location) {
+            startTimeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(start.location+1, end.location-(start.location+1))];
+            
+        }
+        startTimeInt = [startTimeStringCopy integerValue];
+        NSLog(@"%li",(long)startTimeInt);
+        
+        NSRange newstart = [timeStringCopy rangeOfString:@"-"];
+        NSRange newend = [timeStringCopy rangeOfString:@"}"];
+        if (newstart.location != NSNotFound && newend.location != NSNotFound && newend.location > newstart.location) {
+            endTimeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(newstart.location+1, newend.location-(newstart.location+1))];
+        }
+        endTimeInt = [endTimeStringCopy integerValue];
+        NSLog(@"%li",(long)endTimeInt);
     }
     else if([timeString hasPrefix:@"TR"]){
-        NSMutableString *data = [NSMutableString stringWithString:timeString];
-        [data deleteCharactersInRange:NSMakeRange(0, 2)];
-        for (int j = 0; j<[data length]; j++) {
-            if ([data characterAtIndex:j] == '-') {
-                NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-                [f setNumberStyle:NSNumberFormatterDecimalStyle];
-                //Convert start time to number
-                NSNumber * startTimeNumber = [f numberFromString:[data substringWithRange:NSMakeRange(0, j-1)]];
+        day = 1;
+        NSString *timeStringCopy = [NSString stringWithString:timeString];
+        NSString *startTimeStringCopy = [NSString stringWithString:timeString];
+        NSString *endTimeStringCopy = [NSString stringWithString:timeString];
+        //        timeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(4, 7)];
+        NSLog(@"Tuesday/Thursday");
+        NSRange start = [timeStringCopy rangeOfString:@" "];
+        NSRange end = [timeStringCopy rangeOfString:@"-"];
+        if (start.location != NSNotFound && end.location != NSNotFound && end.location > start.location) {
+            startTimeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(start.location+1, end.location-(start.location+1))];
+            
+        }
+        startTimeInt = [startTimeStringCopy integerValue];
+        NSLog(@"%li",(long)startTimeInt);
+        
+        NSRange newstart = [timeStringCopy rangeOfString:@"-"];
+        NSRange newend = [timeStringCopy rangeOfString:@"}"];
+        if (newstart.location != NSNotFound && newend.location != NSNotFound && newend.location > newstart.location) {
+            endTimeStringCopy = [timeStringCopy substringWithRange:NSMakeRange(newstart.location+1, newend.location-(newstart.location+1))];
+            
+        }
+        endTimeInt = [endTimeStringCopy integerValue];
+        NSLog(@"%li",(long)endTimeInt);
+        
                 
-                //Convert end time to number
-                NSNumber * endTimeNumber = [f numberFromString:[data substringWithRange:NSMakeRange(j+1, [data length])]];
+        NSLog(@"###################END%li", (long)startTimeInt);
+        NSLog(@"###################START%li", (long)endTimeInt);
+    }
+}
+
+-(void)addToCalendarView{
+    NSInteger duration = endTimeInt - startTimeInt;
+    if (startTimeInt < 9) {//Afternoon courses
+        startTimeInt = startTimeInt +12;
+    }
+    NSInteger startTime = startTimeInt-9;//Start 9am classes at position 0
+    if (day == 0) {
+        for (int i = 0; i<5; i++) {
+            if (i == 0 || i==2 || i==4) {
+                UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(i*DAY_WIDTH, startTime*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+                [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [courseButton setBackgroundColor:[UIColor grayColor]];
                 
-                //Convert times to ints
-                startTimeInt = [startTimeNumber intValue];
-                endTimeInt = [endTimeNumber intValue];
-                NSLog(@"###################END%i", startTimeInt);
-                NSLog(@"###################START%i", endTimeInt);
+                //Create top color bumper
+                
+                [self.view addSubview:courseButton];
             }
         }
     }
+    else if (day == 1) {
+        for (int i = 0; i<5; i++) {
+            if (i == 1 || i==3) {
+                UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(i*DAY_WIDTH, startTime*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+                [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [courseButton setBackgroundColor:[UIColor grayColor]];
+                
+                //Create top color bumper
+                
+                [self.view addSubview:courseButton];
+            }
+        }
+    }
+    
 }
 
 @end

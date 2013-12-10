@@ -53,7 +53,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    self.tableView.tableHeaderView = self.theSearchBar;
+    self.tableView.tableHeaderView = self.theSearchBar;
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
@@ -295,7 +295,7 @@
         courseTable.navigationItem.title = department;
         courseTable.department = department;
         courseTable.departmentColor = departmentColor;
-    
+        courseTable.cart = self.cart;
     
         NSLog(@"setting the abrrev of the page to %@",abbr);
         courseTable.abbrev = abbr;
@@ -328,12 +328,17 @@
     [searchBar resignFirstResponder];
     self.tableView.allowsSelection = YES;
     self.tableView.scrollEnabled = YES;
+    self.wasSearched = NO;
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     // Make manageObjectContext of the Controller point to AppDelegate’s manageObjectContext object.
     self.managedObjectContext = appDelegate.managedObjectContext;
     
     self.fetchedDeptsArray = (NSMutableArray *)[appDelegate getAllDepartments];
-    self.wasSearched = NO;
+    self.alphabetCount = [NSMutableArray arrayWithCapacity:26];
+    for (int i = 0; i < 26; i++) {
+        [self.alphabetCount insertObject:[NSNull null] atIndex:i];
+    }
+    
     [self resetSections];
     [self.tableView reloadData];
 }
@@ -348,12 +353,18 @@
     self.tableView.allowsSelection = YES;
     self.tableView.scrollEnabled = YES;
 	
-    self.fetchedDeptsArray = [[NSMutableArray alloc] init];
     self.wasSearched = YES;
+    self.fetchedDeptsArray = [[NSMutableArray alloc] init];
+
     NSArray *results = [self searchWithString:searchBar.text];
     [self.fetchedDeptsArray addObjectsFromArray:results];
     
+    self.alphabetCount = [NSMutableArray arrayWithCapacity:26];
+    for (int i = 0; i < 26; i++) {
+        [self.alphabetCount insertObject:[NSNull null] atIndex:i];
+    }
     
+    [self resetSections];
     [self.tableView reloadData];
 }
 
@@ -374,7 +385,12 @@
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
     for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
-        self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
+        if (self.wasSearched) {
+            self.firstLetter = [[[(Course *)[self.fetchedDeptsArray objectAtIndex:i] department] abbrev] substringToIndex: 1];
+        }
+        else {
+            self.firstLetter = [[[self.fetchedDeptsArray objectAtIndex:i] abbrev] substringToIndex: 1];
+        }
         int letter = [self.firstLetter characterAtIndex:0] - 65;
         if ([NSNull null] == [self.alphabetCount objectAtIndex:letter]) {
             NSNumber *one = [NSNumber numberWithInteger:1];

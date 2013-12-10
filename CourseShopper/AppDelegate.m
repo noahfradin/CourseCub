@@ -307,13 +307,13 @@
     NSArray *locs = [self getData: @"locs"];
     
     NSMutableArray *times = [NSMutableArray arrayWithObjects:
-                             @"MFW 9-10",
-                             @"MFW 11-12.30",
-                             @"MFW 12-1",
-                             @"TR 10-12",
-                             @"TR 2-4.30",
-                             @"MFW 6-8",
-                             @"MFW 1-2.30",
+                             @"MWF 9-10}",
+                             @"MWF 11-12.30}",
+                             @"MWF 12-1}",
+                             @"TR 10-12}",
+                             @"TR 2-4.30}",
+                             @"MWF 6-8}",
+                             @"MWF 1-2.30}",
                              nil];
     
     NSError* err = nil;
