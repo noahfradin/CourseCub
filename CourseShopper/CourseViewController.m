@@ -77,6 +77,10 @@
 {
     [super viewDidLoad];
     
+    
+    NSLog(@"sadfasfdgsdfgdsfg dsfgfdgsgdfg %ul",[[_currentCart getCartArray] count]);
+    
+    
     //Kappi database stuff
     // get an instance of app delegate
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
