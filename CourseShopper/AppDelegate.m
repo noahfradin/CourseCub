@@ -305,6 +305,8 @@
     NSArray *desc = [self getData: @"desc"];
     NSArray *profs = [self getData: @"profs"];
     NSArray *locs = [self getData: @"locs"];
+    NSArray *lats = [self getData: @"lats"];
+    NSArray *longs = [self getData: @"longs"];
     
     NSMutableArray *times = [NSMutableArray arrayWithObjects:
                              @"MFW 9-10",
@@ -315,6 +317,28 @@
                              @"MFW 6-8",
                              @"MFW 1-2.30",
                              nil];
+    
+    NSArray *avSeats = [NSArray arrayWithObjects:
+                             @"kapi",
+                             @"998",
+                             @"940",
+                             @"0",
+                             @"12",
+                             @"30",
+                             @"0",
+                             @"999",
+                             nil];
+    
+    NSArray *totSeats = [NSArray arrayWithObjects:
+                               @"kappi",
+                               @"999",
+                               @"999",
+                               @"30",
+                               @"20",
+                               @"30",
+                               @"12",
+                               @"999",
+                               nil];
     
     
     NSError* err = nil;
@@ -346,17 +370,16 @@
             NSUInteger randomIndexProfs = arc4random() % [profs count];
             newCourse.prof = [profs objectAtIndex:randomIndexProfs];
 
-            //FIX THIS RANDOM THING!
-            NSNumber *n1 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
-            NSNumber *n2 = [[NSNumber alloc]initWithInt:(arc4random() % 999)];
-
-            newCourse.availableSeats = [n2 stringValue];
-            newCourse.totalSeats = [n1 stringValue];
+            NSUInteger randomSeats = ((arc4random() % ([avSeats count]-1))+1);
+            newCourse.availableSeats = [avSeats objectAtIndex:randomSeats];
+            newCourse.totalSeats = [totSeats objectAtIndex:randomSeats];
             
             
             NSUInteger randomIndexLocs = arc4random() % [locs count];
             NSString *loc = [locs objectAtIndex:randomIndexLocs];
             newCourse.location = loc;
+            newCourse.lats = [lats objectAtIndex:randomIndexLocs];
+            newCourse.longs = [longs objectAtIndex:randomIndexLocs];
             
             newCourse.department = [self getDeptByAbbrev:firstWord];
         }

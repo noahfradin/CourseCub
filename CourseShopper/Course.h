@@ -22,5 +22,8 @@
 @property (nonatomic, retain) NSString * totalSeats;
 @property (nonatomic, retain) NSString * availableSeats;
 @property (nonatomic, retain) Department *department;
+@property (nonatomic, retain) NSNumber *lats;
+@property (nonatomic, retain) NSNumber *longs;
+
 
 @end
