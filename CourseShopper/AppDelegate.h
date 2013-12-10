@@ -26,6 +26,7 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator ;
 @property (nonatomic, retain) NSArray *colorArray;
 
+@property (nonatomic, retain) NSMutableArray *cartArray;
 
 -(NSArray*)getAllDepartments;
 -(void)addClassesToCD;
