@@ -27,8 +27,11 @@
     
     self.window.tintColor = [UIColor redColor];
     
+
+//    [self oneTimeMethodCall];
     [self loadColours];
-    [self oneTimeMethodCall];
+    [self addDepartmentsToCD];
+    [self addClassesToCD];
     
     //Setting the initial viewcontroller like a boss
 #warning once login is set up we need to set conditional for when user is already logged in => calendar view
@@ -189,7 +192,7 @@
     
     // Query on managedObjectContext With Generated fetchRequest
     NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    NSLog(@"the resulting array is %@",fetchedRecords);
     // Returning Fetched Records
     return fetchedRecords;
     
@@ -378,9 +381,12 @@
             
             
             NSError *error;
-            if (![self.managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            if ([self getDeptByAbbrev:abr] == nil) {
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                }
             }
+            
         }
       
     }
@@ -395,8 +401,9 @@
     BOOL is_first_time = [[NSUserDefaults standardUserDefaults] boolForKey: @"is_first_time"];
     if (!is_first_time) {
         //Call method you want to be called once here
-        [self addDepartmentsToCD];
-        [self addClassesToCD];
+
+//        [self addDepartmentsToCD];
+//        [self addClassesToCD];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"is_first_time"];
     }
 }

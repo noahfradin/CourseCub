@@ -57,6 +57,8 @@
     self.managedObjectContext = appDelegate.managedObjectContext;
     
     NSArray *temp = [appDelegate getAllClassesOfDept:self.abbrev];
+    NSLog(@"this is temp: %@", self.abbrev);
+    
     //self.fetchedCourseArray = [appDelegate getAllClassesOfDept:self.abbrev];
     self.dict = [[NSMutableDictionary alloc] init];
 

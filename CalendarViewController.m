@@ -143,14 +143,6 @@
                     [self.view addSubview:courseButton];
                 }
             }
-//            UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
-//            courseButton.tag = i;
-//            [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-//            [courseButton setBackgroundColor:[UIColor grayColor]];
-//            
-//            //Create top color bumper
-//            
-//            [self.view addSubview:courseButton];
         }
         UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
         courseButton.tag = i;
@@ -162,6 +154,10 @@
         [self.view addSubview:courseButton];
     }
     
+}
+
+-(void) setCart:(Cart *)cart{
+    self.cart = cart;
 }
 
 - (void)didReceiveMemoryWarning
@@ -255,6 +251,11 @@
 
 -(void)loadData{
     self.course_title_array =[NSMutableArray arrayWithObjects:@"Africana Studies", @"Compuer Science", @"Fradin Studies",@"Advanced Fradin Studies",@"Intro to Fradin Studies", nil];
+    
+//    NSMutableArray *temp = [self.cart getCartArray];
+//    for (int i= 0; i<temp.count; i++) {
+//        [self.course_title_array addObject:temp[i].title];
+//    }
     
 }
 

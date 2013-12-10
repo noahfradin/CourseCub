@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TWTSideMenuViewController.h"   
 #import "CalendarMenuViewController.h"
+#import "Cart.h"
 
 @interface CalendarViewController : UIViewController
 
@@ -20,9 +21,9 @@
 @property NSMutableDictionary *timeDict;
 @property UIView *dayBar;
 
+@property Cart *cart;
 
-
-
+-(void) setCart:(Cart *)cart;
 -(void) addButtonWasPressed;
 -(void) menuButtonWasPressed;
 -(void) courseButtonWasPressed:(UIButton*)sender;
