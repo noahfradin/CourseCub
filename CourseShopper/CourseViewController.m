@@ -532,9 +532,9 @@
 }
 
 -(void)mapsButtonWasPressed{
-    //double toLatDouble = [to_lat doubleValue];
-    //double toLongDouble = [to_long doubleValue];
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(41.8267, -71.3977);
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake([self.courseInfo.lats doubleValue], [self.courseInfo.longs doubleValue]);
+    NSLog(@"latitude: %@", self.courseInfo.lats);
+    NSLog(@"longitude: %@", self.courseInfo.longs);
     
     // Apple Maps, using the MKMapItem class
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:location addressDictionary:nil];
