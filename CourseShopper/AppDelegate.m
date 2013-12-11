@@ -26,7 +26,6 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.window.tintColor = [UIColor redColor];
-    
 
 //    [self oneTimeMethodCall];
     [self loadColours];
@@ -308,12 +307,18 @@
     
     NSMutableArray *times = [NSMutableArray arrayWithObjects:
                              @"MWF 9-10}",
-                             @"MWF 11-12.30}",
+                             @"MWF 10-11}",
+                             @"MWF 11-12}",
                              @"MWF 12-1}",
-                             @"TR 10-12}",
-                             @"TR 2-4.30}",
-                             @"MWF 6-8}",
-                             @"MWF 1-2.30}",
+                             @"MWF 1-2}",
+                             @"MWF 2-3}",
+                             @"MWF 3-4}",
+                             @"MWF 4-5}",
+                             @"MWF 5-6}",
+                             @"TR 9-10.5}",
+                             @"TR 10.5-12}",
+                             @"TR 1-2.5}",
+                             @"TR 2.5-4}",
                              nil];
     
     NSError* err = nil;

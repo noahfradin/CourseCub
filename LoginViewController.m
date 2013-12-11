@@ -81,6 +81,10 @@
     self.menuViewController = [[CalendarMenuViewController alloc] initWithNibName:nil bundle:nil];
     self.mainViewController = [[CalendarViewController alloc] initWithNibName:nil bundle:nil];
     
+    //Pass starting cart for appdelegate
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.mainViewController.cart = self.appDelegate.cartArray[0];
+    
     self.sideMenuViewController = [[TWTSideMenuViewController alloc] initWithMenuViewController:self.menuViewController mainViewController:[[UINavigationController alloc] initWithRootViewController:self.mainViewController]];
     self.sideMenuViewController.shadowColor = [UIColor blackColor];
     self.sideMenuViewController.edgeOffset = (UIOffset) { .horizontal = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 18.0f : 0.0f };

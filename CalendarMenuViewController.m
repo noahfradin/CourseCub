@@ -154,6 +154,8 @@
     NSLog(@"Did select row at index path");
     CalendarViewController *calendar = [[CalendarViewController alloc] init];
     //set Cart
+    calendar.cart = self.appDelegate.cartArray[indexPath.row];
+    
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:calendar];
     [self.sideMenuViewController setMainViewController:controller animated:YES closeMenu:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
