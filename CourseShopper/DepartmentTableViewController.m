@@ -46,6 +46,8 @@
     //[appDelegate getClassList];
 
     [self.tableView reloadData];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 
     
     
@@ -102,6 +104,69 @@
     self.theSearchBar.delegate = self;
     self.wasSearched = NO;
     
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 535, 320, 270)];
+    //DO CGRectMake and CGRectFill
+    self.pickerView.delegate = self;
+    self.pickerView.dataSource = self;
+    [self.pickerView setHidden:YES];
+    [self.pickerView setBackgroundColor:[UIColor whiteColor]];
+    self.whiteBottom = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, 480, 322, 800)];
+    [self.whiteBottom setBackgroundColor:[UIColor whiteColor]];
+    self.whiteBottom.layer.borderWidth = 1;
+    self.whiteBottom.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    UILabel *chooseTime = [[UILabel alloc] initWithFrame:CGRectMake(50, 10, 260, 40)];
+    chooseTime.text = @"Choose A Time to Search:";
+    UIFont *chooseTimeFont = [UIFont fontWithName:@"Helvetica Light" size:18];
+    chooseTime.font = chooseTimeFont;
+    [self.whiteBottom setHidden:YES];
+    [self.whiteBottom addSubview:chooseTime];
+    [self.tableView addSubview:self.whiteBottom];
+    [self.tableView addSubview:self.pickerView];
+    _pickerActive = NO;
+    
+    self.hourList = [NSMutableArray arrayWithObjects:
+                     @"All",
+                     @"A Hour (M.,W.,F. 8:00-8:50 AM)",
+                     @"AB Hour (M.,W. 8:30-9:50 AM)",
+                     @"B Hour (M.,W.,F. 9:00-9:50 AM)",
+                     @"C Hour (M.,W.,F. 10:00-10:50 AM)",
+                     @"D Hour (M.,W.,F. 11:00-11:50 AM)",
+                     @"E Hour (M.,W.,F. 12:00-12:50 PM)",
+                     @"F Hour (M.,W.,F. 1:00-1:50 PM)",
+                     @"G Hour (M.,W.,F. 2:00-2:50 PM)",
+                     @"H Hour (T.,Th. 9:00-10:20 AM)",
+                     @"I Hour (T.,Th. 10:30-11:50 AM)",
+                     @"J Hour (T.,Th. 1:00-2:20 PM)",
+                     @"K Hour (T.,Th. 2:30-3:50 PM)",
+                     @"L Hour (T.,Th. 6:30-7:50 PM)",
+                     @"M Hour (M. 3:00-5:20 PM)",
+                     @"N Hour (W. 3:00-5:20 PM)",
+                     @"O Hour (F. 3:00-5:20 PM)",
+                     @"P Hour (T. 4:00-6:20 PM)",
+                     @"Q Hour (Th. 4:00-6:20 PM)",nil];
+    
+    self.hourAbbrevList = [NSMutableArray arrayWithObjects:
+                     @"All",
+                     @"A Hour",
+                     @"AB Hour",
+                     @"B Hour",
+                     @"C Hour",
+                     @"D Hour",
+                     @"E Hour",
+                     @"F Hour",
+                     @"G Hour",
+                     @"H Hour",
+                     @"I Hour",
+                     @"J Hour",
+                     @"K Hour",
+                     @"L Hour",
+                     @"M Hour",
+                     @"N Hour",
+                     @"O Hour",
+                     @"P Hour",
+                     @"Q Hour",nil];
+    
+    
     
     [self loadData];//This populates the department array
     
@@ -116,7 +181,7 @@
     self.toggle = 0;
     
     self.time = [[UIButton alloc] initWithFrame:CGRectMake(160, 5, 80, 30)];
-    [self.time setTitle:@"TIME" forState:UIControlStateNormal];
+    [self.time setTitle:@"Time :" forState:UIControlStateNormal];
     [self.time addTarget:self action:@selector(timeWasPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.time setBackgroundColor:[UIColor whiteColor]];
     [self.time setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
@@ -127,12 +192,19 @@
     UIFont *filtersFont = [UIFont fontWithName:@"Helvetica Light" size:18];
     filters.font = filtersFont;
     
+    self.currentHour = [[UILabel alloc] initWithFrame:CGRectMake(250, 5, 80, 30)];
+    self.currentHour.text = @"All";
+    self.currentHour.textColor = [UIColor whiteColor];
+    UIFont *hourFont = [UIFont fontWithName:@"Helvetica Light" size:16];
+    self.currentHour.font = hourFont;
+    
     self.theSearchBar.inputAccessoryView = accessoryView;
     [accessoryView addSubview:self.WRIT];
     [accessoryView addSubview:filters];
     [accessoryView addSubview:self.time];
+    [accessoryView addSubview:self.currentHour];
     
-
+    self.tableView.sectionIndexColor = [UIColor grayColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -342,6 +414,9 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if (_pickerActive || _searchActive) {
+        return [NSArray arrayWithObjects:@"", nil];
+    }
     return self.alphabet;
 }
 
@@ -353,6 +428,10 @@
     [searchBar setShowsCancelButton:YES animated:YES];
     self.tableView.allowsSelection = NO;
     self.tableView.scrollEnabled = NO;
+    
+    //Using this to reload section titles
+    _searchActive = YES;
+    [self.tableView reloadSectionIndexTitles];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -373,8 +452,14 @@
         [self.alphabetCount insertObject:[NSNull null] atIndex:i];
     }
     
+    //Using this to reload section titles
+    _searchActive = NO;
+    [self.tableView reloadSectionIndexTitles];
+    
+    
     [self resetSections];
     [self.tableView reloadData];
+    
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -397,6 +482,10 @@
     for (int i = 0; i < 26; i++) {
         [self.alphabetCount insertObject:[NSNull null] atIndex:i];
     }
+    
+    //Using this to reload section titles
+    _searchActive = NO;
+    [self.tableView reloadSectionIndexTitles];
     
     [self resetSections];
     [self.tableView reloadData];
@@ -468,7 +557,48 @@
     }
 }
 
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 28;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.hourList[row];
+}
+
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.currentHour.text = self.hourAbbrevList[row];
+    [UIView beginAnimations:@"picker" context:nil];
+    [UIView setAnimationDuration:0.5];
+    
+    self.pickerView.transform = CGAffineTransformMakeTranslation(0,236);
+    self.whiteBottom.transform = CGAffineTransformMakeTranslation(0,236);
+    [UIView commitAnimations];
+    [self.pickerView setHidden:YES];
+    [self.whiteBottom setHidden:YES];
+    [self.theSearchBar becomeFirstResponder];
+    _pickerActive = NO;
+    [self.tableView reloadSectionIndexTitles];
+
+}
+
 -(void)timeWasPressed{
+    [self.theSearchBar resignFirstResponder];
+    [self.tableView bringSubviewToFront:self.whiteBottom];
+    [self.tableView bringSubviewToFront:self.pickerView];
+    [self.pickerView setHidden:NO];
+    [self.whiteBottom setHidden:NO];
+    [UIView beginAnimations:@"picker" context:nil];
+    [UIView setAnimationDuration:0.5];
+    
+    self.pickerView.transform = CGAffineTransformMakeTranslation(0,-236);
+    self.whiteBottom.transform = CGAffineTransformMakeTranslation(0,-236);
+    [UIView commitAnimations];
+    _pickerActive = YES;
+    [self.tableView reloadSectionIndexTitles];
     
 }
 

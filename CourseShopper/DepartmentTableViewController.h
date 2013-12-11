@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Cart.h"
 
-@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate> {
+@interface DepartmentTableViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     UISearchBar *theSearchBar;
 }
 
@@ -28,10 +28,17 @@
 @property NSMutableArray *alphabetCount;
 @property (nonatomic, retain) UISearchBar *theSearchBar;
 @property BOOL wasSearched;
+@property BOOL pickerActive;
+@property BOOL searchActive;
 @property NSString *firstLetter;
 @property UIButton *WRIT;
 @property UIButton *time;
 @property int toggle;
+@property UIPickerView *pickerView;
+@property UIView *whiteBottom;
+@property NSMutableArray *hourList;
+@property NSMutableArray *hourAbbrevList;
+@property UILabel *currentHour;
 
 
 -(void)loadData;
