@@ -282,7 +282,6 @@
 				8CA9174A183D3E6F0059A923 /* Department Table */,
 				8CA9174E183D42C70059A923 /* Course Table */,
 				8CA91753183D43110059A923 /* Course */,
-				70572E391843CB4200118ECD /* Course Alert */,
 				703D626B18514EFE004F263A /* Web Alert */,
 				8C2CD68917F2CC0500CAA5EF /* Supporting Files */,
 				3134D35C1841252E008DFEB6 /* CourseShopper.xcdatamodeld */,
@@ -395,6 +394,7 @@
 			children = (
 				8CA9174F183D42FA0059A923 /* CourseViewController.h */,
 				8CA91750183D42FA0059A923 /* CourseViewController.m */,
+				70572E391843CB4200118ECD /* Course Alert */,
 			);
 			name = Course;
 			sourceTree = "<group>";

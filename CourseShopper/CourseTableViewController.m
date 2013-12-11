@@ -35,6 +35,7 @@
     //In future we'll supply our own images but I wanted to get rid of back text for now (hate it with text).. this is same as departments view
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = self.department;
+    self.view.backgroundColor = [UIColor whiteColor];
     
 
     [self.navBarDivide setHidden:NO];
