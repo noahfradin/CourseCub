@@ -108,8 +108,29 @@
     //Accessory view stuff
     UIView *accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
     [accessoryView setBackgroundColor:[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5]];
+    self.WRIT = [[UIButton alloc] initWithFrame:CGRectMake(70, 5, 80, 30)];
+    [self.WRIT setTitle:@"WRIT" forState:UIControlStateNormal];
+    [self.WRIT addTarget:self action:@selector(WRITWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.WRIT setBackgroundColor:[UIColor whiteColor]];
+    [self.WRIT setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+    self.toggle = 0;
+    
+    self.time = [[UIButton alloc] initWithFrame:CGRectMake(160, 5, 80, 30)];
+    [self.time setTitle:@"TIME" forState:UIControlStateNormal];
+    [self.time addTarget:self action:@selector(timeWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.time setBackgroundColor:[UIColor whiteColor]];
+    [self.time setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+    
+    UILabel *filters = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 80, 30)];
+    filters.text = @"Filters:";
+    filters.textColor = [UIColor whiteColor];
+    UIFont *filtersFont = [UIFont fontWithName:@"Helvetica Light" size:18];
+    filters.font = filtersFont;
     
     self.theSearchBar.inputAccessoryView = accessoryView;
+    [accessoryView addSubview:self.WRIT];
+    [accessoryView addSubview:filters];
+    [accessoryView addSubview:self.time];
     
 
 }
@@ -206,16 +227,29 @@
         UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:31];
         courseNumberLabel.font = numberFont;
         courseNumberLabel.text = course.department.abbrev;
-        courseNumberLabel.textColor = course.department.color;
-
+        
         //Actually course number (sorry)
         UILabel *deptLabel = [[UILabel alloc] initWithFrame:CGRectMake(255, 20, 60, 40)];
         deptLabel.font = courseFont;
         deptLabel.text = courseNumber;
+        
+        if ([self array:self.cart.getCartArray contains:course]) {
+
+            courseNumberLabel.textColor = [UIColor whiteColor];
+            courseLabel.textColor = [UIColor whiteColor];
+            courseTimeLabel.textColor = [UIColor whiteColor];
+            deptLabel.textColor = [UIColor whiteColor];
+            
+            cell.backgroundColor = course.department.color;
+        }
+        else {
+            courseNumberLabel.textColor = course.department.color;
+        }
+        
         [cell addSubview: courseLabel];
         [cell addSubview: courseTimeLabel];
         [cell addSubview: courseNumberLabel];
-        [cell addSubview:deptLabel];
+        [cell addSubview: deptLabel];
         
         NSString *index = [NSString stringWithFormat:@"%d-%d",indexPath.section,indexPath.row];
         NSString *courseKey = [index stringByAppendingString: @"course"];
@@ -384,7 +418,7 @@
 
 //Check the first letters of each item in the departmentAbbrevArray, change the letter to a number corresponding to the section numbers, and then use those numbers to count the number of items in each alphabetical section. UGH.
 -(void) resetSections{
-    for (int i = 0; i < [self.fetchedDeptsArray count] - 1; i++) {
+    for (int i = 0; i < [self.fetchedDeptsArray count]; i++) {
         if (self.wasSearched) {
             self.firstLetter = [[[(Course *)[self.fetchedDeptsArray objectAtIndex:i] department] abbrev] substringToIndex: 1];
         }
@@ -412,6 +446,30 @@
     
     
     //In future this is where we'll populate array from nodejs api
+}
+
+-(BOOL)array:(NSMutableArray *)array contains:(Course *)course {
+    for (int i = 0; i < [array count]; i++) {
+        if (course == array[i]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(void)WRITWasPressed {
+    if (self.toggle == 0){
+        [self.WRIT setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:208.0f/255.0f blue:139.0f/255.0f alpha:1] forState: UIControlStateNormal];
+        self.toggle = 1;
+    }
+    else {
+        [self.WRIT setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
+        self.toggle = 0;
+    }
+}
+
+-(void)timeWasPressed{
+    
 }
 
 -(void)testingDatabase{

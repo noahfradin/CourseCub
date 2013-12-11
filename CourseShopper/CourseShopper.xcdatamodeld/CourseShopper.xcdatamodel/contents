@@ -3,7 +3,9 @@
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="availableSeats" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lats" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longs" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="prof" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>

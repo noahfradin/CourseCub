@@ -131,7 +131,19 @@
     UIFont *numberFont = [UIFont fontWithName:@"Helvetica Light" size:31];
     courseNumberLabel.font = numberFont;
     courseNumberLabel.text = courseNumber;
-    courseNumberLabel.textColor = _departmentColor;
+    
+    
+    if ([self array:self.cart.getCartArray contains:course]) {
+        
+        courseNumberLabel.textColor = [UIColor whiteColor];
+        courseLabel.textColor = [UIColor whiteColor];
+        courseTimeLabel.textColor = [UIColor whiteColor];
+        
+        cell.backgroundColor = course.department.color;
+    }
+    else {
+        courseNumberLabel.textColor = course.department.color;
+    }
     
     
     [cell addSubview: courseLabel];
@@ -179,6 +191,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//Deselect so the select color view doesn't show up again when the user returns to the view
 }
 
+-(BOOL)array:(NSMutableArray *)array contains:(Course *)course {
+    for (int i = 0; i < [array count]; i++) {
+        if (course == array[i]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 
 //Non-delegate methods below

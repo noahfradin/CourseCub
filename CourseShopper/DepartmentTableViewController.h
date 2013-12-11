@@ -29,9 +29,14 @@
 @property (nonatomic, retain) UISearchBar *theSearchBar;
 @property BOOL wasSearched;
 @property NSString *firstLetter;
+@property UIButton *WRIT;
+@property UIButton *time;
+@property int toggle;
 
 
 -(void)loadData;
-
+-(BOOL)array:(NSMutableArray *)array contains: (Course *)course;
+-(void)WRITWasPressed;
+-(void)timeWasPressed;
 
 @end

@@ -10,8 +10,9 @@
 
 #import "Course.h"
 #import "cart.h"
+#import <MapKit/MapKit.h>
 
-@interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate>
+@interface CourseViewController : UIViewController <UIAlertViewDelegate, UIWebViewDelegate, MKMapViewDelegate>
 
 @property(readwrite,strong) UIButton *registerButton;
 @property(readwrite,strong) UIButton *removeCartButton;
@@ -48,6 +49,7 @@
 -(void)bookListButtonWasPressed;
 -(void)coursePreviewButtonWasPressed;
 -(void)criticalReviewButtonWasPressed;
+-(void)mapsButtonWasPressed;
 -(void)initButtonImage: UIBUtton;
 -(void)unregisterRoll;
 -(void)registerRoll;
