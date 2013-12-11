@@ -13,5 +13,6 @@
 
 @property Course *course;
 @property BOOL conflict;
+@property NSMutableArray *conflictArray;
 
 @end

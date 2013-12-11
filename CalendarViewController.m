@@ -417,15 +417,15 @@
     
     courseButton.course = course;//Set course property of course button
     courseButton.conflict = NO;
-    NSMutableArray *conflictArray = [[NSMutableArray alloc] init];;
+    courseButton.conflictArray = [[NSMutableArray alloc] init];;
     NSArray *cartArray = [self.cart getCartArray];
     for (int i = 0; i<[cartArray count]; i++) {
         Course *compCourse = cartArray[i];
         if ([compCourse.time isEqualToString:course.time]) {
-            [conflictArray addObject:compCourse];
+            [courseButton.conflictArray addObject:compCourse];
         }
     }
-    if ([conflictArray count]>1) {
+    if ([courseButton.conflictArray count]>1) {
         courseButton.conflict = YES;
     }
     
@@ -435,9 +435,9 @@
     
     int small_font_size = 11;
     
-        if (conflict) {
-            for (int i = 0; i<[conflictArray count]; i++) {
-                Course *c = conflictArray[i];
+        if (courseButton.conflict) {
+            for (int i = 0; i<[courseButton.conflictArray count]; i++) {
+                Course *c = courseButton.conflictArray[i];
                 NSString *abbrev = c.department.abbrev;
                 NSString *abbrevNum = [abbrev stringByAppendingString:c.number];
                 UIColor *deptColor = c.department.color;
@@ -448,7 +448,7 @@
                 [deptAbbrevLabel setFont:[UIFont fontWithName:@"Helvetica Light" size:small_font_size]];
                 [courseButton addSubview:deptAbbrevLabel];
             
-                int color_bumper_width = DAY_WIDTH/[conflictArray count];
+                int color_bumper_width = DAY_WIDTH/[courseButton.conflictArray count];
                 UIView *colorBumper = [[UIView alloc] initWithFrame:CGRectMake(color_bumper_width*i, 0, color_bumper_width, 10)];
                 [colorBumper setBackgroundColor:deptColor];
                 [courseButton addSubview:colorBumper];
