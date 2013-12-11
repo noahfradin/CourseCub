@@ -173,34 +173,44 @@
     //Accessory view stuff
     UIView *accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
     [accessoryView setBackgroundColor:[UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5]];
-    self.WRIT = [[UIButton alloc] initWithFrame:CGRectMake(70, 5, 80, 30)];
+    self.WRIT = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
     [self.WRIT setTitle:@"WRIT" forState:UIControlStateNormal];
     [self.WRIT addTarget:self action:@selector(WRITWasPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.WRIT setBackgroundColor:[UIColor whiteColor]];
     [self.WRIT setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
     self.toggle = 0;
     
-    self.time = [[UIButton alloc] initWithFrame:CGRectMake(160, 5, 80, 30)];
-    [self.time setTitle:@"Time :" forState:UIControlStateNormal];
+    self.time = [[UIButton alloc] initWithFrame:CGRectMake(160, 0, 160, 40)];
+    
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
+    [self.timeLabel setText:@"Time"];
+    [self.timeLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.timeLabel setTextColor:[UIColor grayColor]];
+    [self.time addSubview:self.timeLabel];
+    
     [self.time addTarget:self action:@selector(timeWasPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.time setBackgroundColor:[UIColor whiteColor]];
-    [self.time setTitleColor:[UIColor grayColor] forState: UIControlStateNormal];
     
-    UILabel *filters = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 80, 30)];
-    filters.text = @"Filters:";
-    filters.textColor = [UIColor whiteColor];
-    UIFont *filtersFont = [UIFont fontWithName:@"Helvetica Light" size:18];
-    filters.font = filtersFont;
+    self.WRIT.layer.borderWidth = 1;
+    self.time.layer.borderWidth = 1;
+    self.WRIT.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.time.layer.borderColor = [[UIColor grayColor] CGColor];
     
-    self.currentHour = [[UILabel alloc] initWithFrame:CGRectMake(250, 5, 80, 30)];
-    self.currentHour.text = @"All";
-    self.currentHour.textColor = [UIColor whiteColor];
-    UIFont *hourFont = [UIFont fontWithName:@"Helvetica Light" size:16];
-    self.currentHour.font = hourFont;
+//    UILabel *filters = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 80, 30)];
+//    filters.text = @"Filters:";
+//    filters.textColor = [UIColor whiteColor];
+//    UIFont *filtersFont = [UIFont fontWithName:@"Helvetica Light" size:18];
+//    filters.font = filtersFont;
+    
+//    self.currentHour = [[UILabel alloc] initWithFrame:CGRectMake(250, 5, 80, 30)];
+//    self.currentHour.text = @"All";
+//    self.currentHour.textColor = [UIColor whiteColor];
+//    UIFont *hourFont = [UIFont fontWithName:@"Helvetica Light" size:16];
+//    self.currentHour.font = hourFont;
     
     self.theSearchBar.inputAccessoryView = accessoryView;
     [accessoryView addSubview:self.WRIT];
-    [accessoryView addSubview:filters];
+//    [accessoryView addSubview:filters];
     [accessoryView addSubview:self.time];
     [accessoryView addSubview:self.currentHour];
     
@@ -570,7 +580,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.currentHour.text = self.hourAbbrevList[row];
+    [self.timeLabel setText:self.hourAbbrevList[row]];
     [UIView beginAnimations:@"picker" context:nil];
     [UIView setAnimationDuration:0.5];
     

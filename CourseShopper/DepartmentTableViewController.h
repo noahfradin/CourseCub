@@ -39,7 +39,7 @@
 @property NSMutableArray *hourList;
 @property NSMutableArray *hourAbbrevList;
 @property UILabel *currentHour;
-
+@property UILabel *timeLabel;
 
 -(void)loadData;
 -(BOOL)array:(NSMutableArray *)array contains: (Course *)course;
