@@ -11,6 +11,7 @@
 #import "CalendarMenuViewController.h"
 #import "Cart.h"
 #import "AppDelegate.h"
+#import "CCCourseButton.h"
 
 @interface CalendarViewController : UIViewController
 @property AppDelegate *appDelegate;
@@ -37,5 +38,19 @@
 -(void)addTitleToView:(Course *)course withCourseButton:(UIButton *)courseButton;
 
 -(void)displayEmptyCartView;
+
+//
+
+
+@property UIView * buttonPane;
+
+@property UIButton *cancel;
+
+@property NSArray *conflictArray;
+
+
+-(void) showBlur;
+-(void) cancelButtonWasPressed;
+-(void)alertCourseButtonWasPressed:(CCCourseButton *) sender;
 
 @end

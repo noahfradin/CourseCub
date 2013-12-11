@@ -73,6 +73,8 @@
 		8C555D061857DCA900CB26EC /* book_stack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C555D051857DCA900CB26EC /* book_stack@2x.png */; };
 		8C555D091857E85900CB26EC /* CCCourseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C555D081857E85900CB26EC /* CCCourseButton.m */; };
 		8C555D0B1858032400CB26EC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C555D0A1858032400CB26EC /* Default@2x.png */; };
+		8C555D0D185866A700CB26EC /* lines.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C555D0C185866A700CB26EC /* lines.png */; };
+		8C555D1018586B3800CB26EC /* ConflictViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C555D0F18586B3800CB26EC /* ConflictViewController.m */; };
 		8CA91741183D384A0059A923 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91740183D384A0059A923 /* CalendarViewController.m */; };
 		8CA91745183D39370059A923 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91744183D39370059A923 /* LoginViewController.m */; };
 		8CA91749183D3E650059A923 /* DepartmentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA91748183D3E650059A923 /* DepartmentTableViewController.m */; };
@@ -169,6 +171,9 @@
 		8C555D071857E85900CB26EC /* CCCourseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCourseButton.h; sourceTree = "<group>"; };
 		8C555D081857E85900CB26EC /* CCCourseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCourseButton.m; sourceTree = "<group>"; };
 		8C555D0A1858032400CB26EC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8C555D0C185866A700CB26EC /* lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lines.png; sourceTree = "<group>"; };
+		8C555D0E18586B3800CB26EC /* ConflictViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictViewController.h; sourceTree = "<group>"; };
+		8C555D0F18586B3800CB26EC /* ConflictViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictViewController.m; sourceTree = "<group>"; };
 		8CA9173F183D384A0059A923 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController.h; path = ../CalendarViewController.h; sourceTree = "<group>"; };
 		8CA91740183D384A0059A923 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController.m; path = ../CalendarViewController.m; sourceTree = "<group>"; };
 		8CA91743183D39370059A923 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
@@ -229,6 +234,8 @@
 			children = (
 				70572E3A1843CB7A00118ECD /* CourseAlertViewController.h */,
 				70572E3B1843CB7A00118ECD /* CourseAlertViewController.m */,
+				8C555D0E18586B3800CB26EC /* ConflictViewController.h */,
+				8C555D0F18586B3800CB26EC /* ConflictViewController.m */,
 				70C2AFC8185590420086D9CE /* UnregisterAlertViewController.h */,
 				70C2AFC9185590420086D9CE /* UnregisterAlertViewController.m */,
 				70C2AFCB1855904C0086D9CE /* RegisterAlertViewController.h */,
@@ -314,6 +321,7 @@
 		8C2CD68917F2CC0500CAA5EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8C555D0C185866A700CB26EC /* lines.png */,
 				8C555D0A1858032400CB26EC /* Default@2x.png */,
 				8C555D051857DCA900CB26EC /* book_stack@2x.png */,
 				8CF1A00D185655C100F091A8 /* lightg@2x.png */,
@@ -507,6 +515,7 @@
 				1738DC271856ECFD0060F3E0 /* Icon@2x.png in Resources */,
 				703A55C018559989005C9047 /* RegisterHalf2@1x.png in Resources */,
 				70D9990C185539D9009346BE /* NotifyMe@2x.png in Resources */,
+				8C555D0D185866A700CB26EC /* lines.png in Resources */,
 				70D99914185539D9009346BE /* Unregister@2x.png in Resources */,
 				1738DC2A1856F92C0060F3E0 /* lats.txt in Resources */,
 				8CF1A00C1855E4B500F091A8 /* add_button@2x.png in Resources */,
@@ -569,6 +578,7 @@
 				705E61BD184EB4C500BAA7D2 /* WebViewController.m in Sources */,
 				7024654518571F3F0055A5F9 /* CustumUI.m in Sources */,
 				8CA91751183D42FA0059A923 /* CourseViewController.m in Sources */,
+				8C555D1018586B3800CB26EC /* ConflictViewController.m in Sources */,
 				8C555D091857E85900CB26EC /* CCCourseButton.m in Sources */,
 				8C2A095C18555C27000C517B /* CalendarMenuViewController.m in Sources */,
 				70C2AFCA185590420086D9CE /* UnregisterAlertViewController.m in Sources */,

@@ -388,6 +388,7 @@
         CourseViewController *courseController = [[CourseViewController alloc] init];
         courseController.courseTitle = course.title;
         courseController.departmentColor = course.department.color;
+        courseController.currentCart = self.cart;
         NSString *abbrev = course.department.abbrev;
         NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
         courseController.navigationItem.title = abbrevNum;

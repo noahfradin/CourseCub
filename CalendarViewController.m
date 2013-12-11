@@ -11,6 +11,7 @@
 #import "TWTSideMenuViewController.h"
 #import "CourseViewController.h"
 #import "CCCourseButton.h"
+#import "ConflictViewController.h"
 
 
 @interface CalendarViewController (){
@@ -37,6 +38,17 @@
 
 #define HOURS_TO_SHOW 12
 
+#define degreesToRadians(degrees) (M_PI * degrees / 180.0)
+
+
+#define buttonPaneHeight self.view.frame.size.height*46/64
+#define buttonPaneWidth self.view.frame.size.width*18/20
+#define labelHeight buttonPaneHeight/10
+#define offset buttonPaneHeight/30
+#define textViewWidth buttonPaneWidth- 2*offset
+#define textViewHeight buttonPaneHeight - 4*offset - 2*labelHeight
+#define cancelHeight labelHeight
+
 
 @end
 
@@ -53,45 +65,16 @@
     return self;
 }
 
-//So we can do stuff in this method you want to happen preload.. good place to put navbar stuff
--(void)viewDidAppear:(BOOL)animated{
-    //Navbar stuff
-    
-    //Setting the title but in the future this will be dynamic based on chosen cart
-    self.navigationItem.title = @"Da Best Cart";
-    self.navigationItem.title = self.cart.title;
-    NSLog(@"I'm here");
-    //If we want to customize we'd just make this a normal button with a normal cgrect frame and add a button background
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonWasPressed)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonWasPressed)];
-    self.navigationItem.leftBarButtonItem = menuButton;
-    
-    
-    ////////////////////////////////
-    //Now for populating the calendar
-    ///////////////////////////////
-//    if (self.cart) {
-        NSArray *cartArray = [self.cart getCartArray];
-        if ([cartArray count]==0) {
-            [self displayEmptyCartView];
-        }
-
-        else{
-        [emptyCartView setHidden:YES];
-        for (int i = 0; i<[cartArray count]; i++) {
-            [self compileCourseInfo:cartArray[i]];
-            [self addToCalendarView:cartArray[i]];
-        }
-        
-    }
+-(void)viewWillAppear:(BOOL)animated{
+    [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
-//And this is a place for post view load stuff anything happening on the main view is cool to put here usually
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+//So we can do stuff in this method you want to happen preload.. good place to put navbar stuff
+-(void)viewDidAppear:(BOOL)animated{
+    
+    
+    
+    [[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     /////////////////////////////////////////////////////////
     //General structural setup and enable for menu controller
@@ -110,9 +93,9 @@
     //////////////////////
     
     NSArray *cartArray = [self.cart getCartArray];
-//    if ([cartArray count]<2) {
-//        [self displayEmptyCartView];
-//    }
+    //    if ([cartArray count]<2) {
+    //        [self displayEmptyCartView];
+    //    }
     //Initial configuration and data needs like array of day title strings
     
     self.dayBar = [[UIView alloc]initWithFrame:CGRectMake(0, TOPBAR_HEIGHT, SCREEN_WIDTH, DAYBAR_HEIGHT)];
@@ -120,9 +103,9 @@
     NSArray *dayInitials = [NSArray arrayWithObjects:@"M", @"T", @"W",@"TH",@"F", nil];
     
     //1px line at bottom of the bar
-//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, TOPBAR_HEIGHT+DAYBAR_HEIGHT, SCREEN_WIDTH, 1)];
-//    [line setBackgroundColor:[UIColor grayColor]];
-//    [self.view addSubview:line];
+    //    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, TOPBAR_HEIGHT+DAYBAR_HEIGHT, SCREEN_WIDTH, 1)];
+    //    [line setBackgroundColor:[UIColor grayColor]];
+    //    [self.view addSubview:line];
     
     //Set up day buttons
     for (int j=0; j<5; j++) {
@@ -146,8 +129,8 @@
     
     [self.view addSubview:self.dayBar];
     
-//    [self loadData];
-//    NSArray *cartArray = [self.cart getCartArray];
+    //    [self loadData];
+    //    NSArray *cartArray = [self.cart getCartArray];
     for (int i = 0; i<[cartArray count]; i++) {
         
         
@@ -160,18 +143,18 @@
         //End of test/example data
         
         
-//        if (day == 0||day==2||day==4) {
-//            
-//            for (int j = 0; j<4; j++) {
-//                if (j== 0||j==2||j==4){
-//                    UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
-//                    courseButton.tag = i;
-//                    [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-//                    [courseButton setBackgroundColor:[UIColor grayColor]];
-//                    [self.view addSubview:courseButton];
-//                }
-//            }
-//        }
+        //        if (day == 0||day==2||day==4) {
+        //
+        //            for (int j = 0; j<4; j++) {
+        //                if (j== 0||j==2||j==4){
+        //                    UIButton *courseButton = [[UIButton alloc] initWithFrame:CGRectMake(day*DAY_WIDTH, position*HOUR_HEIGHT+TOPBAR_HEIGHT+DAYBAR_HEIGHT, DAY_WIDTH, HOUR_HEIGHT*duration)];
+        //                    courseButton.tag = i;
+        //                    [courseButton addTarget:self action:@selector(courseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+        //                    [courseButton setBackgroundColor:[UIColor grayColor]];
+        //                    [self.view addSubview:courseButton];
+        //                }
+        //            }
+        //        }
     }
     
     //Create and display timebar
@@ -189,6 +172,46 @@
         [timeBar addSubview:hourLabel];
     }
     [self.view addSubview:timeBar];
+    
+    
+    
+    //Navbar stuff
+    
+    //Setting the title but in the future this will be dynamic based on chosen cart
+    self.navigationItem.title = @"Da Best Cart";
+    self.navigationItem.title = self.cart.title;
+    NSLog(@"I'm here");
+    //If we want to customize we'd just make this a normal button with a normal cgrect frame and add a button background
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonWasPressed)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Carts" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonWasPressed)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    
+    
+    ////////////////////////////////
+    //Now for populating the calendar
+    ///////////////////////////////
+//    if (self.cart) {
+//        NSArray *cartArray = [self.cart getCartArray];
+        if ([cartArray count]==0) {
+            [self displayEmptyCartView];
+        }
+
+        else{
+        [emptyCartView setHidden:YES];
+        for (int i = 0; i<[cartArray count]; i++) {
+            [self compileCourseInfo:cartArray[i]];
+            [self addToCalendarView:cartArray[i]];
+        }
+        
+    }
+}
+
+//And this is a place for post view load stuff anything happening on the main view is cool to put here usually
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
 }
 //
 //-(void) setCart:(Cart *)cart{
@@ -223,6 +246,60 @@
     
     if (sender.conflict) {
         NSLog(@"Conflict");
+//        ConflictViewController *alert = [[ConflictViewController alloc] init];
+//        alert.conflictArray = sender.conflictArray;
+//        alert.cart = self.cart;
+//        [self.view addSubview:alert.view];
+        
+        _buttonPane = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/20,self.view.frame.size.height*9/64, self.view.frame.size.width*18/20,buttonPaneHeight)];
+        UIColor *color = [UIColor grayColor];
+        _buttonPane.backgroundColor = color;
+        _buttonPane.alpha = .95f;
+        [self.view addSubview:_buttonPane];
+        
+        UIFont *buttonFont = [UIFont fontWithName:@"Helvetica Light" size:24.0];
+        
+        
+        UILabel *bookListLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, offset, buttonPaneWidth, labelHeight)];
+        bookListLabel.text = @"Course Conflict";
+        UIColor *timeLabelFontColor = [UIColor whiteColor];
+        bookListLabel.textAlignment = UITextAlignmentCenter;
+        bookListLabel.textColor = timeLabelFontColor;
+        bookListLabel.font = buttonFont;
+        [_buttonPane addSubview: bookListLabel];
+        
+        
+        UIFont *buttonFont2 = [UIFont fontWithName:@"Helvetica Light" size:20.0];
+        
+        int buttonHeight = 60;
+        int buttonWidth = buttonPaneWidth;
+        for (int i = 0; i<[sender.conflictArray count]; i++) {
+            Course *course = sender.conflictArray[i];
+            Department *department = course.department;
+            CCCourseButton *courseButton = [[CCCourseButton alloc] initWithFrame:CGRectMake(0, offset + 50+buttonHeight*i, buttonWidth, buttonHeight)];
+            [courseButton setBackgroundColor:department.color];
+            courseButton.course = course;
+            [courseButton setTitle:course.title forState:UIControlStateNormal];
+            [courseButton addTarget:self action:@selector(alertCourseButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [_buttonPane addSubview:courseButton];
+            [_buttonPane bringSubviewToFront:courseButton];
+        }
+        
+        
+        
+        UIButton *cancel = [[UIButton alloc] initWithFrame:CGRectMake(offset, labelHeight+textViewHeight+3*offset, textViewWidth, cancelHeight)];
+        [cancel addTarget:self action:@selector(cancelButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+        cancel.layer.borderColor = [[UIColor whiteColor] CGColor];
+        cancel.layer.borderWidth = 2;
+        cancel.layer.backgroundColor = [[UIColor grayColor] CGColor];
+        [[cancel titleLabel] setFont:buttonFont];
+        [cancel setTitle:@"Cancel" forState: UIControlStateNormal];
+        
+        [_buttonPane addSubview:cancel];
+        
+        
+        
     }
     else{
         Course *course = sender.course;
@@ -247,57 +324,57 @@
 //Takes a numbe day of week 0-4 (sender.tag)
 //Displays single day calendar and animates initial to full day name
 //////////////////////////////////////////////////////////////////////
--(void)dayButtonWasPressed:(UIButton*)sender{
-    NSLog(@"dayButtonWasPressed");
-    
-    //Hide all other buttons
-    UIView *whiteOut = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
-    [whiteOut setBackgroundColor:[UIColor whiteColor]];
-    [self.dayBar addSubview:whiteOut];
-    [self.dayBar bringSubviewToFront:whiteOut];
-    [self.dayBar bringSubviewToFront:sender];
-    
-    //Animate movement of day initial to left of dayBar
-    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{[sender setFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];} completion:^(BOOL finished){
-        //Complete day title here based on day array yet to be constructed
-        UILabel *fullDayLabel = [[UILabel alloc] init];
-        [fullDayLabel setFont:[UIFont fontWithName:@"Helvetica-Light" size:17]];
-        float offset = 0;
-        switch (sender.tag) {
-            case 0:
-                offset = 6;
-                [fullDayLabel setText:@"ONDAY"];
-                break;
-            case 1:
-                offset = 1;
-                [fullDayLabel setText:@"UESDAY"];
-                break;
-            case 2:
-                offset = 7;
-                [fullDayLabel setText:@"EDNESDAY"];
-                break;
-            case 3:
-                offset = 13;
-                [fullDayLabel setText:@"URSDAY"];
-                break;
-            case 4:
-                offset = 2;
-                [fullDayLabel setText:@"RIDAY"];
-                break;
-                
-            default:
-                break;
-        }
-        
-        [fullDayLabel setFrame:CGRectMake(DAY_WIDTH/2+offset, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
-        [sender addSubview:fullDayLabel];
-        
-    }];
-    
-#warning Still need to add back button and get rid of add and menu buttons in nav bar
-    
-    
-}
+//-(void)dayButtonWasPressed:(UIButton*)sender{
+//    NSLog(@"dayButtonWasPressed");
+//    
+//    //Hide all other buttons
+//    UIView *whiteOut = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
+//    [whiteOut setBackgroundColor:[UIColor whiteColor]];
+//    [self.dayBar addSubview:whiteOut];
+//    [self.dayBar bringSubviewToFront:whiteOut];
+//    [self.dayBar bringSubviewToFront:sender];
+//    
+//    //Animate movement of day initial to left of dayBar
+//    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{[sender setFrame:CGRectMake(0, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];} completion:^(BOOL finished){
+//        //Complete day title here based on day array yet to be constructed
+//        UILabel *fullDayLabel = [[UILabel alloc] init];
+//        [fullDayLabel setFont:[UIFont fontWithName:@"Helvetica-Light" size:17]];
+//        float offset = 0;
+//        switch (sender.tag) {
+//            case 0:
+//                offset = 6;
+//                [fullDayLabel setText:@"ONDAY"];
+//                break;
+//            case 1:
+//                offset = 1;
+//                [fullDayLabel setText:@"UESDAY"];
+//                break;
+//            case 2:
+//                offset = 7;
+//                [fullDayLabel setText:@"EDNESDAY"];
+//                break;
+//            case 3:
+//                offset = 13;
+//                [fullDayLabel setText:@"URSDAY"];
+//                break;
+//            case 4:
+//                offset = 2;
+//                [fullDayLabel setText:@"RIDAY"];
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//        
+//        [fullDayLabel setFrame:CGRectMake(DAY_WIDTH/2+offset, 0, SCREEN_WIDTH, DAYBAR_HEIGHT)];
+//        [sender addSubview:fullDayLabel];
+//        
+//    }];
+//    
+//#warning Still need to add back button and get rid of add and menu buttons in nav bar
+//    
+//    
+//}
 
 -(void)loadData{
     
@@ -455,8 +532,39 @@
                 [courseButton addSubview:deptAbbrevLabel];
             
                 int color_bumper_width = DAY_WIDTH/[courseButton.conflictArray count];
+                
                 UIView *colorBumper = [[UIView alloc] initWithFrame:CGRectMake(color_bumper_width*i, 0, color_bumper_width, 10)];
                 [colorBumper setBackgroundColor:deptColor];
+                if (![self.cart isRegistered:c]) {
+                    [colorBumper setAlpha:.4];
+                    UIView *crossBumper = [[UIView alloc] initWithFrame:CGRectMake(color_bumper_width*i, 0, color_bumper_width, 10)];
+                    UIImage *image = [UIImage imageNamed:@"lines.png"];
+                    crossBumper.backgroundColor = [UIColor colorWithPatternImage:image];
+                    [crossBumper setAlpha:.6];
+                    [courseButton addSubview:crossBumper];
+                }
+                
+                //Primitive cross hatch
+//                for (int i = 0; i<11; i++) {
+//                    UIView *colorBumperLineR = [[UIView alloc] initWithFrame:CGRectMake(i*5, 5, 12, 1)];
+//                    [colorBumperLineR setBackgroundColor:deptColor];
+//                    
+//                    colorBumperLineR.transform = CGAffineTransformIdentity;
+//                    
+//                    colorBumperLineR.transform = CGAffineTransformMakeRotation(degreesToRadians(45));
+//                    colorBumperLineR.transform = CGAffineTransformRotate(colorBumperLineR.transform, degreesToRadians(90));
+//                    [courseButton addSubview:colorBumperLineR];
+//                    
+//                    UIView *colorBumperLineL = [[UIView alloc] initWithFrame:CGRectMake(i*5, 5, 12, 1)];
+//                    [colorBumperLineL setBackgroundColor:deptColor];
+//                    
+//                    colorBumperLineL.transform = CGAffineTransformIdentity;
+//                    
+//                    colorBumperLineL.transform = CGAffineTransformMakeRotation(degreesToRadians(135));
+//                    colorBumperLineL.transform = CGAffineTransformRotate(colorBumperLineL.transform, degreesToRadians(90));
+//                    [courseButton addSubview:colorBumperLineL];
+//                }
+                
                 [courseButton addSubview:colorBumper];
             }
         }
@@ -478,6 +586,38 @@
             UIView *colorBumper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DAY_WIDTH, 10)];
             UIColor *deptColor = course.department.color;
             [colorBumper setBackgroundColor:deptColor];
+            if (![self.cart isRegistered:course]) {
+                [colorBumper setAlpha:.4];
+                UIView *crossBumper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DAY_WIDTH, 10)];
+                UIImage *image = [UIImage imageNamed:@"lines.png"];
+                crossBumper.backgroundColor = [UIColor colorWithPatternImage:image];
+                [crossBumper setAlpha:.6];
+                [courseButton addSubview:crossBumper];
+            }
+            
+            //Primitive cross hatch
+            
+//            for (int i = 0; i<11; i++) {
+//                UIView *colorBumperLineR = [[UIView alloc] initWithFrame:CGRectMake(i*5, 5, 12, 1)];
+//                [colorBumperLineR setBackgroundColor:deptColor];
+//                
+//                colorBumperLineR.transform = CGAffineTransformIdentity;
+//                
+//                colorBumperLineR.transform = CGAffineTransformMakeRotation(degreesToRadians(45));
+//                colorBumperLineR.transform = CGAffineTransformRotate(colorBumperLineR.transform, degreesToRadians(90));
+//                [courseButton addSubview:colorBumperLineR];
+//                
+//                UIView *colorBumperLineL = [[UIView alloc] initWithFrame:CGRectMake(i*5, 5, 12, 1)];
+//                [colorBumperLineL setBackgroundColor:deptColor];
+//                
+//                colorBumperLineL.transform = CGAffineTransformIdentity;
+//                
+//                colorBumperLineL.transform = CGAffineTransformMakeRotation(degreesToRadians(135));
+//                colorBumperLineL.transform = CGAffineTransformRotate(colorBumperLineL.transform, degreesToRadians(90));
+//                [courseButton addSubview:colorBumperLineL];
+//            }
+            
+            
             [courseButton addSubview:colorBumper];
         }
         
@@ -514,6 +654,45 @@
     
     [self.view addSubview:emptyCartView];
 //    [self.view bringSubviewToFront:emptyCartView];
+}
+
+
+-(void) showBlur{
+    [UIView animateWithDuration:.3 animations: ^{
+        
+        self.view.alpha=1;
+    }];
+    
+}
+
+-(void)cancelButtonWasPressed{
+    for (UIView *subView in self.view.subviews) {
+        [subView removeFromSuperview];
+    }
+    for (UIView *subView in self.view.superview.subviews) {
+        subView.userInteractionEnabled = YES;
+    }
+    [self.view removeFromSuperview];
+    
+    
+}
+
+-(void)alertCourseButtonWasPressed:(CCCourseButton *) sender{
+    Course *course = sender.course;
+    //Then instantiate the course detail view and set the title and the correct course
+    //Anything else we need to pass can go here as well
+    CourseViewController *courseView = [[CourseViewController alloc] init];
+    courseView.courseTitle = course.title;
+    courseView.course = course;
+    courseView.currentCart = self.cart;
+    
+    NSString *abbrev = course.department.abbrev;
+    NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
+    courseView.navigationItem.title = abbrevNum;
+    courseView.abbrevNum = abbrevNum;
+    courseView.departmentColor = course.department.color;
+    
+    [self.navigationController pushViewController:courseView animated:YES];
 }
 
 @end
