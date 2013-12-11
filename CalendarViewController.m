@@ -232,6 +232,12 @@
         courseView.courseTitle = course.title;
         courseView.course = course;
         courseView.currentCart = self.cart;
+        
+        NSString *abbrev = course.department.abbrev;
+        NSString *abbrevNum = [abbrev stringByAppendingString:course.number];
+        courseView.navigationItem.title = abbrevNum;
+        courseView.abbrevNum = abbrevNum;
+        courseView.departmentColor = course.department.color;
         [self.navigationController pushViewController:courseView animated:YES];
     }
 }
