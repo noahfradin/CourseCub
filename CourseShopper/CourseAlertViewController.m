@@ -53,18 +53,20 @@
     [_buttonPane addSubview: bookListLabel];
     
     
-    
+     UIFont *buttonFont2 = [UIFont fontWithName:@"Helvetica Light" size:20.0];
     
     UITextView *bookList = [[UITextView alloc] initWithFrame:CGRectMake(offset, labelHeight+offset*2, textViewWidth, textViewHeight)];
     bookList.layer.borderColor = [[UIColor whiteColor] CGColor];
     bookList.layer.backgroundColor = [[UIColor grayColor] CGColor];
+    bookList.font = buttonFont2;
     bookList.layer.borderWidth = 2;
     bookList.alwaysBounceVertical = YES;
     bookList.editable = NO;
     bookList.textColor = timeLabelFontColor;
+    bookList.textAlignment = UITextAlignmentCenter;
     
     
-    bookList.text = @"(most of the time) or used (rarely). Importantly, small defects (like creases or folds or dog ears, and even insufficient glue on the cover that a buyer can easily correct) do not qualify as defects that warrant returns. Inside the cover, the book text should be pristine—perfect. Ordering a few books together seems to be considerably cheaper on shipping costs than buying one book at a time. (You can see the costs of shipping different quantities on the order page.) I do not make any money on shipping. Our order page is just passing through the cost quoted by the shipping service. One final warning: shipwire tends to hold orders that do not have valid USPS addresses. So, shipping to the will not work. Make sure to enter a correct street address and zip code.(most of the time) or used (rarely). Importantly, small defects (like creases or folds or dog ears, and even insufficient glue on the cover that a buyer can easily correct) do not qualify as defects that warrant returns. Inside the cover, the book text should be pristine—perfect. Ordering a few books together seems to be considerably cheaper on shipping costs than buying one book at a time. (You can see the costs of shipping different quantities on the order page.) I do not make any money on shipping. Our order page is just passing through the cost quoted by the shipping service. One final warning: shipwire tends to hold orders that do not have valid USPS addresses. So, shipping to the will not work. Make sure to enter a correct street address and zip code.";
+    bookList.text = @"\n\n\nSo far as we know\nthis course doesn't HAVE\n\"books\"";
     
 
     
@@ -112,16 +114,15 @@
 }
 
 -(void)cancelButtonWasPressed{
-   // _details.view.userInteractionEnabled = YES;
-  //  _details.navigationController.view.userInteractionEnabled = YES;
-  //  for (UIView *subView in self.view.subviews) {
-   //     [subView removeFromSuperview];
-   // }
-   // [self.view setHidden:YES];
-  //  self.view.userInteractionEnabled = NO;
-    //[self removeFromParentViewController];
- //   _details.view.backgroundColor = [UIColor blueColor];
-    NSLog(@"sdfsdf");
+    for (UIView *subView in self.view.subviews) {
+        [subView removeFromSuperview];
+    }
+    for (UIView *subView in self.view.superview.subviews) {
+        subView.userInteractionEnabled = YES;
+    }
+    [self.view removeFromSuperview];
+   
+ 
 }
 
 
